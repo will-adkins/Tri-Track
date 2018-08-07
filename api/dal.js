@@ -36,6 +36,10 @@ const addProfile = doc => {
   return db.put(modifiedDoc)
 }
 
+const updateProfile = doc => db.put(doc)
+
+const deleteProfile = id => db.get(id).then(doc => db.remove(doc))
+
 ///////////////////////
 // Workout Routes
 ///////////////////////
@@ -61,11 +65,19 @@ const addWorkout = doc => {
   return db.put(modifiedDoc)
 }
 
+const updateWorkout = doc => db.put(doc)
+
+const deleteWorkout = id => db.get(id).then(doc => db.remove(doc))
+
 module.exports = {
   listProfiles,
   getProfile,
   addProfile,
+  updateProfile,
+  deleteProfile,
   listWorkouts,
   getWorkout,
-  addWorkout
+  addWorkout,
+  updateWorkout,
+  deleteWorkout
 }
