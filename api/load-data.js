@@ -12,7 +12,7 @@ const data = [
   {
     _id: 'workout_john-smith_2018-07-26T07:40:23Z',
     dateTime: '2018-07-26T07:40:23Z',
-    personId: 'person_john-smith',
+    profileId: 'profile_john-smith',
     type: 'workout',
     category: 'Run',
     distanceMi: 5,
@@ -25,7 +25,7 @@ const data = [
   {
     _id: 'workout_mary-smith_2018-07-26T07:40:23Z',
     dateTime: '2018-07-26T07:40:23Z',
-    personId: 'person_mary-smith',
+    profileId: 'profile_mary-smith',
     type: 'workout',
     category: 'Bike',
     distanceMi: 5,
@@ -38,7 +38,7 @@ const data = [
   {
     _id: 'workout_mary-smith_2018-07-27T07:40:23Z',
     dateTime: '2018-07-27T07:40:23Z',
-    personId: 'person_mary-smith',
+    profileId: 'profile_mary-smith',
     type: 'workout',
     category: 'Run',
     distanceMi: 3,
@@ -51,7 +51,7 @@ const data = [
   {
     _id: 'workout_john-smith_2018-09-26T07:40:23Z',
     dateTime: '2018-09-26T07:40:23Z',
-    personId: 'person_john-smith',
+    profileId: 'profile_john-smith',
     type: 'workout',
     category: 'Swim',
     distanceMi: 2,
@@ -65,7 +65,7 @@ const data = [
   {
     _id: 'workout_max-boettcher_2018-07-26T07:40:23Z',
     dateTime: '2018-07-26T07:40:23Z',
-    personId: 'person_max-boettcher',
+    profileId: 'profile_max-boettcher',
     type: 'workout',
     category: 'Bike',
     distanceMi: 10,
@@ -76,31 +76,31 @@ const data = [
     paceSecPerMi: 600
   },
   {
-    _id: 'person_john-smith',
+    _id: 'profile_john-smith',
     email: 'john@gmail.com',
     firstName: 'Jeff',
     lastName: 'Smith',
     heightIn: 66,
     weightLbs: 234,
-    type: 'person'
+    type: 'profile'
   },
   {
-    _id: 'person_mary-smith',
+    _id: 'profile_mary-smith',
     email: 'mary@gmail.com',
     firstName: 'Mary',
     lastName: 'Smith',
     heightIn: 52,
     weightLbs: 123,
-    type: 'person'
+    type: 'profile'
   },
   {
-    _id: 'person_max-boettcher',
+    _id: 'profile_max-boettcher',
     email: 'max@gmail.com',
     firstName: 'Max',
     lastName: 'Boettcher',
     heighIn: 72,
     weightLbs: 170,
-    type: 'person'
+    type: 'profile'
   }
 ]
 
