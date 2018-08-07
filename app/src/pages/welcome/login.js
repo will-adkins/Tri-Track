@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import {
   Typography,
@@ -11,7 +12,7 @@ import {
   Button,
   withStyles
 } from '@material-ui/core'
-import { VerifiedUser } from '@material-ui/icons'
+import { AccountCircle, VpnKey } from '@material-ui/icons'
 
 import MenuAppBar from '../../components/menuAppBar'
 
@@ -27,7 +28,12 @@ const styles = theme => ({
     marginTop: theme.spacing.unit * 3
   },
   textField: {
-    flexBasis: 200
+    width: '50%'
+  },
+  center: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 })
 
@@ -37,15 +43,18 @@ const Login = props => {
     <div>
       <MenuAppBar welcome back history={history} />
       <center>
-        <div style={{ paddingTop: 12 }}>
-          <Typography variant="display1">Tri-Track</Typography>
+        <div style={{ paddingTop: '10%' }}>
+          <Typography variant="display2" color="secondary">
+            Tri-Track
+          </Typography>
         </div>
         <img alt="Tri-Track icon" src="/static/tri-symbol-1.jpg" width="50%" />
-        <form>
+
+        <form style={{ marginLeft: '25%', paddingTop: '10%' }}>
           <div className={classes.margin}>
             <Grid container spacing={8} alignItems="flex-end">
               <Grid item>
-                <VerifiedUser />
+                <AccountCircle />
               </Grid>
               <Grid item>
                 <TextField
@@ -57,10 +66,30 @@ const Login = props => {
               </Grid>
             </Grid>
           </div>
+          <div className={classes.margin}>
+            <Grid container spacing={8} alignItems="flex-end">
+              <Grid item>
+                <VpnKey />
+              </Grid>
+              <Grid item>
+                <TextField
+                  id="password"
+                  label="Password"
+                  value=""
+                  className={classes.textfield}
+                />
+              </Grid>
+            </Grid>
+          </div>
           <div style={{ paddingTop: 12 }}>
-            <Button variant="raised" color="primary">
+            <Button variant="extendedFab" color="primary" type="submit">
               Sign In
             </Button>
+            <Link to="/" className="router-link">
+              <Button variant="flat" type="button">
+                Cancel
+              </Button>
+            </Link>
           </div>
         </form>
       </center>

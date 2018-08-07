@@ -22,9 +22,9 @@ const styles = theme => ({
     height: '100%'
   },
   media: {
-    height: 45,
-    paddingTop: '56%',
-    paddingBottom: '30%'
+    width: '80%',
+    paddingTop: '50%',
+    paddingBottom: '35%'
   },
   actions: {
     display: 'flex',
@@ -41,7 +41,7 @@ const Welcome = props => {
   return (
     <div>
       <MenuAppBar welcome />
-      <Card className={classes.card}>
+      <center>
         <CardContent>
           <div className={classes.title}>
             <Typography variant="headline" color="primary">
@@ -54,6 +54,7 @@ const Welcome = props => {
             </Typography>
           </div>
         </CardContent>
+
         <CardMedia
           image="/static/tri-symbol-1.jpg"
           title="Tri-Track icon"
@@ -77,6 +78,7 @@ const Welcome = props => {
               color="primary"
               className={classes.button}
               size="large"
+              onClick={e => history.push('/sign-up')}
             >
               <Typography variant="headline" style={{ color: 'white' }}>
                 Sign Up
@@ -84,7 +86,7 @@ const Welcome = props => {
             </Button>
           </CardActions>
         </div>
-      </Card>
+      </center>
     </div>
   )
 }
