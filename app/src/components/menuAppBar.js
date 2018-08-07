@@ -12,6 +12,7 @@ import {
 } from '@material-ui/icons'
 
 const styles = {
+  center: { display: 'flex', margin: 'auto' },
   icon: { marginRight: 24 }
 }
 
