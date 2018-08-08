@@ -5,10 +5,6 @@ import {
   Typography,
   TextField,
   Grid,
-  InputAdornment,
-  FormControl,
-  Input,
-  InputLabel,
   Button,
   withStyles
 } from '@material-ui/core'
@@ -20,7 +16,11 @@ import {
   AccessibilityNew
 } from '@material-ui/icons'
 
-import { NEW_PROFILE_FORM_TOGGLED } from '../../constants'
+import {
+  NEW_PROFILE_FORM_TOGGLED,
+  NEW_PROFILE_FORM_UPDATED
+} from '../../constants'
+import { addProfile } from '../../action-creators/profiles'
 import MenuAppBar from '../../components/menuAppBar'
 
 const styles = theme => ({
@@ -45,7 +45,22 @@ const styles = theme => ({
 })
 
 const SignUp = props => {
-  const { classes, history, isDetailsForm, toggleForm } = props
+  const {
+    classes,
+    history,
+    isDetailsForm,
+    toggleForm,
+    onChange,
+    onSubmit
+  } = props
+  const {
+    email,
+    password,
+    firstName,
+    lastName,
+    heightIn,
+    weightLbs
+  } = props.profile
 
   const ProfileForm = (
     <center>
@@ -59,7 +74,8 @@ const SignUp = props => {
               <TextField
                 id="username"
                 label="User Name"
-                value=""
+                value={email}
+                onChange={e => onChange('email', e.target.value)}
                 className={classes.textfield}
               />
             </Grid>
@@ -74,7 +90,8 @@ const SignUp = props => {
               <TextField
                 id="password"
                 label="Password"
-                value=""
+                value={password}
+                onChange={e => onChange('password', e.target.value)}
                 className={classes.textfield}
               />
             </Grid>
@@ -101,7 +118,7 @@ const SignUp = props => {
 
   const DetailsForm = (
     <center>
-      <form style={{ marginLeft: '25%' }}>
+      <form style={{ marginLeft: '25%' }} onSubmit={onSubmit(history)}>
         <div className={classes.margin}>
           <Grid container spacing={8} alignItems="flex-end">
             <Grid item>
@@ -111,7 +128,8 @@ const SignUp = props => {
               <TextField
                 id="firstName"
                 label="First Name"
-                value=""
+                value={firstName}
+                onChange={e => onChange('firstName', e.target.value)}
                 className={classes.textfield}
               />
             </Grid>
@@ -126,7 +144,8 @@ const SignUp = props => {
               <TextField
                 id="lastName"
                 label="Last Name"
-                value=""
+                value={lastName}
+                onChange={e => onChange('lastName', e.target.value)}
                 className={classes.textfield}
               />
             </Grid>
@@ -141,7 +160,8 @@ const SignUp = props => {
               <TextField
                 id="heightIn"
                 label="Height (In)"
-                value=""
+                value={heightIn}
+                onChange={e => onChange('heightIn', e.target.value)}
                 className={classes.textfield}
               />
             </Grid>
@@ -156,7 +176,8 @@ const SignUp = props => {
               <TextField
                 id="weightLbs"
                 label="Weight (Lbs)"
-                value=""
+                value={weightLbs}
+                onChange={e => onChange('weightLbs', e.target.value)}
                 className={classes.textfield}
               />
             </Grid>
@@ -196,11 +217,18 @@ const SignUp = props => {
 }
 
 const mapStateToProps = state => ({
-  isDetailsForm: state.newProfile.isDetailsForm
+  isDetailsForm: state.newProfile.isDetailsForm,
+  profile: state.newProfile.data
 })
 
 const mapActionsToProps = dispatch => ({
-  toggleForm: () => dispatch({ type: NEW_PROFILE_FORM_TOGGLED })
+  toggleForm: () => dispatch({ type: NEW_PROFILE_FORM_TOGGLED }),
+  onChange: (field, value) =>
+    dispatch({ type: NEW_PROFILE_FORM_UPDATED, payload: { [field]: value } }),
+  onSubmit: history => e => {
+    e.preventDefault()
+    dispatch(addProfile(history))
+  }
 })
 
 const connector = connect(

@@ -13,7 +13,14 @@ const checkReqFields = require('../lib/checkReqFields')
 const missingFieldsMsg = require('../lib/missingFieldsMsg')
 const cleanObj = require('../lib/cleanObj')
 
-const reqFields = ['email', 'firstName', 'lastName', 'heightIn', 'weightLbs']
+const reqFields = [
+  'email',
+  'password',
+  'firstName',
+  'lastName',
+  'heightIn',
+  'weightLbs'
+]
 
 module.exports = app => {
   app.get('/profiles', (req, res, next) => {
