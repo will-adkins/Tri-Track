@@ -1,6 +1,7 @@
 import { merge, mergeDeepRight } from 'ramda'
 import {
   NEW_PROFILE_FORM_TOGGLED,
+  NEW_PROFILE_FORM_CLEAR,
   NEW_PROFILE_SAVE_STARTED,
   NEW_PROFILE_SAVE_FAILED,
   NEW_PROFILE_SAVE_SUCCEEDED,
@@ -43,6 +44,8 @@ export const newProfile = (state = initialNewProfile, action) => {
   switch (action.type) {
     case NEW_PROFILE_FORM_TOGGLED:
       return merge(state, { isDetailsForm: !state.isDetailsForm })
+    case NEW_PROFILE_FORM_CLEAR:
+      return initialNewProfile
     case NEW_PROFILE_ERROR_CLEAR:
       return merge(state, { isError: false, errMsg: '' })
     case NEW_PROFILE_SAVE_STARTED:

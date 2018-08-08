@@ -20,7 +20,8 @@ import {
   NEW_PROFILE_FORM_TOGGLED,
   NEW_PROFILE_FORM_UPDATED,
   NEW_PROFILE_SAVE_FAILED,
-  NEW_PROFILE_ERROR_CLEAR
+  NEW_PROFILE_ERROR_CLEAR,
+  NEW_PROFILE_FORM_CLEAR
 } from '../../constants'
 import { addProfile } from '../../action-creators/profiles'
 import MenuAppBar from '../../components/menuAppBar'
@@ -56,6 +57,7 @@ const SignUp = props => {
     onChange,
     onSubmit,
     clearError,
+    clearForm,
     isSaving,
     isError,
     errMsg
@@ -117,7 +119,7 @@ const SignUp = props => {
             Sign Up
           </Button>
           <Link to="/" className="router-link">
-            <Button variant="flat" type="button">
+            <Button variant="flat" type="button" onClick={e => clearForm()}>
               Cancel
             </Button>
           </Link>
@@ -244,6 +246,7 @@ const mapStateToProps = state => ({
 const mapActionsToProps = dispatch => ({
   toggleForm: () => dispatch({ type: NEW_PROFILE_FORM_TOGGLED }),
   clearError: () => dispatch({ type: NEW_PROFILE_ERROR_CLEAR }),
+  clearForm: () => dispatch({ type: NEW_PROFILE_FORM_CLEAR }),
   onChange: (field, value) => {
     if (Number.isNaN(value)) {
       dispatch({
