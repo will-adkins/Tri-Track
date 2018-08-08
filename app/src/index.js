@@ -16,14 +16,3 @@ ReactDOM.render(
 registerServiceWorker()
 
 store.dispatch(setProfiles)
-
-/*
-const cacheProfile = window.localStorage.getItem('cacheProfile') || {}
-
-if (isEmpty(cacheProfile)) {
-  dispatch({type: CURRENT_PROFILE_LOGIN_SUCCEEDED}, payload: cacheProfile)
-  history.push('/home')
-} else {
-  render Welcome ?
-}
-*/

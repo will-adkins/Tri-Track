@@ -9,7 +9,9 @@ import {
   Button,
   withStyles
 } from '@material-ui/core'
-import { isEmpty } from 'ramda'
+import { connect } from 'react-redux'
+
+import { cacheLoginCheck } from '../../action-creators/profiles'
 
 import MenuAppBar from '../../components/menuAppBar'
 
@@ -36,60 +38,80 @@ const styles = theme => ({
   }
 })
 
-const Welcome = props => {
-  const { classes, history } = props
+class Welcome extends React.Component {
+  componentDidMount() {
+    const { history, cacheCheck } = this.props
+    cacheCheck(history)
+  }
 
-  return (
-    <div>
-      <MenuAppBar welcome />
-      <center>
-        <CardContent>
-          <div className={classes.title}>
-            <Typography variant="headline" color="primary">
-              Welcome To
-            </Typography>
-          </div>
-          <div className={classes.title}>
-            <Typography variant="display3" color="secondary">
-              Tri-Track
-            </Typography>
-          </div>
-        </CardContent>
+  render() {
+    const { classes, history } = this.props
 
-        <CardMedia
-          image="/static/tri-symbol-1.jpg"
-          title="Tri-Track icon"
-          className={classes.media}
-        />
-        <div className={classes.actions}>
-          <CardActions>
-            <Button
-              variant="extendedFab"
-              color="primary"
-              className={classes.button}
-              size="large"
-              onClick={e => history.push('/login')}
-            >
-              <Typography variant="headline" style={{ color: 'white' }}>
-                Sign In
+    return (
+      <div>
+        <MenuAppBar welcome />
+        <center>
+          <CardContent>
+            <div className={classes.title}>
+              <Typography variant="headline" color="primary">
+                Welcome To
               </Typography>
-            </Button>
-            <Button
-              variant="extendedFab"
-              color="primary"
-              className={classes.button}
-              size="large"
-              onClick={e => history.push('/sign-up')}
-            >
-              <Typography variant="headline" style={{ color: 'white' }}>
-                Sign Up
+            </div>
+            <div className={classes.title}>
+              <Typography variant="display3" color="secondary">
+                Tri-Track
               </Typography>
-            </Button>
-          </CardActions>
-        </div>
-      </center>
-    </div>
-  )
+            </div>
+          </CardContent>
+
+          <CardMedia
+            image="/static/tri-symbol-1.jpg"
+            title="Tri-Track icon"
+            className={classes.media}
+          />
+          <div className={classes.actions}>
+            <CardActions>
+              <Button
+                variant="extendedFab"
+                color="primary"
+                className={classes.button}
+                size="large"
+                onClick={e => history.push('/login')}
+              >
+                <Typography variant="headline" style={{ color: 'white' }}>
+                  Sign In
+                </Typography>
+              </Button>
+              <Button
+                variant="extendedFab"
+                color="primary"
+                className={classes.button}
+                size="large"
+                onClick={e => history.push('/sign-up')}
+              >
+                <Typography variant="headline" style={{ color: 'white' }}>
+                  Sign Up
+                </Typography>
+              </Button>
+            </CardActions>
+          </div>
+        </center>
+      </div>
+    )
+  }
 }
 
-export default withStyles(styles)(Welcome)
+const mapStateToProps = state => ({
+  profile: state.currentProfile
+})
+
+const mapActionsToProps = dispatch => ({
+  cacheCheck: history => dispatch(cacheLoginCheck(history))
+})
+
+const connector = connect(
+  mapStateToProps,
+  mapActionsToProps
+)
+
+export default connector(withStyles(styles)(Welcome))

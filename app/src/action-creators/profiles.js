@@ -85,3 +85,21 @@ export const checkLogin = history => (dispatch, getState) => {
     })
   }
 }
+
+export const cacheLoginCheck = history => (dispatch, getState) => {
+  const cacheProfile =
+    JSON.parse(window.localStorage.getItem('cacheProfile')) || {}
+  console.log('here')
+  if (not(isEmpty(cacheProfile))) {
+    const profiles = getState().profiles
+    const isExistingProfile = profile =>
+      equals(prop('email', profile), prop('email', cacheProfile)) &&
+      equals(prop('password', profile), prop('password', cacheProfile))
+    const foundProfile = find(isExistingProfile, profiles)
+
+    if (not(isEmpty(foundProfile))) {
+      dispatch({ type: CURRENT_PROFILE_LOGIN_SUCCEEDED, payload: foundProfile })
+      history.push('/home')
+    }
+  }
+}
