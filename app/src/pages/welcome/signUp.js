@@ -18,10 +18,13 @@ import {
 
 import {
   NEW_PROFILE_FORM_TOGGLED,
-  NEW_PROFILE_FORM_UPDATED
+  NEW_PROFILE_FORM_UPDATED,
+  NEW_PROFILE_SAVE_FAILED,
+  NEW_PROFILE_ERROR_CLEAR
 } from '../../constants'
 import { addProfile } from '../../action-creators/profiles'
 import MenuAppBar from '../../components/menuAppBar'
+import SnackBar from '../../components/customSnackBar'
 
 const styles = theme => ({
   root: {
@@ -51,7 +54,11 @@ const SignUp = props => {
     isDetailsForm,
     toggleForm,
     onChange,
-    onSubmit
+    onSubmit,
+    clearError,
+    isSaving,
+    isError,
+    errMsg
   } = props
   const {
     email,
@@ -77,6 +84,7 @@ const SignUp = props => {
                 value={email}
                 onChange={e => onChange('email', e.target.value)}
                 className={classes.textfield}
+                required
               />
             </Grid>
           </Grid>
@@ -90,9 +98,11 @@ const SignUp = props => {
               <TextField
                 id="password"
                 label="Password"
+                type="password"
                 value={password}
                 onChange={e => onChange('password', e.target.value)}
                 className={classes.textfield}
+                required
               />
             </Grid>
           </Grid>
@@ -131,6 +141,7 @@ const SignUp = props => {
                 value={firstName}
                 onChange={e => onChange('firstName', e.target.value)}
                 className={classes.textfield}
+                required
               />
             </Grid>
           </Grid>
@@ -147,6 +158,7 @@ const SignUp = props => {
                 value={lastName}
                 onChange={e => onChange('lastName', e.target.value)}
                 className={classes.textfield}
+                required
               />
             </Grid>
           </Grid>
@@ -161,8 +173,9 @@ const SignUp = props => {
                 id="heightIn"
                 label="Height (In)"
                 value={heightIn}
-                onChange={e => onChange('heightIn', e.target.value)}
+                onChange={e => onChange('heightIn', Number(e.target.value))}
                 className={classes.textfield}
+                required
               />
             </Grid>
           </Grid>
@@ -177,8 +190,9 @@ const SignUp = props => {
                 id="weightLbs"
                 label="Weight (Lbs)"
                 value={weightLbs}
-                onChange={e => onChange('weightLbs', e.target.value)}
+                onChange={e => onChange('weightLbs', Number(e.target.value))}
                 className={classes.textfield}
+                required
               />
             </Grid>
           </Grid>
@@ -198,6 +212,7 @@ const SignUp = props => {
     <React.Fragment>
       <div>
         <MenuAppBar welcome back history={history} />
+
         <center>
           <div style={{ paddingTop: '10%' }}>
             <Typography variant="display2" color="secondary">
@@ -210,6 +225,8 @@ const SignUp = props => {
             width="50%"
           />
         </center>
+        {isError && <SnackBar type="error" msg={errMsg} close={clearError} />}
+        {isSaving && <SnackBar type="info" msg="Saving Profile..." />}
       </div>
       {!isDetailsForm ? ProfileForm : DetailsForm}
     </React.Fragment>
@@ -218,13 +235,25 @@ const SignUp = props => {
 
 const mapStateToProps = state => ({
   isDetailsForm: state.newProfile.isDetailsForm,
+  isSaving: state.newProfile.isSaving,
+  isError: state.newProfile.isError,
+  errMsg: state.newProfile.errMsg,
   profile: state.newProfile.data
 })
 
 const mapActionsToProps = dispatch => ({
   toggleForm: () => dispatch({ type: NEW_PROFILE_FORM_TOGGLED }),
-  onChange: (field, value) =>
-    dispatch({ type: NEW_PROFILE_FORM_UPDATED, payload: { [field]: value } }),
+  clearError: () => dispatch({ type: NEW_PROFILE_ERROR_CLEAR }),
+  onChange: (field, value) => {
+    if (Number.isNaN(value)) {
+      dispatch({
+        type: NEW_PROFILE_SAVE_FAILED,
+        payload: `Only numbers are valid entries in the ${field} field.`
+      })
+      return
+    }
+    dispatch({ type: NEW_PROFILE_FORM_UPDATED, payload: { [field]: value } })
+  },
   onSubmit: history => e => {
     e.preventDefault()
     dispatch(addProfile(history))

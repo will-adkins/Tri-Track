@@ -9,6 +9,7 @@ import {
   Button,
   withStyles
 } from '@material-ui/core'
+import { isEmpty } from 'ramda'
 
 import MenuAppBar from '../../components/menuAppBar'
 
