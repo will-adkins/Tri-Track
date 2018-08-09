@@ -9,6 +9,10 @@
   align-items: center;
 }
 
+.svg_icon {
+  transform: scale(1.8);
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

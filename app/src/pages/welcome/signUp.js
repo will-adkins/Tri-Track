@@ -26,6 +26,7 @@ import {
 import { addProfile } from '../../action-creators/profiles'
 import MenuAppBar from '../../components/menuAppBar'
 import SnackBar from '../../components/customSnackBar'
+import CenterLogo from '../../components/centerLogo'
 
 const styles = theme => ({
   root: {
@@ -130,7 +131,10 @@ const SignUp = props => {
 
   const DetailsForm = (
     <center>
-      <form style={{ marginLeft: '25%' }} onSubmit={onSubmit(history)}>
+      <form
+        style={{ marginLeft: '25%', marginTop: '-5%' }}
+        onSubmit={onSubmit(history)}
+      >
         <div className={classes.margin}>
           <Grid container spacing={8} alignItems="flex-end">
             <Grid item>
@@ -214,19 +218,7 @@ const SignUp = props => {
     <React.Fragment>
       <div>
         <MenuAppBar welcome back history={history} />
-
-        <center>
-          <div style={{ paddingTop: '10%' }}>
-            <Typography variant="display2" color="secondary">
-              Tri-Track
-            </Typography>
-          </div>
-          <img
-            alt="Tri-Track icon"
-            src="/static/tri-symbol-1.jpg"
-            width="50%"
-          />
-        </center>
+        <CenterLogo title="Tri-Track" />
         {isError && <SnackBar type="error" msg={errMsg} close={clearError} />}
         {isSaving && <SnackBar type="info" msg="Saving Profile..." />}
       </div>

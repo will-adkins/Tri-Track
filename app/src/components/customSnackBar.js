@@ -115,7 +115,7 @@ class CustomizedSnackbars extends React.Component {
       <div>
         <Snackbar
           anchorOrigin={{
-            vertical: type === 'error' ? 'center' : 'bottom',
+            vertical: 'bottom',
             horizontal: 'left'
           }}
           open={this.state.open}

@@ -86,12 +86,13 @@ export const checkLogin = history => (dispatch, getState) => {
   }
 }
 
-export const cacheLoginCheck = history => (dispatch, getState) => {
+export const cacheLoginCheck = history => async (dispatch, getState) => {
   const cacheProfile =
     JSON.parse(window.localStorage.getItem('cacheProfile')) || {}
-  console.log('here')
+
+  const profiles = await dispatch(setProfiles).then(res => getState().profiles)
+
   if (not(isEmpty(cacheProfile))) {
-    const profiles = getState().profiles
     const isExistingProfile = profile =>
       equals(prop('email', profile), prop('email', cacheProfile)) &&
       equals(prop('password', profile), prop('password', cacheProfile))

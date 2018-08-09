@@ -1,4 +1,5 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
@@ -8,16 +9,29 @@ import {
   DirectionsBike,
   DirectionsRun,
   Pool,
-  ChevronLeft
+  ChevronLeft,
+  Menu,
+  FilterList,
+  MoreVert
 } from '@material-ui/icons'
+import { DRAWER_TOGGLED } from '../constants'
 
 const styles = {
-  center: { display: 'flex', margin: 'auto' },
-  icon: { marginRight: 24 }
+  icon: { marginRight: 24 },
+  menu: { marginLeft: -12 },
+  button: { marginLeft: '18%' }
 }
 
 const MenuAppBar = props => {
-  const { classes, back, history } = props
+  const {
+    classes,
+    back,
+    history,
+    welcome,
+    highLevel,
+    toggleDrawer,
+    listOptions
+  } = props
 
   /* {back && (
               <div>
@@ -30,7 +44,7 @@ const MenuAppBar = props => {
                     }}
                   />*/
 
-  if (props.welcome) {
+  if (welcome) {
     return (
       <div>
         <AppBar position="static">
@@ -59,6 +73,51 @@ const MenuAppBar = props => {
       </div>
     )
   }
-}
 
-export default withStyles(styles)(MenuAppBar)
+  if (highLevel) {
+    return (
+      <div>
+        <AppBar position="static" style={{ display: 'flex' }}>
+          <Toolbar>
+            <div style={{ flexGrow: 5 }}>
+              <Button className={classes.menu} onClick={toggleDrawer}>
+                <Menu style={{ color: 'white' }} className="svg_icon" />
+              </Button>
+            </div>
+            {listOptions && (
+              <div style={{ flexGrow: 1, justifyContent: 'space-around' }}>
+                <Button
+                  variant="fab"
+                  mini
+                  color="secondary"
+                  className={classes.button}
+                >
+                  <FilterList style={{ color: 'white' }} />
+                </Button>
+                <Button
+                  variant="fab"
+                  mini
+                  color="secondary"
+                  className={classes.button}
+                >
+                  <MoreVert style={{ color: 'white' }} />
+                </Button>
+              </div>
+            )}
+          </Toolbar>
+        </AppBar>
+      </div>
+    )
+  }
+}
+const mapStateToProps = () => ({})
+const mapActionsToProps = dispatch => ({
+  toggleDrawer: () => dispatch({ type: DRAWER_TOGGLED })
+})
+
+const connector = connect(
+  mapStateToProps,
+  mapActionsToProps
+)
+
+export default connector(withStyles(styles)(MenuAppBar))

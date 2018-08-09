@@ -20,6 +20,7 @@ import {
   CURRENT_PROFILE_ERROR_CLEAR
 } from '../../constants'
 import { checkLogin } from '../../action-creators/profiles'
+import CenterLogo from '../../components/centerLogo'
 import MenuAppBar from '../../components/menuAppBar'
 import SnackBar from '../../components/customSnackBar'
 
@@ -60,14 +61,8 @@ const Login = props => {
   return (
     <div>
       <MenuAppBar welcome back history={history} />
+      <CenterLogo title="Tri-Track" />
       <center>
-        <div style={{ paddingTop: '10%' }}>
-          <Typography variant="display2" color="secondary">
-            Tri-Track
-          </Typography>
-        </div>
-        <img alt="Tri-Track icon" src="/static/tri-symbol-1.jpg" width="50%" />
-
         <form
           onSubmit={checkLogin(history)}
           style={{ marginLeft: '25%', paddingTop: '10%' }}
