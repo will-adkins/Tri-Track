@@ -1,5 +1,5 @@
 import {} from 'ramda'
-import { SET_WORKOUTS } from '../constants'
+import { SET_WORKOUTS, WORKOUTS_FILTERED } from '../constants'
 
 export const workouts = (state = [], action) => {
   switch (action.type) {

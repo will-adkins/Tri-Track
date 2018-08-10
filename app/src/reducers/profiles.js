@@ -16,6 +16,15 @@ import {
   CURRENT_PROFILE_ERROR_CLEAR
 } from '../constants'
 
+export const profiles = (state = [], action) => {
+  switch (action.type) {
+    case SET_PROFILES:
+      return action.payload
+    default:
+      return state
+  }
+}
+
 const initialNewProfile = {
   data: {
     email: '',
@@ -29,15 +38,6 @@ const initialNewProfile = {
   isSaving: false,
   isError: false,
   errMsg: ''
-}
-
-export const profiles = (state = [], action) => {
-  switch (action.type) {
-    case SET_PROFILES:
-      return action.payload
-    default:
-      return state
-  }
 }
 
 export const newProfile = (state = initialNewProfile, action) => {
