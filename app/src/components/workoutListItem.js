@@ -16,13 +16,16 @@ import dateDisplayParser from '../lib/dateDisplayParser'
 import WorkoutIcon from '../components/workoutIcon'
 
 const WorkoutListItem = data => {
-  const { category, distanceMi, durationSec, dateTime, paceSecPerMi } = propOr(
-    data,
-    'workout',
-    data
-  )
+  const {
+    _id,
+    category,
+    distanceMi,
+    durationSec,
+    dateTime,
+    paceSecPerMi
+  } = propOr(data, 'workout', data)
   return (
-    <Card>
+    <Card className="underlay" key={_id}>
       <Link to="/home" className="router-link">
         <ListItem button>
           <ListItemIcon>

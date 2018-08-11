@@ -1,8 +1,6 @@
 import React from 'react'
 import {
   Typography,
-  Card,
-  CardHeader,
   CardMedia,
   CardContent,
   CardActions,

@@ -1,18 +1,12 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import AppBar from '@material-ui/core/AppBar'
-import Toolbar from '@material-ui/core/Toolbar'
-import Typography from '@material-ui/core/Typography'
-import Button from '@material-ui/core/Button'
-import { Icon, withStyles } from '@material-ui/core'
+import { AppBar, Toolbar, Button, Icon, withStyles } from '@material-ui/core'
 import {
   DirectionsBike,
   DirectionsRun,
   Pool,
-  ChevronLeft,
   Menu,
-  FilterList,
-  MoreVert
+  FilterList
 } from '@material-ui/icons'
 import {
   DRAWER_TOGGLED,
@@ -31,13 +25,10 @@ const styles = {
 const MenuAppBar = props => {
   const {
     classes,
-    back,
-    history,
     welcome,
     highLevel,
     toggleDrawer,
     toggleFilterBar,
-    toggleSortDrawer,
     listOptions
   } = props
 

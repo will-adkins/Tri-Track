@@ -1,10 +1,10 @@
 import React from 'react'
 import {
   withStyles,
-  SvgIcon,
   IconButton,
   Card,
-  Typography
+  Typography,
+  CardContent
 } from '@material-ui/core'
 import { connect } from 'react-redux'
 import {
@@ -17,7 +17,6 @@ import {
 } from '@material-ui/icons'
 import { propEq } from 'ramda'
 
-import filterWorkouts from '../lib/filterWorkouts'
 import { FILTER_KEYS_UPDATED } from '../constants'
 
 const styles = theme => ({
@@ -36,14 +35,12 @@ const styles = theme => ({
   }
 })
 
-function handleDelete() {}
-
 const CategoryButtons = props => {
   const { classes, filterClick, filterNullClick } = props
   const { filter } = props.listOptions
   return (
     <div className={classes.root}>
-      <Typography variant="caption">Categories: </Typography>
+      <Typography variant="caption">Categories:</Typography>
       <IconButton
         onClick={
           propEq('category', 'Swim', filter)
@@ -189,6 +186,11 @@ const WellnessButtons = props => {
 const FilterBar = props => {
   return (
     <Card>
+      <CardContent>
+        <center>
+          <Typography variant="title">Filter Workouts By:</Typography>
+        </center>
+      </CardContent>
       <CategoryButtons {...props} />
       <MotivationButtons {...props} />
       <WellnessButtons {...props} />

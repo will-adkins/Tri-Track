@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom'
 import { last, isEmpty } from 'ramda'
 import {
   Typography,
-  CircularProgress,
   Card,
   Tooltip,
   Button,
@@ -32,7 +31,7 @@ class Home extends React.Component {
   }
 
   render() {
-    const { classes, history, workouts } = this.props
+    const { classes, workouts } = this.props
     const { firstName } = this.props.profile
 
     const RecentWorkouts = isEmpty(workouts) ? (
@@ -60,6 +59,7 @@ class Home extends React.Component {
         <CenterLogo title={`Welcome, ${firstName}`} />
 
         <div>{RecentWorkouts}</div>
+
         <center
           style={{
             display: 'flex',

@@ -18,12 +18,11 @@ import {
   CalendarToday,
   Timer,
   Whatshot,
-  MoreVert
+  Sort
 } from '@material-ui/icons'
 import { connect } from 'react-redux'
 
 import { SORT_DRAWER_TOGGLED, SORT_OPTION_TOGGLED } from '../constants'
-import sortWorkouts from '../lib/sortWorkouts'
 
 const styles = theme => ({
   root: {
@@ -52,9 +51,15 @@ class SortListComposition extends React.Component {
             this.anchorEl = node
           }}
         >
-          <MoreVert style={{ color: 'white' }} />
+          <Sort style={{ color: 'white' }} />
         </Button>
-        <Popper open={open} anchorEl={this.anchorEl} transition disablePortal>
+        <Popper
+          open={open}
+          anchorEl={this.anchorEl}
+          transition
+          disablePortal
+          className="overlay"
+        >
           {({ TransitionProps, placement }) => (
             <Grow
               {...TransitionProps}

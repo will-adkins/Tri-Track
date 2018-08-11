@@ -1,24 +1,21 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
-import Button from '@material-ui/core/Button'
-import CheckCircleIcon from '@material-ui/icons/CheckCircle'
-import ErrorIcon from '@material-ui/icons/Error'
-import InfoIcon from '@material-ui/icons/Info'
-import CloseIcon from '@material-ui/icons/Close'
+import { Error, Info, Close, Warning, CheckCircle } from '@material-ui/icons'
 import green from '@material-ui/core/colors/green'
 import amber from '@material-ui/core/colors/amber'
-import IconButton from '@material-ui/core/IconButton'
-import Snackbar from '@material-ui/core/Snackbar'
-import SnackbarContent from '@material-ui/core/SnackbarContent'
-import WarningIcon from '@material-ui/icons/Warning'
-import { withStyles } from '@material-ui/core/styles'
+import {
+  IconButton,
+  Snackbar,
+  SnackbarContent,
+  withStyles
+} from '@material-ui/core'
 
 const variantIcon = {
-  success: CheckCircleIcon,
-  warning: WarningIcon,
-  error: ErrorIcon,
-  info: InfoIcon
+  success: CheckCircle,
+  warning: Warning,
+  error: Error,
+  info: Info
 }
 
 const styles1 = theme => ({
@@ -69,7 +66,7 @@ function MySnackbarContent(props) {
           className={classes.close}
           onClick={onClose}
         >
-          <CloseIcon className={classes.icon} />
+          <Close className={classes.icon} />
         </IconButton>
       ]}
       {...other}
@@ -99,17 +96,17 @@ class CustomizedSnackbars extends React.Component {
   }
 
   handleClose = (event, reason) => {
-    const { close } = this.props
+    //const { close } = this.props
     if (reason === 'clickaway') {
       return
     }
 
     this.setState({ open: false })
-    close ? close() : null
+    // close ? close() : null
   }
 
   render() {
-    const { classes, type, msg } = this.props
+    const { type, msg } = this.props
 
     return (
       <div>

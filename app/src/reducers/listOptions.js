@@ -4,8 +4,6 @@ import {
   SORT_DRAWER_TOGGLED,
   LIST_OPTIONS_CLEARED,
   FILTER_KEYS_UPDATED,
-  FILTERED_WORKOUTS_SHOWN,
-  FILTERED_WORKOUTS_HIDDEN,
   SORT_OPTION_TOGGLED
 } from '../constants'
 
@@ -30,10 +28,6 @@ export const listOptions = (state = initialListOptions, action) => {
       })
     case FILTER_KEYS_UPDATED:
       return mergeDeepRight(state, { filter: action.payload })
-    case FILTERED_WORKOUTS_SHOWN:
-      return merge(state, { showFilteredWorkouts: true })
-    case FILTERED_WORKOUTS_HIDDEN:
-      return merge(state, { showFilteredWorkouts: false })
     case SORT_DRAWER_TOGGLED:
       return merge(state, {
         showSortDrawer: !state.showSortDrawer,

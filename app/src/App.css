@@ -14,7 +14,15 @@
 }
 
 .overlay {
+  position: 'relative' !important;
   z-index: 1000 !important;
+  opacity: 1.01;
+}
+
+.underlay {
+  position: 'relative' !important;
+  z-index: 0 !important;
+  opacity: 0.99;
 }
 
 @keyframes App-logo-spin {

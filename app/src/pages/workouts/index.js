@@ -2,14 +2,13 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { withStyles } from '@material-ui/core'
 
-import { map, not } from 'ramda'
+import { map } from 'ramda'
 
-import { FILTERED_WORKOUTS_HIDDEN, LIST_OPTIONS_CLEARED } from '../../constants'
+import { LIST_OPTIONS_CLEARED } from '../../constants'
 import MenuAppBar from '../../components/menuAppBar'
 import withDrawer from '../../components/withDrawer'
 import workoutListItem from '../../components/workoutListItem'
 import FilterBar from '../../components/filterBar'
-import SortMenu from '../../components/sortMenu'
 
 import sortWorkouts from '../../lib/sortWorkouts'
 import filterWorkouts from '../../lib/filterWorkouts'
@@ -20,8 +19,7 @@ const styles = theme => ({
 
 class Workouts extends React.Component {
   componentDidMount() {
-    const { hideFilteredWorkouts, clearFilter } = this.props
-    hideFilteredWorkouts()
+    const { clearFilter } = this.props
     clearFilter()
   }
 
@@ -31,10 +29,12 @@ class Workouts extends React.Component {
       <div>
         <MenuAppBar highLevel listOptions />
         {showFilterBar && <FilterBar />}
-        {map(
-          workoutListItem,
-          sortWorkouts(sortKey, filterWorkouts(filterKey, workouts))
-        )}
+        <div className="overlay">
+          {map(
+            workoutListItem,
+            sortWorkouts(sortKey, filterWorkouts(filterKey, workouts))
+          )}
+        </div>
       </div>
     )
   }
@@ -49,7 +49,6 @@ const mapStateToProps = state => ({
 })
 
 const mapActionsToProps = dispatch => ({
-  hideFilteredWorkouts: () => dispatch({ type: FILTERED_WORKOUTS_HIDDEN }),
   clearFilter: () => dispatch({ type: LIST_OPTIONS_CLEARED })
 })
 
