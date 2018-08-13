@@ -1,12 +1,22 @@
 import React from 'react'
+import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { AppBar, Toolbar, Button, Icon, withStyles } from '@material-ui/core'
+import {
+  AppBar,
+  Toolbar,
+  Button,
+  Icon,
+  withStyles,
+  IconButton,
+  Typography
+} from '@material-ui/core'
 import {
   DirectionsBike,
   DirectionsRun,
   Pool,
   Menu,
-  FilterList
+  FilterList,
+  ChevronLeft
 } from '@material-ui/icons'
 import {
   DRAWER_TOGGLED,
@@ -19,7 +29,8 @@ import SortMenu from '../components/sortMenu'
 const styles = {
   icon: { marginRight: 24 },
   menu: { marginLeft: -12 },
-  button: { marginLeft: '18%' }
+  button: { marginLeft: '18%' },
+  flex: { justifyContent: 'center' }
 }
 
 const MenuAppBar = props => {
@@ -27,6 +38,9 @@ const MenuAppBar = props => {
     classes,
     welcome,
     highLevel,
+    back,
+    title,
+    history,
     toggleDrawer,
     toggleFilterBar,
     listOptions
@@ -106,6 +120,27 @@ const MenuAppBar = props => {
       </div>
     )
   }
+
+  if (back) {
+    return (
+      <AppBar position="static">
+        <Toolbar>
+          <div style={{ display: 'flex' }}>
+            <IconButton onClick={e => history.goBack()}>
+              <ChevronLeft style={{ color: 'white' }} className="svg_icon" />
+            </IconButton>
+            <Typography
+              variant="title"
+              style={{ color: 'white' }}
+              className={classes.flex}
+            >
+              {title}
+            </Typography>
+          </div>
+        </Toolbar>
+      </AppBar>
+    )
+  }
 }
 const mapStateToProps = () => ({})
 const mapActionsToProps = dispatch => ({
@@ -119,4 +154,4 @@ const connector = connect(
   mapActionsToProps
 )
 
-export default connector(withStyles(styles)(MenuAppBar))
+export default connector(withRouter(withStyles(styles)(MenuAppBar)))

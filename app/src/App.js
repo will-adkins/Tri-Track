@@ -6,6 +6,7 @@ import Login from './pages/welcome/login'
 import SignUp from './pages/welcome/signUp'
 import Home from './pages/home'
 import Workouts from './pages/workouts'
+import ViewWorkout from './pages/workouts/view'
 
 const App = () => (
   <BrowserRouter>
@@ -15,6 +16,7 @@ const App = () => (
       <Route exact path="/sign-up" component={SignUp} />
       <Route exact path="/home" component={Home} />
       <Route exact path="/workouts" component={Workouts} />
+      <Route exact path="/workouts/:id" component={ViewWorkout} />
     </Switch>
   </BrowserRouter>
 )

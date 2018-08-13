@@ -13,6 +13,10 @@
   transform: scale(1.8);
 }
 
+.svg_workout_category {
+  transform: scale(5);
+}
+
 .overlay {
   position: 'relative' !important;
   z-index: 1000 !important;

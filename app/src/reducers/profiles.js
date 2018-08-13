@@ -13,7 +13,8 @@ import {
   CURRENT_PROFILE_LOGIN_SUCCEEDED,
   CURRENT_PROFILE_LOGIN_FAILED,
   CURRENT_PROFILE_FORM_CLEAR,
-  CURRENT_PROFILE_ERROR_CLEAR
+  CURRENT_PROFILE_ERROR_CLEAR,
+  CURRENT_PROFILE_LOGGED_OUT
 } from '../constants'
 
 export const profiles = (state = [], action) => {
@@ -113,6 +114,9 @@ export const currentProfile = (state = initialCurrentProfile, action) => {
         isError: false,
         errMsg: ''
       })
+    case CURRENT_PROFILE_LOGGED_OUT:
+      window.localStorage.clear()
+      return initialCurrentProfile
     default:
       return state
   }

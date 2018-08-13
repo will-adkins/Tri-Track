@@ -26,7 +26,7 @@ const WorkoutListItem = data => {
   } = propOr(data, 'workout', data)
   return (
     <Card className="underlay" key={_id}>
-      <Link to="/home" className="router-link">
+      <Link to={`/workouts/${_id}`} className="router-link">
         <ListItem button>
           <ListItemIcon>
             <Avatar aria-label={category}>

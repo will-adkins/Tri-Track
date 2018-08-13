@@ -1,14 +1,26 @@
 import React from 'react'
 import { DirectionsBike, DirectionsRun, Pool } from '@material-ui/icons'
 
-export default props => (
-  <React.Fragment>
-    {props.category === 'Swim' ? (
-      <Pool color="secondary" />
-    ) : props.category === 'Bike' ? (
-      <DirectionsBike color="secondary" />
-    ) : props.category === 'Run' ? (
-      <DirectionsRun color="secondary" />
-    ) : null}
-  </React.Fragment>
-)
+export default props => {
+  const { category, large } = props
+  return (
+    <React.Fragment>
+      {category === 'Swim' ? (
+        <Pool
+          color="secondary"
+          className={large ? 'svg_workout_category' : null}
+        />
+      ) : category === 'Bike' ? (
+        <DirectionsBike
+          color="secondary"
+          className={large ? 'svg_workout_category' : null}
+        />
+      ) : category === 'Run' ? (
+        <DirectionsRun
+          color="secondary"
+          className={large ? 'svg_workout_category' : null}
+        />
+      ) : null}
+    </React.Fragment>
+  )
+}

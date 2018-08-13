@@ -13,16 +13,18 @@ import {
   Home,
   FitnessCenter,
   Edit,
-  Star,
+  Add,
   DirectionsBike,
   DirectionsRun,
-  Pool
+  Pool,
+  ExitToApp
 } from '@material-ui/icons'
 
-import { DRAWER_TOGGLED } from '../constants'
+import { DRAWER_TOGGLED, CURRENT_PROFILE_LOGGED_OUT } from '../constants'
 
-const withDrawer = function(PageComponent) {
+const withDrawer = PageComponent => {
   const WrappedDrawerPageComponent = props => {
+    const { logout, toggleDrawer } = props
     const NavListItems = (
       <div>
         <center style={{ margin: '5%' }}>
@@ -41,7 +43,7 @@ const withDrawer = function(PageComponent) {
         </center>
         <Divider />
         <Link to="/home" className="router-link">
-          <ListItem button onClick={e => props.toggleDrawer()}>
+          <ListItem button onClick={e => toggleDrawer()}>
             <ListItemIcon>
               <Home />
             </ListItemIcon>
@@ -50,7 +52,7 @@ const withDrawer = function(PageComponent) {
         </Link>
 
         <Link to="/workouts" className="router-link">
-          <ListItem button onClick={e => props.toggleDrawer()}>
+          <ListItem button onClick={e => toggleDrawer()}>
             <ListItemIcon>
               <FitnessCenter />
             </ListItemIcon>
@@ -58,8 +60,17 @@ const withDrawer = function(PageComponent) {
           </ListItem>
         </Link>
 
+        <Link to="/workouts/new" className="router-link">
+          <ListItem button onClick={e => toggleDrawer()}>
+            <ListItemIcon>
+              <Add />
+            </ListItemIcon>
+            <ListItemText primary="Add Workout" />
+          </ListItem>
+        </Link>
+
         <Link to="/edit-profile" className="router-link">
-          <ListItem button onClick={e => props.toggleDrawer()}>
+          <ListItem button onClick={e => toggleDrawer()}>
             <ListItemIcon>
               <Edit />
             </ListItemIcon>
@@ -67,12 +78,18 @@ const withDrawer = function(PageComponent) {
           </ListItem>
         </Link>
 
-        <Link to="/workouts/new" className="router-link">
-          <ListItem button onClick={e => props.toggleDrawer()}>
+        <Link to="/" className="router-link">
+          <ListItem
+            button
+            onClick={e => {
+              toggleDrawer()
+              logout()
+            }}
+          >
             <ListItemIcon>
-              <Star />
+              <ExitToApp />
             </ListItemIcon>
-            <ListItemText primary="Add Workout" />
+            <ListItemText primary="Sign Out" />
           </ListItem>
         </Link>
       </div>
@@ -98,7 +115,8 @@ const withDrawer = function(PageComponent) {
   })
 
   const mapActionsToProps = dispatch => ({
-    toggleDrawer: () => dispatch({ type: DRAWER_TOGGLED })
+    toggleDrawer: () => dispatch({ type: DRAWER_TOGGLED }),
+    logout: () => dispatch({ type: CURRENT_PROFILE_LOGGED_OUT })
   })
 
   const connector = connect(

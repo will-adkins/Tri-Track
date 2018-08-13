@@ -154,7 +154,7 @@ const WellnessButtons = props => {
           propEq('wellness', 1, filter) ? classes.selected : classes.unselected
         }
       >
-        <MoodBad />
+        <img src="/static/sick.png" alt="Sick Icon" />
       </IconButton>
       <IconButton
         onClick={
@@ -166,7 +166,7 @@ const WellnessButtons = props => {
           propEq('wellness', 2, filter) ? classes.selected : classes.unselected
         }
       >
-        <SentimentSatisfied />
+        <img src="/static/fever.png" alt="Fever Icon" />
       </IconButton>
       <IconButton
         onClick={
@@ -178,7 +178,7 @@ const WellnessButtons = props => {
           propEq('wellness', 3, filter) ? classes.selected : classes.unselected
         }
       >
-        <Mood />
+        <img src="/static/well.png" alt="Well Icon" />
       </IconButton>
     </div>
   )
@@ -199,23 +199,12 @@ const FilterBar = props => {
 }
 
 const mapStateToProps = state => {
-  console.log(JSON.stringify(state.listOptions.filter))
   return {
     listOptions: state.listOptions
   }
 }
 
 const mapActionsToProps = dispatch => ({
-  //   filterCategoryClick: value => e => {
-  //     dispatch({ type: FILTER_KEYS_UPDATED, payload: { category: value } })
-  //   },
-  //   filterMotivationClick: value => filterFn => e => {
-  //     dispatch({ type: FILTER_KEYS_UPDATED, payload: { motivation: value } })
-  //   },
-  //   filterWellnessClick: value => filterFn => e => {
-  //     dispatch({ type: FILTER_KEYS_UPDATED, payload: { wellness: value }
-  //      })
-  //   },
   filterClick: (field, value) => e =>
     dispatch({ type: FILTER_KEYS_UPDATED, payload: { [field]: value } }),
   filterNullClick: field => e =>
