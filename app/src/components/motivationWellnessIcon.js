@@ -15,11 +15,11 @@ export default props => {
   }
   if (equals(type, 'wellness')) {
     return equals(value, 1) ? (
-      <img src="/static/sick.png" />
+      <img src="/static/sick.png" alt="Sick Icon" />
     ) : equals(value, 2) ? (
-      <img src="/static/fever.png" />
+      <img src="/static/fever.png" alt="Fever Icon" />
     ) : (
-      <img src="/static/well.png" />
+      <img src="/static/well.png" alt="Well Icon" />
     )
   }
 }

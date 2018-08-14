@@ -1,5 +1,5 @@
 import React from 'react'
-import { withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router'
 import { connect } from 'react-redux'
 import {
   AppBar,
@@ -130,8 +130,8 @@ const MenuAppBar = props => {
               <ChevronLeft style={{ color: 'white' }} className="svg_icon" />
             </IconButton>
             <Typography
-              variant="title"
-              style={{ color: 'white' }}
+              variant="headline"
+              style={{ color: 'white', marginTop: 8, marginLeft: 8 }}
               className={classes.flex}
             >
               {title}

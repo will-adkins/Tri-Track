@@ -1,5 +1,5 @@
 import fetch from 'isomorphic-fetch'
-import { find, equals, prop, isNil, not, isEmpty } from 'ramda'
+import { isNil, not, isEmpty } from 'ramda'
 
 import {
   NEW_PROFILE_SAVE_STARTED,
@@ -10,8 +10,11 @@ import {
   CURRENT_PROFILE_LOGIN_SUCCEEDED,
   CURRENT_PROFILE_LOGIN_STARTED,
   CURRENT_PROFILE_ERROR_CLEAR,
-  NEW_PROFILE_ERROR_CLEAR
+  NEW_PROFILE_ERROR_CLEAR,
+  SET_CURRENT_PROFILE
 } from '../constants'
+import findProfile from '../lib/findProfile'
+
 const url = process.env.REACT_APP_BASE_URL + 'profiles'
 
 export const setProfiles = async (dispatch, getState) => {
@@ -20,8 +23,20 @@ export const setProfiles = async (dispatch, getState) => {
   dispatch({ type: SET_PROFILES, payload: profiles })
 }
 
+export const setCurrentProfile = async (dispatch, getState) => {
+  const profiles = getState().profiles
+  const login = getState().newProfile.data
+  console.log(JSON.stringify(login))
+  const foundProfile = findProfile(profiles, login)
+  console.log(JSON.stringify(foundProfile))
+  window.localStorage.setItem('cacheProfile', JSON.stringify(foundProfile))
+
+  dispatch({ type: SET_CURRENT_PROFILE, payload: foundProfile })
+}
+
 export const addProfile = history => async (dispatch, getState) => {
   dispatch({ type: NEW_PROFILE_SAVE_STARTED })
+
   const profile = getState().newProfile.data
 
   if (isEmpty(profile.email) || isEmpty(profile.password)) {
@@ -47,8 +62,10 @@ export const addProfile = history => async (dispatch, getState) => {
     )
 
   if (postResult.ok) {
-    dispatch({ type: NEW_PROFILE_SAVE_SUCCEEDED })
+    await dispatch(setProfiles)
+    await dispatch(setCurrentProfile)
     history.push('/home')
+    dispatch({ type: NEW_PROFILE_SAVE_SUCCEEDED })
   } else {
     dispatch({ type: NEW_PROFILE_ERROR_CLEAR })
     dispatch({
@@ -65,11 +82,7 @@ export const checkLogin = history => (dispatch, getState) => {
 
   const profiles = getState().profiles
 
-  const isExistingProfile = profile =>
-    equals(prop('email', profile), prop('email', login)) &&
-    equals(prop('password', profile), prop('password', login))
-
-  const foundProfile = find(isExistingProfile, profiles)
+  const foundProfile = findProfile(profiles, login)
 
   if (not(isNil(foundProfile))) {
     dispatch({ type: CURRENT_PROFILE_LOGIN_SUCCEEDED, payload: foundProfile })
@@ -93,10 +106,7 @@ export const cacheLoginCheck = history => async (dispatch, getState) => {
   const profiles = await dispatch(setProfiles).then(res => getState().profiles)
 
   if (not(isEmpty(cacheProfile))) {
-    const isExistingProfile = profile =>
-      equals(prop('email', profile), prop('email', cacheProfile)) &&
-      equals(prop('password', profile), prop('password', cacheProfile))
-    const foundProfile = find(isExistingProfile, profiles)
+    const foundProfile = findProfile(profiles, cacheProfile)
 
     if (not(isEmpty(foundProfile))) {
       dispatch({ type: CURRENT_PROFILE_LOGIN_SUCCEEDED, payload: foundProfile })

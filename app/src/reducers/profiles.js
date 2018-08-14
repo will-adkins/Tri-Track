@@ -14,7 +14,8 @@ import {
   CURRENT_PROFILE_LOGIN_FAILED,
   CURRENT_PROFILE_FORM_CLEAR,
   CURRENT_PROFILE_ERROR_CLEAR,
-  CURRENT_PROFILE_LOGGED_OUT
+  CURRENT_PROFILE_LOGGED_OUT,
+  SET_CURRENT_PROFILE
 } from '../constants'
 
 export const profiles = (state = [], action) => {
@@ -85,6 +86,8 @@ const initialCurrentProfile = {
 
 export const currentProfile = (state = initialCurrentProfile, action) => {
   switch (action.type) {
+    case SET_CURRENT_PROFILE:
+      return mergeDeepRight(state, { data: action.payload })
     case CURRENT_PROFILE_FORM_UPDATE:
       return mergeDeepRight(state, { data: action.payload })
     case CURRENT_PROFILE_FORM_CLEAR:

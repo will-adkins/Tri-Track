@@ -1,7 +1,7 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 import { profiles, newProfile, currentProfile } from './reducers/profiles'
-import { workouts, currentWorkout } from './reducers/workouts'
+import { workouts, currentWorkout, editWorkout } from './reducers/workouts'
 import { drawer } from './reducers/drawer'
 import { listOptions } from './reducers/listOptions'
 
@@ -10,6 +10,7 @@ export default createStore(
     profiles,
     newProfile,
     currentProfile,
+    editWorkout,
     workouts,
     currentWorkout,
     drawer,

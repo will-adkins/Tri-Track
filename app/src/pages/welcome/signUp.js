@@ -111,7 +111,7 @@ const SignUp = props => {
             type="button"
             onClick={e => toggleForm()}
           >
-            Sign Up
+            Next
           </Button>
           <Link to="/" className="router-link">
             <Button variant="flat" type="button" onClick={e => clearForm()}>
