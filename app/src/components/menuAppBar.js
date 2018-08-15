@@ -39,6 +39,7 @@ const MenuAppBar = props => {
     welcome,
     highLevel,
     back,
+    backURL,
     title,
     history,
     toggleDrawer,
@@ -112,7 +113,7 @@ const MenuAppBar = props => {
                 >
                   <FilterList style={{ color: 'white' }} />
                 </Button>
-                <SortMenu className="overlay" />
+                <SortMenu />
               </div>
             )}
           </Toolbar>
@@ -126,7 +127,11 @@ const MenuAppBar = props => {
       <AppBar position="static">
         <Toolbar>
           <div style={{ display: 'flex' }}>
-            <IconButton onClick={e => history.goBack()}>
+            <IconButton
+              onClick={e =>
+                backURL ? history.push(backURL) : history.goBack()
+              }
+            >
               <ChevronLeft style={{ color: 'white' }} className="svg_icon" />
             </IconButton>
             <Typography

@@ -1,19 +1,22 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import {
-  CardActions,
-  Card,
-  Button,
-  CircularProgress,
-  withStyles
-} from '@material-ui/core'
+import { Card, CircularProgress, withStyles } from '@material-ui/core'
 
 import MenuAppBar from '../../components/menuAppBar'
 import CenterLogo from '../../components/centerLogo'
 import SnackBar from '../../components/customSnackBar'
 import WorkoutForm from '../../components/workoutForm'
-import { updateWorkout } from '../../action-creators/workouts'
-import { EDIT_WORKOUT_FORM_UPDATED, EDIT_WORKOUT_LOADED } from '../../constants'
+
+import {
+  updateWorkout,
+  editWorkoutFormUpdate
+} from '../../action-creators/workouts'
+import {
+  EDIT_WORKOUT_LOADED,
+  EDIT_WORKOUT_FORM_TOGGLE,
+  EDIT_WORKOUT_ERROR_CLEAR,
+  EDIT_WORKOUT_SAVE_FAILED
+} from '../../constants'
 
 const styles = theme => ({
   card: {
@@ -30,11 +33,13 @@ class EditWorkout extends React.Component {
 
   render() {
     const {
-      classes,
       match,
+      history,
       workout,
       onChange,
       onSubmit,
+      toggleForm,
+      errorClear,
       isError,
       errMsg
     } = this.props
@@ -56,17 +61,14 @@ class EditWorkout extends React.Component {
         <CenterLogo />
         <Card>
           <WorkoutForm
+            id={match.params.id}
             onChange={onChange}
-            onSubmit={onSubmit}
+            onSubmit={onSubmit(match.params.id, history)}
+            toggleForm={toggleForm}
             workout={workout}
           />
-          <CardActions className={classes.actions} style={{ paddingTop: 16 }}>
-            <Button variant="extendedFab" color="primary">
-              Submit
-            </Button>
-            <Button>Cancel</Button>
-          </CardActions>
         </Card>
+        {isError && <SnackBar type="error" msg={errMsg} close={errorClear} />}
       </div>
     )
   }
@@ -75,17 +77,31 @@ class EditWorkout extends React.Component {
 const mapStateToProps = state => ({
   load: state.currentWorkout.data,
   workout: state.editWorkout.data,
+  isFirstForm: state.editWorkout.isFirstForm,
   isSaving: state.editWorkout.isSaving,
-  isError: state.currentWorkout.isError,
-  errMsg: state.currentWorkout.errMsg
+  isError: state.editWorkout.isError,
+  errMsg: state.editWorkout.errMsg
 })
 
 const mapActionsToProps = dispatch => ({
   setWorkout: workout =>
     dispatch({ type: EDIT_WORKOUT_LOADED, payload: workout }),
-  onChange: (field, value) =>
-    dispatch({ type: EDIT_WORKOUT_FORM_UPDATED, payload: { [field]: value } }),
-  onSubmit: (id, history) => dispatch(updateWorkout(id, history))
+  onChange: (field, value) => {
+    if (Number.isNaN(value)) {
+      dispatch({
+        type: EDIT_WORKOUT_SAVE_FAILED,
+        payload: `Only numbers are valid entries in the ${field} field.`
+      })
+      return
+    }
+    dispatch(editWorkoutFormUpdate(field, value))
+  },
+  onSubmit: (id, history) => e => {
+    e.preventDefault()
+    dispatch(updateWorkout(id, history))
+  },
+  toggleForm: e => dispatch({ type: EDIT_WORKOUT_FORM_TOGGLE }),
+  errorClear: () => dispatch({ type: EDIT_WORKOUT_ERROR_CLEAR })
 })
 
 const connector = connect(

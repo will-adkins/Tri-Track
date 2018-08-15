@@ -15,7 +15,8 @@ export default sec => {
     minutes = `${Math.floor(sec / 60)}`
   }
   const remainder = sec % 60
-  const seconds = remainder < 10 ? `0${remainder}` : `${remainder}`
+  const seconds =
+    remainder < 10 ? `0${Math.floor(remainder)}` : `${Math.floor(remainder)}`
 
   return hours > 0 ? `${hours}:${minutes}:${seconds}` : `${minutes}:${seconds}`
 }

@@ -1,14 +1,11 @@
 import React from 'react'
+import { equals, not } from 'ramda'
 import { withRouter } from 'react-router'
+import { connect } from 'react-redux'
 import {
   Grid,
   TextField,
-  CardContent,
-  ListItem,
-  Input,
-  InputLabel,
-  InputAdornment,
-  FormControl,
+  CardActions,
   Button,
   withStyles
 } from '@material-ui/core'
@@ -16,6 +13,7 @@ import { Terrain, AccessTime, Timer, Whatshot } from '@material-ui/icons'
 
 import secToMin from '../lib/secToMin'
 import WorkoutIcon from '../components/workoutIcon'
+import MotivationWellnessIcon from '../components/motivationWellnessIcon'
 import CustomSelect from '../components/customSelect'
 
 const styles = theme => ({
@@ -43,13 +41,22 @@ const styles = theme => ({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center'
-  }
+  },
+  actions: { justifyContent: 'flex-end', width: '50%' }
 })
 
 const WorkoutForm = props => {
-  const { classes, history, onChange, onSubmit } = props
+  const {
+    classes,
+    history,
+    onChange,
+    onSubmit,
+    toggleForm,
+    isFirstForm
+  } = props
   const {
     category,
+    stroke,
     wellness,
     motivation,
     distanceMi,
@@ -60,207 +67,162 @@ const WorkoutForm = props => {
 
   const SoftForm = (
     <center>
-      <form style={{ marginLeft: '25%', paddingTop: '10%' }}>
+      <form style={{ marginLeft: '25%' }}>
         <div className={classes.margin}>
           <Grid container spacing={8} alignItems="flex-end">
             <Grid item>
               <WorkoutIcon category={category} />
             </Grid>
             <CustomSelect
+              label="Workout Category"
               field="category"
               value={category}
               onSelect={onChange}
             />
           </Grid>
-        </div>
-        <div className={classes.margin}>
-          <Grid container spacing={8} alignItems="flex-end">
-            <Grid item>
-              <Terrain />
-            </Grid>
-            <Grid item>
-              <TextField
-                id="password"
-                label="Wellness"
-                type="password"
-                className={classes.textfield}
-                required
+          {equals('Swim', category) && (
+            <Grid container spacing={8} alignItems="flex-end">
+              <Grid item>
+                <img src="/static/stroke.png" alt="Swim Stroke Icon" />
+              </Grid>
+              <CustomSelect
+                label="Swim Stroke"
+                field="stroke"
+                value={stroke}
+                onSelect={onChange}
               />
             </Grid>
-          </Grid>
-        </div>
-        <div className={classes.margin}>
+          )}
           <Grid container spacing={8} alignItems="flex-end">
             <Grid item>
-              <Terrain />
+              <MotivationWellnessIcon type="motivation" value={motivation} />
             </Grid>
+            <CustomSelect
+              label="Motivation"
+              field="motivation"
+              value={motivation}
+              onSelect={onChange}
+            />
+          </Grid>
+          <Grid container spacing={0} alignItems="flex-end">
             <Grid item>
-              <TextField
-                id="username"
-                label="Motivation"
-                className={classes.textfield}
-                required
-              />
+              <MotivationWellnessIcon type="wellness" value={wellness} />
             </Grid>
+            <CustomSelect
+              label="Wellness"
+              field="wellness"
+              value={wellness}
+              onSelect={onChange}
+            />
           </Grid>
         </div>
+        <CardActions className={classes.actions} style={{ paddingTop: 16 }}>
+          <Button variant="extendedFab" color="primary" onClick={toggleForm}>
+            Next
+          </Button>
+          <Button type="button" onClick={e => history.goBack()}>
+            Cancel
+          </Button>
+        </CardActions>
       </form>
     </center>
   )
 
-  // const HardForm = (
-  //   <center>
-  //     <form
-  //       style={{ marginLeft: '25%', marginTop: '-5%' }}
-  //       onSubmit={onSubmit(history)}
-  //     >
-  //       <div className={classes.margin}>
-  //         <Grid container spacing={8} alignItems="flex-end">
-  //           <Grid item>
-  //             <Info />
-  //           </Grid>
-  //           <Grid item>
-  //             <TextField
-  //               id="firstName"
-  //               label="First Name"
-  //               value={firstName}
-  //               onChange={e => onChange('firstName', e.target.value)}
-  //               className={classes.textfield}
-  //               required
-  //             />
-  //           </Grid>
-  //         </Grid>
-  //       </div>
-  //       <div className={classes.margin}>
-  //         <Grid container spacing={8} alignItems="flex-end">
-  //           <Grid item>
-  //             <Info />
-  //           </Grid>
-  //           <Grid item>
-  //             <TextField
-  //               id="lastName"
-  //               label="Last Name"
-  //               value={lastName}
-  //               onChange={e => onChange('lastName', e.target.value)}
-  //               className={classes.textfield}
-  //               required
-  //             />
-  //           </Grid>
-  //         </Grid>
-  //       </div>
-  //       <div className={classes.margin}>
-  //         <Grid container spacing={8} alignItems="flex-end">
-  //           <Grid item>
-  //             <AccessibilityNew />
-  //           </Grid>
-  //           <Grid item>
-  //             <TextField
-  //               id="heightIn"
-  //               label="Height (In)"
-  //               value={heightIn}
-  //               onChange={e => onChange('heightIn', Number(e.target.value))}
-  //               className={classes.textfield}
-  //               required
-  //             />
-  //           </Grid>
-  //         </Grid>
-  //       </div>
-  //       <div className={classes.margin}>
-  //         <Grid container spacing={8} alignItems="flex-end">
-  //           <Grid item>
-  //             <FitnessCenter />
-  //           </Grid>
-  //           <Grid item>
-  //             <TextField
-  //               id="weightLbs"
-  //               label="Weight (Lbs)"
-  //               value={weightLbs}
-  //               onChange={e => onChange('weightLbs', Number(e.target.value))}
-  //               className={classes.textfield}
-  //               required
-  //             />
-  //           </Grid>
-  //         </Grid>
-  //       </div>
-  //       <div style={{ paddingTop: 12 }}>
-  //         <Button variant="extendedFab" color="primary" type="submit">
-  //           Sign Up
-  //         </Button>
-  //         <Button variant="flat" type="button" onClick={e => toggleForm()}>
-  //           Go Back
-  //         </Button>
-  //       </div>
-  //     </form>
-  //   </center>
-  // )
+  const HardForm = (
+    <center>
+      <form style={{ marginLeft: '25%' }} onSubmit={onSubmit}>
+        <div className={classes.margin}>
+          <Grid container spacing={8} alignItems="flex-end">
+            <Grid item>
+              <Terrain />
+            </Grid>
+            <Grid item>
+              <TextField
+                id="distance"
+                label="Distance (miles)"
+                value={distanceMi}
+                onChange={e => onChange('distanceMi', Number(e.target.value))}
+                className={classes.textfield}
+                required
+              />
+            </Grid>
+          </Grid>
+        </div>
+        <div className={classes.margin}>
+          <Grid container spacing={8} alignItems="flex-end">
+            <Grid item>
+              <AccessTime />
+            </Grid>
+            <Grid item>
+              <TextField
+                id="duration"
+                label="Duration (seconds)"
+                value={durationSec}
+                onChange={e => onChange('durationSec', Number(e.target.value))}
+                className={classes.textfield}
+                required
+              />
+            </Grid>
+          </Grid>
+        </div>
+        <div className={classes.margin}>
+          <Grid container spacing={8} alignItems="flex-end">
+            <Grid item>
+              <Timer />
+            </Grid>
+            <Grid item>
+              <TextField
+                id="pace"
+                label="Pace (min/mile)"
+                value={secToMin(paceSecPerMi)}
+                onChange={e => onChange('paceSecPerMi', Number(e.target.value))}
+                className={classes.textfield}
+                disabled
+              />
+            </Grid>
+          </Grid>
+        </div>
+        <div className={classes.margin}>
+          <Grid container spacing={8} alignItems="flex-end">
+            <Grid item>
+              <Whatshot />
+            </Grid>
+            <Grid item>
+              <TextField
+                id="calories"
+                label="Calories Burned"
+                value={calories}
+                onChange={e => onChange('calories', Number(e.target.value))}
+                className={classes.textfield}
+                disabled
+              />
+            </Grid>
+          </Grid>
+        </div>
+        <CardActions className={classes.actions} style={{ paddingTop: 16 }}>
+          <Button type="submit" variant="extendedFab" color="primary">
+            Submit
+          </Button>
+          <Button type="button" onClick={toggleForm}>
+            Go Back
+          </Button>
+        </CardActions>
+      </form>
+    </center>
+  )
 
-  // return (
-  //   <CardContent>
-  //     <div className={classes.row}>
-  //       <ListItem>
-  //         <FormControl className={classes.margin}>
-  //           <InputLabel>Distance (miles)</InputLabel>
-  //           <Input
-  //             id="input-with-icon-adornment"
-  //             value={`${distanceMi}`}
-  //             startAdornment={
-  //               <InputAdornment position="start">
-  //                 <Terrain />
-  //               </InputAdornment>
-  //             }
-  //           />
-  //         </FormControl>
-  //       </ListItem>
-
-  //       <ListItem>
-  //         <FormControl className={classes.margin}>
-  //           <InputLabel>Duration</InputLabel>
-  //           <Input
-  //             id="input-with-icon-adornment"
-  //             value={secToMin(durationSec)}
-  //             startAdornment={
-  //               <InputAdornment position="start">
-  //                 <AccessTime />
-  //               </InputAdornment>
-  //             }
-  //           />
-  //         </FormControl>
-  //       </ListItem>
-  //     </div>
-  //     <div className={classes.row}>
-  //       <ListItem>
-  //         <FormControl className={classes.margin}>
-  //           <InputLabel>Pace</InputLabel>
-  //           <Input
-  //             id="input-with-icon-adornment"
-  //             value={`${paceSecPerMi}`}
-  //             startAdornment={
-  //               <InputAdornment position="start">
-  //                 <Timer />
-  //               </InputAdornment>
-  //             }
-  //           />
-  //         </FormControl>
-  //       </ListItem>
-
-  //       <ListItem>
-  //         <FormControl className={classes.margin}>
-  //           <InputLabel>Calories</InputLabel>
-  //           <Input
-  //             id="input-with-icon-adornment"
-  //             value={calories}
-  //             startAdornment={
-  //               <InputAdornment position="start">
-  //                 <Whatshot />
-  //               </InputAdornment>
-  //             }
-  //           />
-  //         </FormControl>
-  //       </ListItem>
-  //     </div>
-  //   </CardContent>
-  // )
-  return SoftForm
+  return (
+    <React.Fragment>
+      {isFirstForm && SoftForm}
+      {not(isFirstForm) && HardForm}
+    </React.Fragment>
+  )
 }
 
-export default withRouter(withStyles(styles)(WorkoutForm))
+const mapStateToProps = state => ({
+  isFirstForm: state.editWorkout.isFirstForm
+})
+
+const connector = connect(mapStateToProps)
+
+export default connector(withRouter(withStyles(styles)(WorkoutForm)))

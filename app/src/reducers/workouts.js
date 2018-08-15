@@ -8,7 +8,8 @@ import {
   EDIT_WORKOUT_SAVE_SUCCEEDED,
   EDIT_WORKOUT_SAVE_FAILED,
   EDIT_WORKOUT_FORM_TOGGLE,
-  EDIT_WORKOUT_FORM_UPDATED
+  EDIT_WORKOUT_FORM_UPDATED,
+  EDIT_WORKOUT_ERROR_CLEAR
 } from '../constants'
 
 export const workouts = (state = [], action) => {
@@ -63,6 +64,7 @@ const initialEditWorkout = {
     dateTime: now.toISOString(),
     profileId: '',
     category: '',
+    stroke: '',
     distanceMi: 0,
     durationSec: 0,
     motivation: 0,
@@ -94,6 +96,12 @@ export const editWorkout = (state = initialEditWorkout, action) => {
         isSaving: false,
         isError: true,
         errMsg: action.payload
+      })
+    case EDIT_WORKOUT_ERROR_CLEAR:
+      return merge(state, {
+        isSaving: false,
+        isError: false,
+        errMsg: ''
       })
     default:
       return state

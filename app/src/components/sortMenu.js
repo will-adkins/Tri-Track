@@ -59,6 +59,7 @@ class SortListComposition extends React.Component {
           transition
           disablePortal
           className="overlay"
+          style={{ paddingTop: 6 }}
         >
           {({ TransitionProps, placement }) => (
             <Grow
@@ -74,7 +75,6 @@ class SortListComposition extends React.Component {
                   marginLeft: '-60%',
                   minWidth: '50%'
                 }}
-                className="overlay"
               >
                 <ClickAwayListener onClickAway={toggleSortDrawer}>
                   <MenuList>

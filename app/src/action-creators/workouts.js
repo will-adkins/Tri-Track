@@ -1,13 +1,15 @@
 import fetch from 'isomorphic-fetch'
-import { filter, propEq, prop } from 'ramda'
+import { filter, propEq, prop, equals } from 'ramda'
 import {
   SET_WORKOUTS,
   SET_CURRENT_WORKOUT,
   CURRENT_WORKOUT_LOADING_FAILED,
   EDIT_WORKOUT_SAVE_STARTED,
   EDIT_WORKOUT_SAVE_SUCCEEDED,
-  EDIT_WORKOUT_SAVE_FAILED
+  EDIT_WORKOUT_SAVE_FAILED,
+  EDIT_WORKOUT_FORM_UPDATED
 } from '../constants'
+import caloriesBurned from '../lib/caloriesBurned'
 
 const url = process.env.REACT_APP_BASE_URL + 'workouts'
 
@@ -39,7 +41,7 @@ export const setCurrentWorkout = id => async (dispatch, getState) => {
 
 export const updateWorkout = (id, history) => async (dispatch, getState) => {
   dispatch({ type: EDIT_WORKOUT_SAVE_STARTED })
-  const putResult = await fetch(url + '/' + id, {
+  const putResult = await fetch(url, {
     headers: { 'Content-Type': 'application/json' },
     method: 'PUT',
     body: JSON.stringify(getState().editWorkout.data)
@@ -61,6 +63,49 @@ export const updateWorkout = (id, history) => async (dispatch, getState) => {
     dispatch({
       type: EDIT_WORKOUT_SAVE_FAILED,
       payload: 'Failed to update workout.'
+    })
+  }
+}
+
+export const editWorkoutFormUpdate = (field, value) => (dispatch, getState) => {
+  dispatch({ type: EDIT_WORKOUT_FORM_UPDATED, payload: { [field]: value } })
+  console.log('field', field)
+  console.log('value', value)
+  const category = getState().editWorkout.data.category
+
+  if (
+    equals(field, 'distanceMi') ||
+    equals(field, 'durationSec') ||
+    equals(field, 'category') ||
+    equals(field, 'stroke')
+  ) {
+    console.log('in pace, calories updater branch')
+    const duration = getState().editWorkout.data.durationSec
+    const distance = getState().editWorkout.data.distanceMi
+    const newPace = duration / distance
+    dispatch({
+      type: EDIT_WORKOUT_FORM_UPDATED,
+      payload: { paceSecPerMi: newPace }
+    })
+
+    if (equals(category, 'Swim')) {
+      const stroke = getState().editWorkout.data.stroke
+      const newCalories = dispatch(
+        caloriesBurned(category, distance, duration, stroke)
+      )
+      console.log('calories swim', newCalories)
+      dispatch({
+        type: EDIT_WORKOUT_FORM_UPDATED,
+        payload: { calories: newCalories }
+      })
+      return
+    }
+
+    const newCalories = dispatch(caloriesBurned(category, distance, duration))
+    console.log('calories bike/run', newCalories)
+    dispatch({
+      type: EDIT_WORKOUT_FORM_UPDATED,
+      payload: { calories: newCalories }
     })
   }
 }

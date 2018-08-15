@@ -50,7 +50,7 @@ class ViewWorkout extends React.Component {
 
     return (
       <div>
-        <MenuAppBar back title="View Workout" />
+        <MenuAppBar back backURL="/workouts" title="View Workout" />
         <center>
           <div>
             <Card className={classes.card}>
