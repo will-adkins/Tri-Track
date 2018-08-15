@@ -78,7 +78,7 @@ class Home extends React.Component {
               </Button>
             </Tooltip>
           </Link>
-          <Link to="/workouts">
+          <Link to="/workouts/new">
             <Tooltip title="Create a Workout">
               <Button
                 variant="extendedFab"

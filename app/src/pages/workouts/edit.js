@@ -25,7 +25,7 @@ const styles = theme => ({
   actions: { justifyContent: 'flex-end' }
 })
 
-class EditWorkout extends React.Component {
+class WorkoutEdit extends React.Component {
   componentDidMount() {
     const { setWorkout, load } = this.props
     setWorkout(load)
@@ -39,6 +39,7 @@ class EditWorkout extends React.Component {
       onChange,
       onSubmit,
       toggleForm,
+      isFirstForm,
       errorClear,
       isSaving,
       isError,
@@ -67,6 +68,7 @@ class EditWorkout extends React.Component {
             onSubmit={onSubmit(match.params.id, history)}
             toggleForm={toggleForm}
             workout={workout}
+            isFirstForm={isFirstForm}
           />
         </Card>
         {isError && <SnackBar type="error" msg={errMsg} close={errorClear} />}
@@ -111,4 +113,4 @@ const connector = connect(
   mapActionsToProps
 )
 
-export default connector(withStyles(styles)(EditWorkout))
+export default connector(withStyles(styles)(WorkoutEdit))

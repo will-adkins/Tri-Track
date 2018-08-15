@@ -1,5 +1,5 @@
 import fetch from 'isomorphic-fetch'
-import { filter, propEq, prop, equals } from 'ramda'
+import { filter, propEq, prop, equals, isEmpty, merge } from 'ramda'
 import {
   SET_WORKOUTS,
   SET_CURRENT_WORKOUT,
@@ -7,7 +7,12 @@ import {
   EDIT_WORKOUT_SAVE_STARTED,
   EDIT_WORKOUT_SAVE_SUCCEEDED,
   EDIT_WORKOUT_SAVE_FAILED,
-  EDIT_WORKOUT_FORM_UPDATED
+  EDIT_WORKOUT_FORM_UPDATED,
+  NEW_PROFILE_SAVE_FAILED,
+  NEW_WORKOUT_SAVE_FAILED,
+  NEW_WORKOUT_ERROR_CLEAR,
+  NEW_WORKOUT_FORM_UPDATED,
+  NEW_WORKOUT_SAVE_STARTED
 } from '../constants'
 import caloriesBurned from '../lib/caloriesBurned'
 
@@ -62,15 +67,15 @@ export const updateWorkout = (id, history) => async (dispatch, getState) => {
   } else {
     dispatch({
       type: EDIT_WORKOUT_SAVE_FAILED,
-      payload: 'Failed to update workout.'
+      payload:
+        'Failed to update workout. Please refresh Tri-Track and try again.'
     })
   }
 }
 
 export const editWorkoutFormUpdate = (field, value) => (dispatch, getState) => {
   dispatch({ type: EDIT_WORKOUT_FORM_UPDATED, payload: { [field]: value } })
-  console.log('field', field)
-  console.log('value', value)
+
   const category = getState().editWorkout.data.category
 
   if (
@@ -79,7 +84,6 @@ export const editWorkoutFormUpdate = (field, value) => (dispatch, getState) => {
     equals(field, 'category') ||
     equals(field, 'stroke')
   ) {
-    console.log('in pace, calories updater branch')
     const duration = getState().editWorkout.data.durationSec
     const distance = getState().editWorkout.data.distanceMi
     const newPace = duration / distance
@@ -93,7 +97,7 @@ export const editWorkoutFormUpdate = (field, value) => (dispatch, getState) => {
       const newCalories = dispatch(
         caloriesBurned(category, distance, duration, stroke)
       )
-      console.log('calories swim', newCalories)
+
       dispatch({
         type: EDIT_WORKOUT_FORM_UPDATED,
         payload: { calories: newCalories }
@@ -102,9 +106,97 @@ export const editWorkoutFormUpdate = (field, value) => (dispatch, getState) => {
     }
 
     const newCalories = dispatch(caloriesBurned(category, distance, duration))
-    console.log('calories bike/run', newCalories)
+
     dispatch({
       type: EDIT_WORKOUT_FORM_UPDATED,
+      payload: { calories: newCalories }
+    })
+  }
+}
+
+export const addWorkout = history => async (dispatch, getState) => {
+  dispatch({ type: NEW_WORKOUT_SAVE_STARTED })
+  const workout = getState().newWorkout.data
+
+  if (
+    isEmpty(workout.category) ||
+    equals(workout.wellness, 0) ||
+    equals(workout.motivation, 0)
+  ) {
+    dispatch({ type: NEW_WORKOUT_ERROR_CLEAR })
+    dispatch({
+      type: NEW_WORKOUT_SAVE_FAILED,
+      payload: 'Remember to fill in the first page!'
+    })
+    return
+  }
+
+  const id = getState().currentProfile.data._id
+  const newWorkout = merge(workout, { profileId: id })
+
+  const postResult = await fetch(url, {
+    headers: { 'Content-Type': 'application/json' },
+    method: 'POST',
+    body: JSON.stringify(newWorkout)
+  })
+    .then(res => res.json())
+    .catch(err =>
+      dispatch({
+        type: NEW_WORKOUT_SAVE_FAILED,
+        payload:
+          'Failed to save workout. Please refresh Tri-Track and try again.'
+      })
+    )
+
+  if (postResult.ok) {
+    await dispatch(setWorkouts)
+    dispatch({ type: NEW_WORKOUT_SAVE_FAILED })
+    history.push(`/workouts`)
+  } else {
+    dispatch({
+      type: NEW_PROFILE_SAVE_FAILED,
+      payload:
+        'Failed to update workout. Please refresh Tri-Track and try again.'
+    })
+  }
+}
+
+export const newWorkoutFormUpdate = (field, value) => (dispatch, getState) => {
+  dispatch({ type: NEW_WORKOUT_FORM_UPDATED, payload: { [field]: value } })
+
+  const category = getState().newWorkout.data.category
+
+  if (
+    equals(field, 'distanceMi') ||
+    equals(field, 'durationSec') ||
+    equals(field, 'category') ||
+    equals(field, 'stroke')
+  ) {
+    const duration = getState().newWorkout.data.durationSec
+    const distance = getState().newWorkout.data.distanceMi
+    const newPace = duration / distance
+    dispatch({
+      type: NEW_WORKOUT_FORM_UPDATED,
+      payload: { paceSecPerMi: newPace }
+    })
+
+    if (equals(category, 'Swim')) {
+      const stroke = getState().newWorkout.data.stroke
+      const newCalories = dispatch(
+        caloriesBurned(category, distance, duration, stroke)
+      )
+
+      dispatch({
+        type: NEW_WORKOUT_FORM_UPDATED,
+        payload: { calories: newCalories }
+      })
+      return
+    }
+
+    const newCalories = dispatch(caloriesBurned(category, distance, duration))
+
+    dispatch({
+      type: NEW_WORKOUT_FORM_UPDATED,
       payload: { calories: newCalories }
     })
   }

@@ -1,7 +1,6 @@
 import React from 'react'
 import { equals, not } from 'ramda'
 import { withRouter } from 'react-router'
-import { connect } from 'react-redux'
 import {
   Grid,
   TextField,
@@ -219,10 +218,4 @@ const WorkoutForm = props => {
   )
 }
 
-const mapStateToProps = state => ({
-  isFirstForm: state.editWorkout.isFirstForm
-})
-
-const connector = connect(mapStateToProps)
-
-export default connector(withRouter(withStyles(styles)(WorkoutForm)))
+export default withRouter(withStyles(styles)(WorkoutForm))
