@@ -40,6 +40,7 @@ class EditWorkout extends React.Component {
       onSubmit,
       toggleForm,
       errorClear,
+      isSaving,
       isError,
       errMsg
     } = this.props
@@ -69,6 +70,7 @@ class EditWorkout extends React.Component {
           />
         </Card>
         {isError && <SnackBar type="error" msg={errMsg} close={errorClear} />}
+        {isSaving && <SnackBar type="info" msg="Updating your workout..." />}
       </div>
     )
   }

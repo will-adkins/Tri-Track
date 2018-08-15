@@ -102,7 +102,7 @@ class CustomizedSnackbars extends React.Component {
     }
 
     this.setState({ open: false })
-    close()
+    close ? close() : null
   }
 
   render() {
