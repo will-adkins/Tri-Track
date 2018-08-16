@@ -24,7 +24,7 @@ import { DRAWER_TOGGLED, CURRENT_PROFILE_LOGGED_OUT } from '../constants'
 
 const withDrawer = PageComponent => {
   const WrappedDrawerPageComponent = props => {
-    const { logout, toggleDrawer } = props
+    const { logout, toggleDrawer, profileId } = props
     const NavListItems = (
       <div>
         <center style={{ margin: '5%' }}>
@@ -69,7 +69,7 @@ const withDrawer = PageComponent => {
           </ListItem>
         </Link>
 
-        <Link to="/edit-profile" className="router-link">
+        <Link to={`/profile/${profileId}/edit`} className="router-link">
           <ListItem button onClick={e => toggleDrawer()}>
             <ListItemIcon>
               <Edit />
@@ -111,7 +111,8 @@ const withDrawer = PageComponent => {
   }
 
   const mapStateToProps = state => ({
-    open: state.drawer
+    open: state.drawer,
+    profileId: state.currentProfile.data._id
   })
 
   const mapActionsToProps = dispatch => ({

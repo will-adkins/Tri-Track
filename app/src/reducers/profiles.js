@@ -15,7 +15,15 @@ import {
   CURRENT_PROFILE_FORM_CLEAR,
   CURRENT_PROFILE_ERROR_CLEAR,
   CURRENT_PROFILE_LOGGED_OUT,
-  SET_CURRENT_PROFILE
+  SET_CURRENT_PROFILE,
+  EDIT_PROFILE_FORM_TOGGLED,
+  EDIT_PROFILE_FORM_CLEAR,
+  EDIT_PROFILE_ERROR_CLEAR,
+  EDIT_PROFILE_SAVE_STARTED,
+  EDIT_PROFILE_SAVE_FAILED,
+  EDIT_PROFILE_SAVE_SUCCEEDED,
+  EDIT_PROFILE_FORM_UPDATED,
+  EDIT_PROFILE_LOADED
 } from '../constants'
 
 export const profiles = (state = [], action) => {
@@ -61,6 +69,50 @@ export const newProfile = (state = initialNewProfile, action) => {
     case NEW_PROFILE_SAVE_SUCCEEDED:
       return initialNewProfile
     case NEW_PROFILE_FORM_UPDATED:
+      return mergeDeepRight(state, { data: action.payload })
+    default:
+      return state
+  }
+}
+
+const initialEditProfile = {
+  data: {
+    _id: '',
+    _rev: '',
+    email: '',
+    password: '',
+    firstName: '',
+    lastName: '',
+    heightIn: '',
+    weightLbs: ''
+  },
+  isDetailsForm: false,
+  isSaving: false,
+  isError: false,
+  errMsg: ''
+}
+
+export const editProfile = (state = initialEditProfile, action) => {
+  switch (action.type) {
+    case EDIT_PROFILE_LOADED:
+      return mergeDeepRight(state, { data: action.payload })
+    case EDIT_PROFILE_FORM_TOGGLED:
+      return merge(state, { isDetailsForm: !state.isDetailsForm })
+    case EDIT_PROFILE_FORM_CLEAR:
+      return initialEditProfile
+    case EDIT_PROFILE_ERROR_CLEAR:
+      return merge(state, { isError: false, errMsg: '' })
+    case EDIT_PROFILE_SAVE_STARTED:
+      return merge(state, { isSaving: true, isError: false, errMsg: '' })
+    case EDIT_PROFILE_SAVE_FAILED:
+      return merge(state, {
+        isSaving: false,
+        isError: true,
+        errMsg: action.payload
+      })
+    case EDIT_PROFILE_SAVE_SUCCEEDED:
+      return initialEditProfile
+    case EDIT_PROFILE_FORM_UPDATED:
       return mergeDeepRight(state, { data: action.payload })
     default:
       return state

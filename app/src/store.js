@@ -1,6 +1,11 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
-import { profiles, newProfile, currentProfile } from './reducers/profiles'
+import {
+  profiles,
+  newProfile,
+  editProfile,
+  currentProfile
+} from './reducers/profiles'
 import {
   workouts,
   currentWorkout,
@@ -14,6 +19,7 @@ export default createStore(
   combineReducers({
     profiles,
     newProfile,
+    editProfile,
     currentProfile,
     workouts,
     currentWorkout,
