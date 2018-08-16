@@ -11,6 +11,7 @@ import {
   InputAdornment
 } from '@material-ui/core'
 import {
+  Waves,
   Terrain,
   AccessTime,
   Timer,
@@ -62,8 +63,6 @@ const WorkoutForm = props => {
     onChange,
     onSubmit,
     toggleForm,
-    toggleCalendar,
-    calendarOpen,
     isFirstForm
   } = props
   const {
@@ -96,7 +95,7 @@ const WorkoutForm = props => {
           {equals('Swim', category) && (
             <Grid container spacing={8} alignItems="flex-end">
               <Grid item>
-                <img src="/static/stroke.png" alt="Swim Stroke Icon" />
+                <Waves />
               </Grid>
               <CustomSelect
                 label="Swim Stroke"
@@ -179,7 +178,7 @@ const WorkoutForm = props => {
         <div className={classes.margin}>
           <Grid container spacing={8} alignItems="flex-end">
             <Grid item>
-              <Terrain />
+              {equals(category, 'Swim') ? <Waves /> : <Terrain />}
             </Grid>
             <Grid item>
               <TextField

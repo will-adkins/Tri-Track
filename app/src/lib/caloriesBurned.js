@@ -19,6 +19,7 @@ export default (category, distance, duration, stroke) => (
     'durationMin',
     durationMin
   )
+  console.log('category', category, 'stroke', stroke)
   if (equals(category, 'Swim')) {
     const calories = equals(stroke, 'Freestyle')
       ? ((9.8 * weightKg * 3.5) / 200) * durationMin

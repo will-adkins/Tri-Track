@@ -15,7 +15,13 @@ import {
   NEW_WORKOUT_SAVE_STARTED,
   NEW_WORKOUT_SAVE_SUCCEEDED,
   NEW_WORKOUT_SAVE_FAILED,
-  NEW_WORKOUT_ERROR_CLEAR
+  NEW_WORKOUT_ERROR_CLEAR,
+  CURRENT_WORKOUT_DELETING_STARTED,
+  CURRENT_WORKOUT_DELETING_SUCCEEDED,
+  CURRENT_WORKOUT_DELETING_FAILED,
+  CURRENT_WORKOUT_DELETING_CANCELED,
+  CURRENT_WORKOUT_DELETE_CONFIRMATION_STARTED,
+  CURRENT_WORKOUT_DELETE_CONFIRMATION_ENDED
 } from '../constants'
 
 export const workouts = (state = [], action) => {
@@ -45,6 +51,8 @@ const initialCurrentWorkout = {
     type: 'workout'
   },
   isError: false,
+  isConfirmingDelete: false,
+  isDeleting: false,
   errMsg: ''
 }
 
@@ -54,7 +62,24 @@ export const currentWorkout = (state = initialCurrentWorkout, action) => {
       return mergeDeepRight(state, {
         data: action.payload,
         isError: false,
+        isDeleting: false,
         errMsg: ''
+      })
+    case CURRENT_WORKOUT_DELETE_CONFIRMATION_STARTED:
+      return merge(state, { isConfirmingDelete: true })
+    case CURRENT_WORKOUT_DELETE_CONFIRMATION_ENDED:
+      return merge(state, { isConfirmingDelete: false })
+    case CURRENT_WORKOUT_DELETING_STARTED:
+      return merge(state, { isDeleting: true, isError: false, errMsg: '' })
+    case CURRENT_WORKOUT_DELETING_CANCELED:
+      return merge(state, { isDeleting: false, isError: false, errMsg: '' })
+    case CURRENT_WORKOUT_DELETING_SUCCEEDED:
+      return initialCurrentWorkout
+    case CURRENT_WORKOUT_DELETING_FAILED:
+      return merge(state, {
+        isDeleting: false,
+        isError: true,
+        errMsg: action.payload
       })
     case CURRENT_WORKOUT_LOADING_FAILED:
       return merge(state, { isError: true, errMsg: action.payload })
@@ -143,7 +168,7 @@ export const newWorkout = (state = initialNewWorkout, action) => {
     case NEW_WORKOUT_SAVE_STARTED:
       return merge(state, { isSaving: true, isError: false, errMsg: '' })
     case NEW_WORKOUT_SAVE_SUCCEEDED:
-      return initialEditWorkout
+      return initialNewWorkout
     case NEW_WORKOUT_SAVE_FAILED:
       return merge(state, {
         isSaving: false,

@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Card, withStyles } from '@material-ui/core'
+import { withStyles } from '@material-ui/core'
 
 import MenuAppBar from '../../components/menuAppBar'
 import CenterLogo from '../../components/centerLogo'
@@ -24,37 +24,44 @@ const styles = theme => ({
   actions: { justifyContent: 'flex-end' }
 })
 
-const WorkoutNew = props => {
-  const {
-    history,
-    workout,
-    onChange,
-    onSubmit,
-    toggleForm,
-    isFirstForm,
-    errorClear,
-    isSaving,
-    isError,
-    errMsg
-  } = props
-  return (
-    <div>
-      <MenuAppBar back title="Create Workout" />
-      <CenterLogo className="underlay" />
+class WorkoutNew extends React.Component {
+  componentDidMount() {
+    const { errorClear } = this.props
+    errorClear()
+  }
 
-      <WorkoutForm
-        onChange={onChange}
-        onSubmit={onSubmit(history)}
-        toggleForm={toggleForm}
-        workout={workout}
-        isFirstForm={isFirstForm}
-        className="overlay"
-      />
+  render() {
+    const {
+      history,
+      workout,
+      onChange,
+      onSubmit,
+      toggleForm,
+      isFirstForm,
+      errorClear,
+      isSaving,
+      isError,
+      errMsg
+    } = this.props
+    return (
+      <div>
+        <MenuAppBar back title="Create Workout" />
+        <CenterLogo className="underlay" />
 
-      {isError && <SnackBar type="error" msg={errMsg} close={errorClear} />}
-      {isSaving && <SnackBar type="info" msg="Saving your workout..." />}
-    </div>
-  )
+        <WorkoutForm
+          onChange={onChange}
+          onSubmit={onSubmit(history)}
+          toggleForm={toggleForm}
+          workout={workout}
+          isFirstForm={isFirstForm}
+          className="overlay"
+        />
+
+        {isError && <SnackBar type="error" msg={errMsg} close={errorClear} />}
+        {isSaving && <SnackBar type="info" msg="Saving your workout..." />}
+      </div>
+    )
+  }
 }
 
 const mapStateToProps = state => ({

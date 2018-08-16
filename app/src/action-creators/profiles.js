@@ -1,5 +1,6 @@
 import fetch from 'isomorphic-fetch'
 import { isNil, not, isEmpty, equals } from 'ramda'
+import { setWorkouts } from './workouts'
 
 import {
   NEW_PROFILE_SAVE_STARTED,
@@ -115,7 +116,7 @@ export const updateProfile = history => async (dispatch, getState) => {
   }
 }
 
-export const checkLogin = history => (dispatch, getState) => {
+export const checkLogin = history => async (dispatch, getState) => {
   dispatch({ type: CURRENT_PROFILE_LOGIN_STARTED })
 
   const login = getState().currentProfile.data
@@ -128,7 +129,7 @@ export const checkLogin = history => (dispatch, getState) => {
     dispatch({ type: CURRENT_PROFILE_LOGIN_SUCCEEDED, payload: foundProfile })
 
     window.localStorage.setItem('cacheProfile', JSON.stringify(foundProfile))
-
+    await dispatch(setWorkouts)
     history.push('/home')
   } else {
     dispatch({ type: CURRENT_PROFILE_ERROR_CLEAR })
@@ -153,6 +154,7 @@ export const cacheLoginCheck = history => async (dispatch, getState) => {
 
     if (not(isEmpty(foundProfile))) {
       dispatch({ type: CURRENT_PROFILE_LOGIN_SUCCEEDED, payload: foundProfile })
+      await dispatch(setWorkouts)
       history.push('/home')
     }
   }

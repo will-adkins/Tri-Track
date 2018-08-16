@@ -5,12 +5,7 @@ import { ArrowDropDown } from '@material-ui/icons'
 import { connect } from 'react-redux'
 import Calendar from 'react-calendar'
 
-import {
-  CALENDAR_TOGGLED,
-  EDIT_WORKOUT_FORM_UPDATED,
-  NEW_WORKOUT_FORM_UPDATED,
-  CALENDAR_RESET
-} from '../constants'
+import { CALENDAR_TOGGLED, CALENDAR_RESET } from '../constants'
 
 const styles = theme => ({
   root: {

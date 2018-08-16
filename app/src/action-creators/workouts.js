@@ -12,7 +12,11 @@ import {
   NEW_WORKOUT_SAVE_FAILED,
   NEW_WORKOUT_ERROR_CLEAR,
   NEW_WORKOUT_FORM_UPDATED,
-  NEW_WORKOUT_SAVE_STARTED
+  NEW_WORKOUT_SAVE_STARTED,
+  CURRENT_WORKOUT_DELETING_STARTED,
+  CURRENT_WORKOUT_DELETING_SUCCEEDED,
+  CURRENT_WORKOUT_DELETING_FAILED,
+  NEW_WORKOUT_SAVE_SUCCEEDED
 } from '../constants'
 import caloriesBurned from '../lib/caloriesBurned'
 
@@ -150,7 +154,7 @@ export const addWorkout = history => async (dispatch, getState) => {
 
   if (postResult.ok) {
     await dispatch(setWorkouts)
-    dispatch({ type: NEW_WORKOUT_SAVE_FAILED })
+    dispatch({ type: NEW_WORKOUT_SAVE_SUCCEEDED })
     history.push(`/workouts`)
   } else {
     dispatch({
@@ -199,5 +203,24 @@ export const newWorkoutFormUpdate = (field, value) => (dispatch, getState) => {
       type: NEW_WORKOUT_FORM_UPDATED,
       payload: { calories: newCalories }
     })
+  }
+}
+
+export const deleteWorkout = history => async (dispatch, getState) => {
+  dispatch({ type: CURRENT_WORKOUT_DELETING_STARTED })
+
+  const workoutId = getState().currentWorkout.data._id
+
+  const deleteResult = await fetch(url + '/' + workoutId, {
+    headers: { 'Content-Type': 'application/json' },
+    method: 'DELETE'
+  }).then(res => res.json())
+
+  if (deleteResult.ok) {
+    await dispatch(setWorkouts)
+    dispatch({ type: CURRENT_WORKOUT_DELETING_SUCCEEDED })
+    history.push('/workouts')
+  } else {
+    dispatch({ type: CURRENT_WORKOUT_DELETING_FAILED })
   }
 }

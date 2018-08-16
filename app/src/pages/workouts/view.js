@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom'
 import {
   CircularProgress,
   withStyles,
-  Card,
   CardContent,
   CardActions,
   IconButton,
@@ -13,16 +12,18 @@ import {
 import { Edit, Delete } from '@material-ui/icons'
 
 import { setCurrentWorkout } from '../../action-creators/workouts'
+import { CURRENT_WORKOUT_DELETE_CONFIRMATION_STARTED } from '../../constants'
 
 import MenuAppBar from '../../components/menuAppBar'
 import CenterLogo from '../../components/centerLogo'
 import SnackBar from '../../components/customSnackBar'
 import WorkoutData from '../../components/workoutData'
 import WorkoutIcon from '../../components/workoutIcon'
+import AlertDialog from '../../components/customAlertDialog'
 
 const styles = theme => ({
   card: {
-    paddingTop: '10%'
+    paddingTop: '15%'
   },
   actions: { justifyContent: 'flex-end' }
 })
@@ -34,7 +35,16 @@ class ViewWorkout extends React.Component {
   }
 
   render() {
-    const { classes, match, isError, errMsg, workout } = this.props
+    const {
+      classes,
+      match,
+      isError,
+      errMsg,
+      workout,
+      confirmDelete,
+      isDeleting,
+      isConfirm
+    } = this.props
     const { _id, category } = this.props.workout
 
     if (_id !== match.params.id) {
@@ -53,22 +63,24 @@ class ViewWorkout extends React.Component {
         <MenuAppBar back backURL="/workouts" title="View Workout" />
         <center>
           <div>
-            <Card className={classes.card}>
-              <CardContent>
-                <WorkoutIcon category={category} large />
-              </CardContent>
-              <WorkoutData workout={workout} />
-              <CardActions className={classes.actions}>
-                <Link to={`/workouts/${_id}/edit`} className="router-link">
-                  <Button variant="fab" size="small" color="primary">
-                    <Edit color="inherit" />
-                  </Button>
-                </Link>
-                <IconButton color="primary">
-                  <Delete />
-                </IconButton>
-              </CardActions>
-            </Card>
+            <CardContent className={classes.card}>
+              <WorkoutIcon category={category} large />
+            </CardContent>
+            <WorkoutData workout={workout} />
+            <CardActions className={classes.actions}>
+              <Link to={`/workouts/${_id}/edit`} className="router-link">
+                <Button variant="fab" size="small" color="primary">
+                  <Edit color="inherit" />
+                </Button>
+              </Link>
+              <IconButton color="primary" onClick={confirmDelete}>
+                <Delete />
+              </IconButton>
+            </CardActions>
+            {isDeleting && (
+              <SnackBar type="warning" msg="Deleting Workout..." />
+            )}
+            {isConfirm && <AlertDialog />}
           </div>
         </center>
       </div>
@@ -78,12 +90,16 @@ class ViewWorkout extends React.Component {
 
 const mapStateToProps = state => ({
   workout: state.currentWorkout.data,
+  isDeleting: state.currentWorkout.isDeleting,
   isError: state.currentWorkout.isError,
-  errMsg: state.currentWorkout.errMsg
+  errMsg: state.currentWorkout.errMsg,
+  isConfirm: state.currentWorkout.isConfirmingDelete
 })
 
 const mapActionsToProps = dispatch => ({
-  setWorkout: id => dispatch(setCurrentWorkout(id))
+  setWorkout: id => dispatch(setCurrentWorkout(id)),
+  confirmDelete: e =>
+    dispatch({ type: CURRENT_WORKOUT_DELETE_CONFIRMATION_STARTED })
 })
 
 const connector = connect(
