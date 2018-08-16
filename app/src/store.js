@@ -13,6 +13,7 @@ import {
   newWorkout
 } from './reducers/workouts'
 import { drawer } from './reducers/drawer'
+import { calendar } from './reducers/calendar'
 import { listOptions } from './reducers/listOptions'
 
 export default createStore(
@@ -26,6 +27,7 @@ export default createStore(
     newWorkout,
     editWorkout,
     drawer,
+    calendar,
     listOptions
   }),
   applyMiddleware(thunk)

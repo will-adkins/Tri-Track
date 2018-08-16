@@ -40,16 +40,17 @@ const WorkoutNew = props => {
   return (
     <div>
       <MenuAppBar back title="Create Workout" />
-      <CenterLogo />
-      <Card>
-        <WorkoutForm
-          onChange={onChange}
-          onSubmit={onSubmit(history)}
-          toggleForm={toggleForm}
-          workout={workout}
-          isFirstForm={isFirstForm}
-        />
-      </Card>
+      <CenterLogo className="underlay" />
+
+      <WorkoutForm
+        onChange={onChange}
+        onSubmit={onSubmit(history)}
+        toggleForm={toggleForm}
+        workout={workout}
+        isFirstForm={isFirstForm}
+        className="overlay"
+      />
+
       {isError && <SnackBar type="error" msg={errMsg} close={errorClear} />}
       {isSaving && <SnackBar type="info" msg="Saving your workout..." />}
     </div>

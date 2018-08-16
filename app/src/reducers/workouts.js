@@ -38,8 +38,8 @@ const initialCurrentWorkout = {
     category: '',
     distanceMi: 0,
     durationSec: 0,
-    motivation: 0,
-    wellness: 0,
+    motivation: 3,
+    wellness: 3,
     calories: 0,
     paceSecPerMi: 0,
     type: 'workout'
@@ -73,8 +73,8 @@ const initialEditWorkout = {
     stroke: '',
     distanceMi: 0,
     durationSec: 0,
-    motivation: 0,
-    wellness: 0,
+    motivation: 3,
+    wellness: 3,
     calories: 0,
     paceSecPerMi: 0,
     type: 'workout'
@@ -122,8 +122,8 @@ const initialNewWorkout = {
     stroke: 'Freestyle',
     distanceMi: 0,
     durationSec: 0,
-    motivation: 0,
-    wellness: 0,
+    motivation: 3,
+    wellness: 3,
     calories: 0,
     paceSecPerMi: 0,
     type: 'workout'

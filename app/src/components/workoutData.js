@@ -1,5 +1,5 @@
 import React from 'react'
-import {} from 'ramda'
+import { equals } from 'ramda'
 import {
   withStyles,
   ListItem,
@@ -35,6 +35,7 @@ const styles = theme => ({
 const WorkoutData = props => {
   const { classes } = props
   const {
+    category,
     dateTime,
     distanceMi,
     durationSec,
@@ -46,7 +47,7 @@ const WorkoutData = props => {
   } = props.workout
 
   const DateStroke = () =>
-    stroke ? (
+    equals('Swim', category) ? (
       <React.Fragment>
         <ListItem>
           <FormControl className={classes.margin}>

@@ -1,4 +1,5 @@
 import React from 'react'
+
 import { equals, not } from 'ramda'
 import { withRouter } from 'react-router'
 import {
@@ -6,14 +7,24 @@ import {
   TextField,
   CardActions,
   Button,
-  withStyles
+  withStyles,
+  InputAdornment
 } from '@material-ui/core'
-import { Terrain, AccessTime, Timer, Whatshot } from '@material-ui/icons'
+import {
+  Terrain,
+  AccessTime,
+  Timer,
+  Whatshot,
+  CalendarToday
+} from '@material-ui/icons'
 
 import secToMin from '../lib/secToMin'
+import dateParser from '../lib/dateDisplayParser'
+
 import WorkoutIcon from '../components/workoutIcon'
 import MotivationWellnessIcon from '../components/motivationWellnessIcon'
 import CustomSelect from '../components/customSelect'
+import CustomCalendar from '../components/customCalendar'
 
 const styles = theme => ({
   workout: {
@@ -51,10 +62,13 @@ const WorkoutForm = props => {
     onChange,
     onSubmit,
     toggleForm,
+    toggleCalendar,
+    calendarOpen,
     isFirstForm
   } = props
   const {
     category,
+    dateTime,
     stroke,
     wellness,
     motivation,
@@ -92,6 +106,34 @@ const WorkoutForm = props => {
               />
             </Grid>
           )}
+
+          <Grid container spacing={8} alignItems="flex-end">
+            <Grid item>
+              <CalendarToday />
+            </Grid>
+            <Grid item>
+              <TextField
+                id="distance"
+                label="Date"
+                value={dateParser(dateTime)}
+                className={classes.textfield}
+                style={{ width: 160, marginLeft: 8 }}
+                required
+                disabled
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <CustomCalendar
+                        dateTime={dateTime}
+                        onChange={onChange}
+                        className="overlay"
+                      />
+                    </InputAdornment>
+                  )
+                }}
+              />
+            </Grid>
+          </Grid>
           <Grid container spacing={8} alignItems="flex-end">
             <Grid item>
               <MotivationWellnessIcon type="motivation" value={motivation} />
@@ -103,7 +145,11 @@ const WorkoutForm = props => {
               onSelect={onChange}
             />
           </Grid>
-          <Grid container spacing={0} alignItems="flex-end">
+          <Grid
+            container
+            spacing={equals(wellness, 3) ? 0 : 8}
+            alignItems="flex-end"
+          >
             <Grid item>
               <MotivationWellnessIcon type="wellness" value={wellness} />
             </Grid>

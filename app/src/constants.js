@@ -3,6 +3,8 @@
 ///////////////////////
 
 export const DRAWER_TOGGLED = 'DRAWER_TOGGLED'
+export const CALENDAR_TOGGLED = 'CALENDAR_TOGGLED'
+export const CALENDAR_RESET = 'CALENDAR_RESET'
 
 ///////////////////////
 // Profile Constants

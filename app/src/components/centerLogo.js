@@ -10,7 +10,12 @@ const CenterLogo = props => {
           {title}
         </Typography>
       </div>
-      <img alt="Tri-Track icon" src="/static/tri-symbol-1.jpg" width="50%" />
+      <img
+        alt="Tri-Track icon"
+        src="/static/tri-symbol-1.jpg"
+        width="50%"
+        className="underlay"
+      />
     </center>
   )
 }

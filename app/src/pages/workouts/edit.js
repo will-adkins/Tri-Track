@@ -15,7 +15,8 @@ import {
   EDIT_WORKOUT_LOADED,
   EDIT_WORKOUT_FORM_TOGGLE,
   EDIT_WORKOUT_ERROR_CLEAR,
-  EDIT_WORKOUT_SAVE_FAILED
+  EDIT_WORKOUT_SAVE_FAILED,
+  CALENDAR_RESET
 } from '../../constants'
 
 const styles = theme => ({
@@ -27,7 +28,8 @@ const styles = theme => ({
 
 class WorkoutEdit extends React.Component {
   componentDidMount() {
-    const { setWorkout, load } = this.props
+    const { setWorkout, load, calendarReset } = this.props
+    calendarReset()
     setWorkout(load)
   }
 
@@ -60,17 +62,18 @@ class WorkoutEdit extends React.Component {
     return (
       <div>
         <MenuAppBar back title="Edit Workout" />
-        <CenterLogo />
-        <Card>
-          <WorkoutForm
-            id={match.params.id}
-            onChange={onChange}
-            onSubmit={onSubmit(match.params.id, history)}
-            toggleForm={toggleForm}
-            workout={workout}
-            isFirstForm={isFirstForm}
-          />
-        </Card>
+        <CenterLogo className="underlay" />
+
+        <WorkoutForm
+          id={match.params.id}
+          onChange={onChange}
+          onSubmit={onSubmit(match.params.id, history)}
+          toggleForm={toggleForm}
+          workout={workout}
+          isFirstForm={isFirstForm}
+          className="overlay"
+        />
+
         {isError && <SnackBar type="error" msg={errMsg} close={errorClear} />}
         {isSaving && <SnackBar type="info" msg="Updating your workout..." />}
       </div>
@@ -105,7 +108,8 @@ const mapActionsToProps = dispatch => ({
     dispatch(updateWorkout(id, history))
   },
   toggleForm: e => dispatch({ type: EDIT_WORKOUT_FORM_TOGGLE }),
-  errorClear: () => dispatch({ type: EDIT_WORKOUT_ERROR_CLEAR })
+  errorClear: () => dispatch({ type: EDIT_WORKOUT_ERROR_CLEAR }),
+  calendarReset: () => dispatch({ type: CALENDAR_RESET })
 })
 
 const connector = connect(
