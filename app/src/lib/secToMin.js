@@ -1,7 +1,14 @@
-import {} from 'ramda'
+import { equals } from 'ramda'
 
 export default sec => {
   const hours = `${Math.floor(sec / 3600)}`
+
+  if (equals(sec, 0)) {
+    return '0:00'
+  }
+  if (equals(sec, Infinity)) {
+    return '0:00'
+  }
 
   let minutes
 

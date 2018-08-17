@@ -7,7 +7,8 @@ import {
   CardContent,
   CardActions,
   IconButton,
-  Button
+  Button,
+  Tooltip
 } from '@material-ui/core'
 import { Edit, Delete } from '@material-ui/icons'
 
@@ -69,13 +70,17 @@ class ViewWorkout extends React.Component {
             <WorkoutData workout={workout} />
             <CardActions className={classes.actions}>
               <Link to={`/workouts/${_id}/edit`} className="router-link">
-                <Button variant="fab" size="small" color="primary">
-                  <Edit color="inherit" />
-                </Button>
+                <Tooltip title="Edit Workout">
+                  <Button variant="fab" size="small" color="primary">
+                    <Edit color="inherit" />
+                  </Button>
+                </Tooltip>
               </Link>
-              <IconButton color="primary" onClick={confirmDelete}>
-                <Delete />
-              </IconButton>
+              <Tooltip title="Delete Workout">
+                <IconButton color="primary" onClick={confirmDelete}>
+                  <Delete />
+                </IconButton>
+              </Tooltip>
             </CardActions>
             {isDeleting && (
               <SnackBar type="warning" msg="Deleting Workout..." />

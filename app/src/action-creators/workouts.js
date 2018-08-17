@@ -90,7 +90,11 @@ export const editWorkoutFormUpdate = (field, value) => (dispatch, getState) => {
   ) {
     const duration = getState().editWorkout.data.durationSec
     const distance = getState().editWorkout.data.distanceMi
-    const newPace = duration / distance
+    const newPace =
+      Number.isNaN(duration / distance) || equals(duration / distance, Infinity)
+        ? 0
+        : duration / distance
+
     dispatch({
       type: EDIT_WORKOUT_FORM_UPDATED,
       payload: { paceSecPerMi: newPace }
@@ -178,7 +182,10 @@ export const newWorkoutFormUpdate = (field, value) => (dispatch, getState) => {
   ) {
     const duration = getState().newWorkout.data.durationSec
     const distance = getState().newWorkout.data.distanceMi
-    const newPace = duration / distance
+    const newPace =
+      Number.isNaN(duration / distance) || equals(duration / distance, Infinity)
+        ? 0
+        : duration / distance
     dispatch({
       type: NEW_WORKOUT_FORM_UPDATED,
       payload: { paceSecPerMi: newPace }

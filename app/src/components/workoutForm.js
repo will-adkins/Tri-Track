@@ -26,6 +26,7 @@ import WorkoutIcon from '../components/workoutIcon'
 import MotivationWellnessIcon from '../components/motivationWellnessIcon'
 import CustomSelect from '../components/customSelect'
 import CustomCalendar from '../components/customCalendar'
+import DecimalTextField from '../components/decimalTextField'
 
 const styles = theme => ({
   workout: {
@@ -112,7 +113,7 @@ const WorkoutForm = props => {
             </Grid>
             <Grid item>
               <TextField
-                id="distance"
+                id="dateTime"
                 label="Date"
                 value={dateParser(dateTime)}
                 className={classes.textfield}
@@ -181,13 +182,11 @@ const WorkoutForm = props => {
               {equals(category, 'Swim') ? <Waves /> : <Terrain />}
             </Grid>
             <Grid item>
-              <TextField
-                id="distance"
+              <DecimalTextField
+                onChange={onChange}
                 label="Distance (miles)"
+                field="distanceMi"
                 value={distanceMi}
-                onChange={e => onChange('distanceMi', Number(e.target.value))}
-                className={classes.textfield}
-                required
               />
             </Grid>
           </Grid>
