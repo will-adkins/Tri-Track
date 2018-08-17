@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
+import { not, isEmpty } from 'ramda'
 import { TextField, Grid, Button, withStyles } from '@material-ui/core'
 import {
   AccountCircle,
@@ -54,6 +55,7 @@ const SignUp = props => {
     clearError,
     clearForm,
     isSaving,
+    isValid,
     isError,
     errMsg
   } = props
@@ -110,6 +112,7 @@ const SignUp = props => {
             color="primary"
             type="button"
             onClick={e => toggleForm()}
+            disabled={isValid ? false : true}
           >
             Next
           </Button>
@@ -226,7 +229,10 @@ const mapStateToProps = state => ({
   isSaving: state.newProfile.isSaving,
   isError: state.newProfile.isError,
   errMsg: state.newProfile.errMsg,
-  profile: state.newProfile.data
+  profile: state.newProfile.data,
+  isValid:
+    not(isEmpty(state.newProfile.data.email)) &&
+    not(isEmpty(state.newProfile.data.password))
 })
 
 const mapActionsToProps = dispatch => ({

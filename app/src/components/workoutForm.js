@@ -25,7 +25,7 @@ import dateParser from '../lib/dateDisplayParser'
 import WorkoutIcon from '../components/workoutIcon'
 import MotivationWellnessIcon from '../components/motivationWellnessIcon'
 import CustomSelect from '../components/customSelect'
-import CustomCalendar from '../components/customCalendar'
+import { DateTimePicker } from 'material-ui-pickers'
 import DecimalTextField from '../components/decimalTextField'
 
 const styles = theme => ({
@@ -107,12 +107,18 @@ const WorkoutForm = props => {
             </Grid>
           )}
 
-          <Grid container spacing={8} alignItems="flex-end">
+          <Grid container spacing={16} alignItems="flex-end">
             <Grid item>
               <CalendarToday />
             </Grid>
             <Grid item>
-              <TextField
+              <DateTimePicker
+                label="Date"
+                value={new Date(dateTime)}
+                onChange={date => onChange(date.toISOString())}
+                disableFuture
+              />
+              {/* <TextField
                 id="dateTime"
                 label="Date"
                 value={dateParser(dateTime)}
@@ -131,7 +137,7 @@ const WorkoutForm = props => {
                     </InputAdornment>
                   )
                 }}
-              />
+              /> */}
             </Grid>
           </Grid>
           <Grid container spacing={8} alignItems="flex-end">
@@ -203,6 +209,7 @@ const WorkoutForm = props => {
                 value={durationSec}
                 onChange={e => onChange('durationSec', Number(e.target.value))}
                 className={classes.textfield}
+                helperText={secToMin(durationSec)}
                 required
               />
             </Grid>

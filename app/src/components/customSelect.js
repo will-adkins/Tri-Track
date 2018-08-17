@@ -54,7 +54,7 @@ class CustomSelect extends React.Component {
 
     return (
       <Grid item>
-        <FormControl className={classes.formControl} required>
+        <FormControl className={classes.formControl}>
           <InputLabel>{label}</InputLabel>
           <Select
             open={this.state.open}

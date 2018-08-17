@@ -9,6 +9,7 @@ import {
   FitnessCenter,
   AccessibilityNew
 } from '@material-ui/icons'
+import { isEmpty, not } from 'ramda'
 
 import {
   EDIT_PROFILE_FORM_TOGGLED,
@@ -62,7 +63,8 @@ class ProfileEdit extends React.Component {
       clearForm,
       isSaving,
       isError,
-      errMsg
+      errMsg,
+      isValid
     } = this.props
     const {
       email,
@@ -117,6 +119,7 @@ class ProfileEdit extends React.Component {
               color="primary"
               type="button"
               onClick={e => toggleForm()}
+              disabled={isValid ? false : true}
             >
               Next
             </Button>
@@ -235,7 +238,10 @@ const mapStateToProps = state => ({
   isError: state.editProfile.isError,
   errMsg: state.editProfile.errMsg,
   profile: state.editProfile.data,
-  loadProfile: state.currentProfile.data
+  loadProfile: state.currentProfile.data,
+  isValid:
+    not(isEmpty(state.editProfile.data.email)) &&
+    not(isEmpty(state.editProfile.data.password))
 })
 
 const mapActionsToProps = dispatch => ({
