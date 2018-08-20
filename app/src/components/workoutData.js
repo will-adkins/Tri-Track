@@ -24,7 +24,8 @@ import secToMin from '../lib/secToMin'
 
 const styles = theme => ({
   workout: {
-    paddingTop: '10%'
+    paddingTop: '10%',
+    width: '90%'
   },
   row: {
     display: 'flex',

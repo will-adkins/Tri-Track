@@ -72,6 +72,7 @@ class WorkoutEdit extends React.Component {
           onChange={onChange}
           onSubmit={onSubmit(match.params.id, history)}
           toggleForm={toggleForm}
+          formClear={() => null}
           workout={workout}
           isFirstForm={isFirstForm}
           className="overlay"

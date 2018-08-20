@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { last, isEmpty } from 'ramda'
+import { head, isEmpty } from 'ramda'
 import {
   Typography,
   Card,
@@ -12,6 +12,7 @@ import {
 import { Add, Assignment } from '@material-ui/icons'
 
 import { setWorkouts } from '../../action-creators/workouts'
+import sortWorkouts from '../../lib/sortWorkouts'
 
 import MenuAppBar from '../../components/menuAppBar'
 import CenterLogo from '../../components/centerLogo'
@@ -31,7 +32,7 @@ class Home extends React.Component {
   }
 
   render() {
-    const { classes, workouts } = this.props
+    const { classes, workouts, sortKey } = this.props
     const { firstName } = this.props.profile
 
     const RecentWorkouts = isEmpty(workouts) ? (
@@ -49,7 +50,10 @@ class Home extends React.Component {
         <Typography style={{ paddingTop: '10%' }} variant="headline">
           Most Recent Workout
         </Typography>
-        <WorkoutListItem workout={last(workouts)} recentOnly />
+        <WorkoutListItem
+          workout={head(sortWorkouts(sortKey, workouts))}
+          recentOnly
+        />
       </div>
     )
 
@@ -98,7 +102,8 @@ class Home extends React.Component {
 
 const mapStateToProps = state => ({
   workouts: state.workouts,
-  profile: state.currentProfile.data
+  profile: state.currentProfile.data,
+  sortKey: state.listOptions.sort
 })
 
 const mapActionsToProps = dispatch => ({

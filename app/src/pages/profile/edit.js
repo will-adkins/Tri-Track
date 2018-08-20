@@ -209,7 +209,7 @@ class ProfileEdit extends React.Component {
           </div>
           <div style={{ paddingTop: 12 }}>
             <Button variant="extendedFab" color="primary" type="submit">
-              Sign Up
+              Submit
             </Button>
             <Button variant="flat" type="button" onClick={e => toggleForm()}>
               Go Back

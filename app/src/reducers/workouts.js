@@ -21,7 +21,8 @@ import {
   CURRENT_WORKOUT_DELETING_FAILED,
   CURRENT_WORKOUT_DELETING_CANCELED,
   CURRENT_WORKOUT_DELETE_CONFIRMATION_STARTED,
-  CURRENT_WORKOUT_DELETE_CONFIRMATION_ENDED
+  CURRENT_WORKOUT_DELETE_CONFIRMATION_ENDED,
+  NEW_WORKOUT_FORM_CLEAR
 } from '../constants'
 
 export const workouts = (state = [], action) => {
@@ -184,6 +185,8 @@ export const newWorkout = (state = initialNewWorkout, action) => {
         isError: false,
         errMsg: ''
       })
+    case NEW_WORKOUT_FORM_CLEAR:
+      return initialNewWorkout
     default:
       return state
   }

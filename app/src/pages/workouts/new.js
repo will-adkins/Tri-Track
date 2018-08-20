@@ -10,7 +10,8 @@ import WorkoutForm from '../../components/workoutForm'
 import {
   NEW_WORKOUT_FORM_TOGGLE,
   NEW_WORKOUT_ERROR_CLEAR,
-  NEW_WORKOUT_SAVE_FAILED
+  NEW_WORKOUT_SAVE_FAILED,
+  NEW_WORKOUT_FORM_CLEAR
 } from '../../constants'
 import {
   addWorkout,
@@ -37,6 +38,7 @@ class WorkoutNew extends React.Component {
       onChange,
       onSubmit,
       toggleForm,
+      formClear,
       isFirstForm,
       errorClear,
       isSaving,
@@ -45,13 +47,14 @@ class WorkoutNew extends React.Component {
     } = this.props
     return (
       <div>
-        <MenuAppBar back title="Create Workout" />
+        <MenuAppBar back title="Add Workout" />
         <CenterLogo className="underlay" />
 
         <WorkoutForm
           onChange={onChange}
           onSubmit={onSubmit(history)}
           toggleForm={toggleForm}
+          formClear={formClear}
           workout={workout}
           isFirstForm={isFirstForm}
           className="overlay"
@@ -88,7 +91,8 @@ const mapActionsToProps = dispatch => ({
     dispatch(addWorkout(history))
   },
   toggleForm: e => dispatch({ type: NEW_WORKOUT_FORM_TOGGLE }),
-  errorClear: () => dispatch({ type: NEW_WORKOUT_ERROR_CLEAR })
+  errorClear: () => dispatch({ type: NEW_WORKOUT_ERROR_CLEAR }),
+  formClear: () => dispatch({ type: NEW_WORKOUT_FORM_CLEAR })
 })
 
 const connector = connect(

@@ -78,6 +78,7 @@ const WorkoutForm = props => {
     onChange,
     onSubmit,
     toggleForm,
+    formClear,
     isFirstForm
   } = props
   const {
@@ -249,7 +250,13 @@ const WorkoutForm = props => {
           <Button variant="extendedFab" color="primary" onClick={toggleForm}>
             Next
           </Button>
-          <Button type="button" onClick={e => history.goBack()}>
+          <Button
+            type="button"
+            onClick={e => {
+              history.goBack()
+              formClear()
+            }}
+          >
             Cancel
           </Button>
         </CardActions>
@@ -272,44 +279,51 @@ const WorkoutForm = props => {
               value={distanceMi}
             />
           </div>
-          <div className={classes.lowerRow} style={{ width: '50%' }}>
-            <div className={classes.icon}>
+          <div className={classes.lowerRow} style={{ width: 198 }}>
+            <div
+              style={{
+                alignSelf: 'center',
+                display: 'flex',
+                flexDirection: 'row'
+              }}
+            >
               <AccessTime />
             </div>
             <div
               style={{
                 display: 'flex',
-                flexDirection: 'row',
                 justifyContent: 'space-around',
                 width: '100%'
               }}
             >
               <TextField
                 id="duration"
-                label="Hr"
+                label="Duration"
                 value={hr}
                 onChange={e => onChange('hr', Number(e.target.value))}
-                style={{ width: 24, marginRight: 8 }}
+                style={{ width: 28 }}
                 inputProps={{ maxLength: 2 }}
+                helperText="Hr"
               />
 
               <TextField
                 id="duration"
-                label="Min"
+                label=" "
                 value={min}
                 onChange={e => onChange('min', Number(e.target.value))}
-                style={{ width: 24, marginRight: 8 }}
+                style={{ width: 28, marginRight: 8 }}
                 inputProps={{ maxLength: 2 }}
+                helperText="Min"
               />
 
               <TextField
                 id="duration"
-                label="Sec"
+                label=" "
                 value={sec}
                 onChange={e => onChange('sec', Number(e.target.value))}
-                style={{ width: 24 }}
-                required
+                style={{ width: 28 }}
                 inputProps={{ maxLength: 2 }}
+                helperText="Sec"
               />
             </div>
           </div>
