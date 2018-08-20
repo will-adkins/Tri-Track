@@ -29,7 +29,7 @@ import SortMenu from '../components/sortMenu'
 const styles = {
   icon: { marginRight: 24 },
   menu: { marginLeft: -12 },
-  button: { marginLeft: '18%' },
+  button: {},
   flex: { justifyContent: 'center' }
 }
 
@@ -103,7 +103,7 @@ const MenuAppBar = props => {
               </Button>
             </div>
             {listOptions && (
-              <div style={{ flexGrow: 1, justifyContent: 'space-around' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-around' }}>
                 <Button
                   variant="fab"
                   mini

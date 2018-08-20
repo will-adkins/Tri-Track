@@ -8,7 +8,10 @@ import {
   CardActions,
   Button,
   withStyles,
-  InputAdornment
+  Paper,
+  Tabs,
+  Tab,
+  Typography
 } from '@material-ui/core'
 import {
   Waves,
@@ -52,7 +55,8 @@ const styles = theme => ({
   center: {
     display: 'flex',
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    flexDirection: 'column'
   },
   actions: { justifyContent: 'flex-end', width: '50%' }
 })
@@ -80,19 +84,50 @@ const WorkoutForm = props => {
 
   const SoftForm = (
     <center>
-      <form style={{ marginLeft: '25%' }}>
-        <div className={classes.margin}>
-          <Grid container spacing={8} alignItems="flex-end">
+      <form>
+        {/* 
+        //style=
+        {{ marginLeft: '25%' }} */}
+        <div className={classes.center}>
+          <Grid container spacing={16} alignItems="flex-end">
             <Grid item>
-              <WorkoutIcon category={category} />
+              <CalendarToday />
             </Grid>
-            <CustomSelect
+            <Grid item>
+              <DateTimePicker
+                label="Date"
+                value={new Date(dateTime)}
+                onChange={date => onChange(date.toISOString())}
+                disableFuture
+              />
+            </Grid>
+          </Grid>
+
+          <Paper style={{ width: 240 }}>
+            <Typography variant="caption">Category</Typography>
+            <Tabs
+              value={category}
+              onChange={(e, v) => onChange('category', v)}
+              fullWidth
+              indicatorColor="primary"
+              textColor="primary"
+              centered
+            >
+              <Tab icon={<WorkoutIcon category={'Swim'} />} value="Swim" />
+              <Tab icon={<WorkoutIcon category={'Bike'} />} value="Bike" />
+              <Tab icon={<WorkoutIcon category={'Run'} />} value="Run" />
+            </Tabs>
+          </Paper>
+          {/* <Grid item>
+              <WorkoutIcon category={category} />
+            </Grid> */}
+          {/* <CustomSelect
               label="Workout Category"
               field="category"
               value={category}
               onSelect={onChange}
-            />
-          </Grid>
+            /> */}
+
           {equals('Swim', category) && (
             <Grid container spacing={8} alignItems="flex-end">
               <Grid item>
@@ -107,18 +142,7 @@ const WorkoutForm = props => {
             </Grid>
           )}
 
-          <Grid container spacing={16} alignItems="flex-end">
-            <Grid item>
-              <CalendarToday />
-            </Grid>
-            <Grid item>
-              <DateTimePicker
-                label="Date"
-                value={new Date(dateTime)}
-                onChange={date => onChange(date.toISOString())}
-                disableFuture
-              />
-              {/* <TextField
+          {/* <TextField
                 id="dateTime"
                 label="Date"
                 value={dateParser(dateTime)}
@@ -138,8 +162,7 @@ const WorkoutForm = props => {
                   )
                 }}
               /> */}
-            </Grid>
-          </Grid>
+
           <Grid container spacing={8} alignItems="flex-end">
             <Grid item>
               <MotivationWellnessIcon type="motivation" value={motivation} />
