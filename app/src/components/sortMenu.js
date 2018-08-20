@@ -45,7 +45,6 @@ class SortListComposition extends React.Component {
           variant="fab"
           mini
           color="secondary"
-          className={classes.button}
           onClick={e => toggleSortDrawer()}
           buttonRef={node => {
             this.anchorEl = node
@@ -71,9 +70,7 @@ class SortListComposition extends React.Component {
             >
               <Paper
                 style={{
-                  marginRight: '30%',
-                  marginLeft: '-60%',
-                  minWidth: '50%'
+                  minWidth: '100%'
                 }}
               >
                 <ClickAwayListener onClickAway={toggleSortDrawer}>

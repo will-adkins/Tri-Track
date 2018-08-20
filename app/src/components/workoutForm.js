@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { equals, not } from 'ramda'
+import { equals, not, gt } from 'ramda'
 import { withRouter } from 'react-router'
 import {
   Grid,
@@ -14,6 +14,9 @@ import {
   Typography
 } from '@material-ui/core'
 import {
+  Pool,
+  DirectionsBike,
+  DirectionsRun,
   Waves,
   Terrain,
   AccessTime,
@@ -35,16 +38,19 @@ const styles = theme => ({
   workout: {
     paddingTop: '10%'
   },
-  row: {
-    display: 'flex',
-    justifyContent: 'space-evenly'
-  },
+  row: { display: 'flex', flexDirection: 'row' },
+  lowerRow: { display: 'flex', flexDirection: 'row', paddingTop: '5%' },
+  icon: { alignSelf: 'flex-end', marginRight: 8 },
   root: {
     display: 'flex',
     flexWrap: 'wrap'
   },
   margin: {
     margin: theme.spacing.unit
+  },
+  tabs: {
+    width: '0 auto',
+    marginTop: '5%'
   },
   withoutLabel: {
     marginTop: theme.spacing.unit * 3
@@ -58,7 +64,11 @@ const styles = theme => ({
     alignItems: 'center',
     flexDirection: 'column'
   },
-  actions: { justifyContent: 'flex-end', width: '50%' }
+  actions: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'flex-end'
+  }
 })
 
 const WorkoutForm = props => {
@@ -77,11 +87,19 @@ const WorkoutForm = props => {
     wellness,
     motivation,
     distanceMi,
+    hr,
+    min,
+    sec,
     durationSec,
     paceSecPerMi,
     calories
   } = props.workout
-
+  // const hr = `${Math.floor(durationSec / 3600)}`
+  // const min = gt(hr, 0)
+  //   ? `${durationSec % 3600}`
+  //   : `${Math.floor(durationSec / 60)}`
+  // const sec = `${durationSec % 60}`
+  console.log('hr', hr, 'min', min, 'sec', sec)
   const SoftForm = (
     <center>
       <form>
@@ -89,33 +107,31 @@ const WorkoutForm = props => {
         //style=
         {{ marginLeft: '25%' }} */}
         <div className={classes.center}>
-          <Grid container spacing={16} alignItems="flex-end">
-            <Grid item>
+          <div className={classes.row}>
+            <div className={classes.icon}>
               <CalendarToday />
-            </Grid>
-            <Grid item>
-              <DateTimePicker
-                label="Date"
-                value={new Date(dateTime)}
-                onChange={date => onChange(date.toISOString())}
-                disableFuture
-              />
-            </Grid>
-          </Grid>
+            </div>
+            <DateTimePicker
+              label="Date"
+              value={new Date(dateTime)}
+              onChange={date => onChange(date.toISOString())}
+              disableFuture
+            />
+          </div>
 
-          <Paper style={{ width: 240 }}>
+          <Paper className={classes.tabs}>
             <Typography variant="caption">Category</Typography>
             <Tabs
               value={category}
               onChange={(e, v) => onChange('category', v)}
               fullWidth
               indicatorColor="primary"
-              textColor="primary"
+              textColor="secondary"
               centered
             >
-              <Tab icon={<WorkoutIcon category={'Swim'} />} value="Swim" />
-              <Tab icon={<WorkoutIcon category={'Bike'} />} value="Bike" />
-              <Tab icon={<WorkoutIcon category={'Run'} />} value="Run" />
+              <Tab icon={<Pool />} value="Swim" />
+              <Tab icon={<DirectionsBike />} value="Bike" />
+              <Tab icon={<DirectionsRun />} value="Run" />
             </Tabs>
           </Paper>
           {/* <Grid item>
@@ -129,17 +145,34 @@ const WorkoutForm = props => {
             /> */}
 
           {equals('Swim', category) && (
-            <Grid container spacing={8} alignItems="flex-end">
-              <Grid item>
-                <Waves />
-              </Grid>
-              <CustomSelect
-                label="Swim Stroke"
-                field="stroke"
+            <Paper className={classes.tabs}>
+              <Typography variant="caption">Stroke</Typography>
+              <Tabs
                 value={stroke}
-                onSelect={onChange}
-              />
-            </Grid>
+                onChange={(e, v) => onChange('stroke', v)}
+                fullWidth
+                indicatorColor="primary"
+                textColor="secondary"
+                centered
+              >
+                <Tab label="Free" value="Freestyle" />
+                <Tab label="Back" value="Backstroke" />
+                <Tab label="Breast" value="Breaststroke" />
+                <Tab label="Fly" value="Butterfly" />
+              </Tabs>
+            </Paper>
+
+            // <Grid container spacing={8} alignItems="flex-end">
+            //   <Grid item>
+            //     <Waves />
+            //   </Grid>
+            //   <CustomSelect
+            //     label="Swim Stroke"
+            //     field="stroke"
+            //     value={stroke}
+            //     onSelect={onChange}
+            //   />
+            // </Grid>
           )}
 
           {/* <TextField
@@ -162,33 +195,55 @@ const WorkoutForm = props => {
                   )
                 }}
               /> */}
-
-          <Grid container spacing={8} alignItems="flex-end">
-            <Grid item>
-              <MotivationWellnessIcon type="motivation" value={motivation} />
-            </Grid>
-            <CustomSelect
-              label="Motivation"
-              field="motivation"
+          <Paper className={classes.tabs}>
+            <Typography variant="caption">Motivation</Typography>
+            <Tabs
               value={motivation}
-              onSelect={onChange}
-            />
-          </Grid>
-          <Grid
-            container
-            spacing={equals(wellness, 3) ? 0 : 8}
-            alignItems="flex-end"
-          >
-            <Grid item>
-              <MotivationWellnessIcon type="wellness" value={wellness} />
-            </Grid>
-            <CustomSelect
-              label="Wellness"
-              field="wellness"
+              onChange={(e, v) => onChange('motivation', v)}
+              fullWidth
+              indicatorColor="primary"
+              textColor="secondary"
+              centered
+            >
+              <Tab
+                icon={<MotivationWellnessIcon type={'motivation'} value={1} />}
+                value={1}
+              />
+              <Tab
+                icon={<MotivationWellnessIcon type={'motivation'} value={2} />}
+                value={2}
+              />
+              <Tab
+                icon={<MotivationWellnessIcon type={'motivation'} value={3} />}
+                value={3}
+              />
+            </Tabs>
+          </Paper>
+
+          <Paper className={classes.tabs}>
+            <Typography variant="caption">Wellness</Typography>
+            <Tabs
               value={wellness}
-              onSelect={onChange}
-            />
-          </Grid>
+              onChange={(e, v) => onChange('wellness', v)}
+              fullWidth
+              indicatorColor="primary"
+              textColor="secondary"
+              centered
+            >
+              <Tab
+                icon={<MotivationWellnessIcon type={'wellness'} value={1} />}
+                value={1}
+              />
+              <Tab
+                icon={<MotivationWellnessIcon type={'wellness'} value={2} />}
+                value={2}
+              />
+              <Tab
+                icon={<MotivationWellnessIcon type={'wellness'} value={3} />}
+                value={3}
+              />
+            </Tabs>
+          </Paper>
         </div>
         <CardActions className={classes.actions} style={{ paddingTop: 16 }}>
           <Button variant="extendedFab" color="primary" onClick={toggleForm}>
@@ -204,73 +259,88 @@ const WorkoutForm = props => {
 
   const HardForm = (
     <center>
-      <form style={{ marginLeft: '25%' }} onSubmit={onSubmit}>
-        <div className={classes.margin}>
-          <Grid container spacing={8} alignItems="flex-end">
-            <Grid item>
+      <form onSubmit={onSubmit}>
+        <div className={classes.center}>
+          <div className={classes.lowerRow}>
+            <div className={classes.icon}>
               {equals(category, 'Swim') ? <Waves /> : <Terrain />}
-            </Grid>
-            <Grid item>
-              <DecimalTextField
-                onChange={onChange}
-                label="Distance (miles)"
-                field="distanceMi"
-                value={distanceMi}
-              />
-            </Grid>
-          </Grid>
-        </div>
-        <div className={classes.margin}>
-          <Grid container spacing={8} alignItems="flex-end">
-            <Grid item>
+            </div>
+            <DecimalTextField
+              onChange={onChange}
+              label="Distance (miles)"
+              field="distanceMi"
+              value={distanceMi}
+            />
+          </div>
+          <div className={classes.lowerRow} style={{ width: '50%' }}>
+            <div className={classes.icon}>
               <AccessTime />
-            </Grid>
-            <Grid item>
+            </div>
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'row',
+                justifyContent: 'space-around',
+                width: '100%'
+              }}
+            >
               <TextField
                 id="duration"
-                label="Duration (seconds)"
-                value={durationSec}
-                onChange={e => onChange('durationSec', Number(e.target.value))}
-                className={classes.textfield}
-                helperText={secToMin(durationSec)}
+                label="Hr"
+                value={hr}
+                onChange={e => onChange('hr', Number(e.target.value))}
+                style={{ width: 24, marginRight: 8 }}
+                inputProps={{ maxLength: 2 }}
+              />
+
+              <TextField
+                id="duration"
+                label="Min"
+                value={min}
+                onChange={e => onChange('min', Number(e.target.value))}
+                style={{ width: 24, marginRight: 8 }}
+                inputProps={{ maxLength: 2 }}
+              />
+
+              <TextField
+                id="duration"
+                label="Sec"
+                value={sec}
+                onChange={e => onChange('sec', Number(e.target.value))}
+                style={{ width: 24 }}
                 required
+                inputProps={{ maxLength: 2 }}
               />
-            </Grid>
-          </Grid>
-        </div>
-        <div className={classes.margin}>
-          <Grid container spacing={8} alignItems="flex-end">
-            <Grid item>
+            </div>
+          </div>
+
+          <div className={classes.lowerRow}>
+            <div className={classes.icon}>
               <Timer />
-            </Grid>
-            <Grid item>
-              <TextField
-                id="pace"
-                label="Pace (min/mile)"
-                value={secToMin(paceSecPerMi)}
-                onChange={e => onChange('paceSecPerMi', Number(e.target.value))}
-                className={classes.textfield}
-                disabled
-              />
-            </Grid>
-          </Grid>
-        </div>
-        <div className={classes.margin}>
-          <Grid container spacing={8} alignItems="flex-end">
-            <Grid item>
+            </div>
+            <TextField
+              id="pace"
+              label="Pace (min/mile)"
+              value={secToMin(paceSecPerMi)}
+              onChange={e => onChange('paceSecPerMi', Number(e.target.value))}
+              className={classes.textfield}
+              disabled
+            />
+          </div>
+
+          <div className={classes.lowerRow}>
+            <div className={classes.icon}>
               <Whatshot />
-            </Grid>
-            <Grid item>
-              <TextField
-                id="calories"
-                label="Calories Burned"
-                value={calories}
-                onChange={e => onChange('calories', Number(e.target.value))}
-                className={classes.textfield}
-                disabled
-              />
-            </Grid>
-          </Grid>
+            </div>
+            <TextField
+              id="calories"
+              label="Calories Burned"
+              value={calories}
+              onChange={e => onChange('calories', Number(e.target.value))}
+              className={classes.textfield}
+              disabled
+            />
+          </div>
         </div>
         <CardActions className={classes.actions} style={{ paddingTop: 16 }}>
           <Button type="submit" variant="extendedFab" color="primary">

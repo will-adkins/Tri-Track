@@ -27,10 +27,7 @@ import {
 import SortMenu from '../components/sortMenu'
 
 const styles = {
-  icon: { marginRight: 24 },
-  menu: { marginLeft: -12 },
-  button: {},
-  flex: { justifyContent: 'center' }
+  button: { marginRight: 8 }
 }
 
 const MenuAppBar = props => {
@@ -90,20 +87,28 @@ const MenuAppBar = props => {
 
   if (highLevel) {
     return (
-      <div>
-        <AppBar
-          position="static"
-          style={{ display: 'flex' }}
-          className="overlay"
-        >
-          <Toolbar>
-            <div style={{ flexGrow: 5 }}>
-              <Button className={classes.menu} onClick={toggleDrawer}>
+      <AppBar position="static" className="overlay">
+        <Toolbar>
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              width: '100%'
+            }}
+          >
+            <div>
+              <Button onClick={toggleDrawer}>
                 <Menu style={{ color: 'white' }} className="svg_icon" />
               </Button>
             </div>
             {listOptions && (
-              <div style={{ display: 'flex', justifyContent: 'space-around' }}>
+              <div
+                style={{
+                  display: 'flex',
+                  width: '100%',
+                  justifyContent: 'flex-end'
+                }}
+              >
                 <Button
                   variant="fab"
                   mini
@@ -116,9 +121,9 @@ const MenuAppBar = props => {
                 <SortMenu />
               </div>
             )}
-          </Toolbar>
-        </AppBar>
-      </div>
+          </div>
+        </Toolbar>
+      </AppBar>
     )
   }
 

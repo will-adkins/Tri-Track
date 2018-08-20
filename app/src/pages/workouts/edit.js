@@ -10,7 +10,8 @@ import WorkoutForm from '../../components/workoutForm'
 
 import {
   updateWorkout,
-  editWorkoutFormUpdate
+  editWorkoutFormUpdate,
+  setEditWorkout
 } from '../../action-creators/workouts'
 import {
   EDIT_WORKOUT_LOADED,
@@ -93,8 +94,7 @@ const mapStateToProps = state => ({
 })
 
 const mapActionsToProps = dispatch => ({
-  setWorkout: workout =>
-    dispatch({ type: EDIT_WORKOUT_LOADED, payload: workout }),
+  setWorkout: workout => dispatch(setEditWorkout(workout)),
   onChange: (field, value) => {
     if (Number.isNaN(value)) {
       dispatch({
