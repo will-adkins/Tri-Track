@@ -25,11 +25,15 @@ import secToMin from '../lib/secToMin'
 const styles = theme => ({
   workout: {
     paddingTop: '10%',
-    width: '90%'
+    display: 'flex',
+    flexDirection: 'column'
   },
   row: {
     display: 'flex',
-    justifyContent: 'space-evenly'
+    justifyContent: 'space-between'
+  },
+  data: {
+    margin: 16
   }
 })
 
@@ -49,39 +53,8 @@ const WorkoutData = props => {
 
   const DateStroke = () =>
     equals('Swim', category) ? (
-      <React.Fragment>
-        <ListItem>
-          <FormControl className={classes.margin}>
-            <InputLabel>Date</InputLabel>
-            <Input
-              id="input-with-icon-adornment"
-              value={dateDisplayParser(dateTime)}
-              startAdornment={
-                <InputAdornment position="start">
-                  <CalendarToday />
-                </InputAdornment>
-              }
-            />
-          </FormControl>
-        </ListItem>
-        <ListItem>
-          <FormControl className={classes.margin}>
-            <InputLabel>Stroke</InputLabel>
-            <Input
-              id="input-with-icon-adornment"
-              value={stroke}
-              startAdornment={
-                <InputAdornment position="start">
-                  <Waves />
-                </InputAdornment>
-              }
-            />
-          </FormControl>
-        </ListItem>
-      </React.Fragment>
-    ) : (
-      <center style={{ paddingBottom: '5%' }}>
-        <FormControl className={classes.margin}>
+      <div className={classes.row}>
+        <FormControl className={classes.data}>
           <InputLabel>Date</InputLabel>
           <Input
             id="input-with-icon-adornment"
@@ -93,104 +66,119 @@ const WorkoutData = props => {
             }
           />
         </FormControl>
-      </center>
+
+        <FormControl className={classes.data}>
+          <InputLabel>Stroke</InputLabel>
+          <Input
+            id="input-with-icon-adornment"
+            value={stroke}
+            startAdornment={
+              <InputAdornment position="start">
+                <Waves />
+              </InputAdornment>
+            }
+          />
+        </FormControl>
+      </div>
+    ) : (
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
+        <FormControl className={classes.data}>
+          <InputLabel>Date</InputLabel>
+          <Input
+            id="input-with-icon-adornment"
+            value={dateDisplayParser(dateTime)}
+            startAdornment={
+              <InputAdornment position="start">
+                <CalendarToday />
+              </InputAdornment>
+            }
+          />
+        </FormControl>
+      </div>
     )
   return (
     <CardContent className={classes.workout}>
-      <div className={classes.row}>{<DateStroke />}</div>
+      {<DateStroke />}
       <div className={classes.row}>
-        <ListItem>
-          <FormControl className={classes.margin}>
-            <InputLabel>Distance</InputLabel>
-            <Input
-              id="input-with-icon-adornment"
-              value={`${distanceMi} miles`}
-              startAdornment={
-                <InputAdornment position="start">
-                  <Terrain />
-                </InputAdornment>
-              }
-            />
-          </FormControl>
-        </ListItem>
-        <ListItem>
-          <FormControl className={classes.margin}>
-            <InputLabel>Duration</InputLabel>
-            <Input
-              id="input-with-icon-adornment"
-              value={secToMin(durationSec)}
-              startAdornment={
-                <InputAdornment position="start">
-                  <AccessTime />
-                </InputAdornment>
-              }
-            />
-          </FormControl>
-        </ListItem>
-      </div>
-      <div className={classes.row}>
-        <ListItem>
-          <FormControl className={classes.margin}>
-            <InputLabel>Pace</InputLabel>
-            <Input
-              id="input-with-icon-adornment"
-              value={`${secToMin(paceSecPerMi)}  min / mile`}
-              startAdornment={
-                <InputAdornment position="start">
-                  <Timer />
-                </InputAdornment>
-              }
-            />
-          </FormControl>
-        </ListItem>
+        <FormControl className={classes.data}>
+          <InputLabel>Distance</InputLabel>
+          <Input
+            id="input-with-icon-adornment"
+            value={`${distanceMi} miles`}
+            startAdornment={
+              <InputAdornment position="start">
+                <Terrain />
+              </InputAdornment>
+            }
+          />
+        </FormControl>
 
-        <ListItem>
-          <FormControl className={classes.margin}>
-            <InputLabel>Calories</InputLabel>
-            <Input
-              id="input-with-icon-adornment"
-              value={calories}
-              startAdornment={
-                <InputAdornment position="start">
-                  <Whatshot />
-                </InputAdornment>
-              }
-            />
-          </FormControl>
-        </ListItem>
+        <FormControl className={classes.data}>
+          <InputLabel>Duration</InputLabel>
+          <Input
+            id="input-with-icon-adornment"
+            value={secToMin(durationSec)}
+            startAdornment={
+              <InputAdornment position="start">
+                <AccessTime />
+              </InputAdornment>
+            }
+          />
+        </FormControl>
       </div>
       <div className={classes.row}>
-        <ListItem>
-          <FormControl className={classes.margin}>
-            <InputLabel>Motivation</InputLabel>
-            <Input
-              id="input-with-icon-adornment"
-              value={`${motivation}`}
-              startAdornment={
-                <InputAdornment position="start">
-                  <MotivationWellnessIcon
-                    type="motivation"
-                    value={motivation}
-                  />
-                </InputAdornment>
-              }
-            />
-          </FormControl>
-        </ListItem>
-        <ListItem>
-          <FormControl className={classes.margin}>
-            <InputLabel>Wellness</InputLabel>
-            <Input
-              id="input-with-icon-adornment"
-              value={`${wellness}`}
-              startAdornment={
-                <InputAdornment position="start">
-                  <MotivationWellnessIcon type="wellness" value={wellness} />
-                </InputAdornment>
-              }
-            />
-          </FormControl>
-        </ListItem>
+        <FormControl className={classes.data}>
+          <InputLabel>Pace</InputLabel>
+          <Input
+            id="input-with-icon-adornment"
+            value={`${secToMin(paceSecPerMi)}  min / mile`}
+            startAdornment={
+              <InputAdornment position="start">
+                <Timer />
+              </InputAdornment>
+            }
+          />
+        </FormControl>
+
+        <FormControl className={classes.data}>
+          <InputLabel>Calories</InputLabel>
+          <Input
+            id="input-with-icon-adornment"
+            value={calories}
+            startAdornment={
+              <InputAdornment position="start">
+                <Whatshot />
+              </InputAdornment>
+            }
+          />
+        </FormControl>
+      </div>
+      <div className={classes.row}>
+        <FormControl className={classes.data}>
+          <InputLabel>Motivation</InputLabel>
+          <Input
+            id="input-with-icon-adornment"
+            value={`${motivation}`}
+            startAdornment={
+              <InputAdornment position="start">
+                <MotivationWellnessIcon type="motivation" value={motivation} />
+              </InputAdornment>
+            }
+          />
+        </FormControl>
+
+        <FormControl className={classes.data}>
+          <InputLabel>Wellness</InputLabel>
+          <Input
+            id="input-with-icon-adornment"
+            value={`${wellness}`}
+            startAdornment={
+              <InputAdornment position="start">
+                <MotivationWellnessIcon type="wellness" value={wellness} />
+              </InputAdornment>
+            }
+          />
+        </FormControl>
       </div>
     </CardContent>
   )

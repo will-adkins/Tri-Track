@@ -1,6 +1,5 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { withStyles } from '@material-ui/core'
 
 import { map } from 'ramda'
 
@@ -12,10 +11,6 @@ import FilterBar from '../../components/filterBar'
 
 import sortWorkouts from '../../lib/sortWorkouts'
 import filterWorkouts from '../../lib/filterWorkouts'
-
-const styles = theme => ({
-  root: {}
-})
 
 class Workouts extends React.Component {
   componentDidMount() {
@@ -57,4 +52,4 @@ const connector = connect(
   mapActionsToProps
 )
 
-export default withDrawer(connector(withStyles(styles)(Workouts)))
+export default withDrawer(connector(Workouts))
