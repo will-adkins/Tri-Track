@@ -27,7 +27,8 @@ import {
 import SortMenu from '../components/sortMenu'
 
 const styles = {
-  button: { marginRight: 8 }
+  button: { marginRight: 8 },
+  icon: { marginRight: 12 }
 }
 
 const MenuAppBar = props => {

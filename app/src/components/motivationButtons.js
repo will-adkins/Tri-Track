@@ -24,8 +24,16 @@ const MotivationButtons = props => {
   const { classes, onClick, onNullClick, value, highOrderType } = props
   const keyToUpdate = isNil(highOrderType) ? value : prop(value, highOrderType)
   return (
-    <React.Fragment>
-      <Typography variant="caption">Motivation: </Typography>
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignContent: 'center'
+      }}
+    >
+      {/* <Typography variant="caption">Motivation: </Typography> */}
+
       <IconButton
         onClick={
           propEq('motivation', 1, keyToUpdate)
@@ -68,7 +76,7 @@ const MotivationButtons = props => {
       >
         <Mood />
       </IconButton>
-    </React.Fragment>
+    </div>
   )
 }
 

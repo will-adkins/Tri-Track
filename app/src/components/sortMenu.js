@@ -68,12 +68,12 @@ class SortListComposition extends React.Component {
                 transformOrigin: placement === 'center bottom'
               }}
             >
-              <Paper
-                style={{
-                  minWidth: '100%'
-                }}
-              >
-                <ClickAwayListener onClickAway={toggleSortDrawer}>
+              <ClickAwayListener onClickAway={e => toggleSortDrawer()}>
+                <Paper
+                  style={{
+                    minWidth: '100%'
+                  }}
+                >
                   <MenuList>
                     <center style={{ margin: '5%' }}>
                       <Typography variant="title" color="secondary">
@@ -143,8 +143,8 @@ class SortListComposition extends React.Component {
                       Date
                     </MenuItem>
                   </MenuList>
-                </ClickAwayListener>
-              </Paper>
+                </Paper>
+              </ClickAwayListener>
             </Grow>
           )}
         </Popper>

@@ -5,7 +5,8 @@ import {
   Avatar,
   Typography,
   ListItemIcon,
-  ListItemText
+  ListItemText,
+  withStyles
 } from '@material-ui/core'
 import { Link } from 'react-router-dom'
 import { propOr } from 'ramda'
@@ -16,6 +17,7 @@ import dateDisplayParser from '../lib/dateDisplayParser'
 import WorkoutIcon from '../components/workoutIcon'
 
 const WorkoutListItem = data => {
+  const { recentOnly } = data
   const {
     _id,
     category,
@@ -24,8 +26,9 @@ const WorkoutListItem = data => {
     dateTime,
     paceSecPerMi
   } = propOr(data, 'workout', data)
+
   return (
-    <Card className="underlay" key={_id}>
+    <Card style={recentOnly ? { margin: 16 } : { display: 'flex' }} key={_id}>
       <Link to={`/workouts/${_id}`} className="router-link">
         <ListItem button>
           <ListItemIcon>

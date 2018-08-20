@@ -22,8 +22,7 @@ const styles = theme => ({
   card: {
     paddingTop: '10%'
   },
-  actions: { justifyContent: 'flex-end' },
-  form: { width: '50%' }
+  actions: { justifyContent: 'flex-end' }
 })
 
 class WorkoutNew extends React.Component {
@@ -51,16 +50,16 @@ class WorkoutNew extends React.Component {
       <div>
         <MenuAppBar back title="Add Workout" />
         <CenterLogo className="underlay" />
-        <div className={classes.form}>
-          <WorkoutForm
-            onChange={onChange}
-            onSubmit={onSubmit(history)}
-            toggleForm={toggleForm}
-            formClear={formClear}
-            workout={workout}
-            isFirstForm={isFirstForm}
-          />
-        </div>
+
+        <WorkoutForm
+          onChange={onChange}
+          onSubmit={onSubmit(history)}
+          toggleForm={toggleForm}
+          formClear={formClear}
+          workout={workout}
+          isFirstForm={isFirstForm}
+        />
+
         {isError && <SnackBar type="error" msg={errMsg} close={errorClear} />}
         {isSaving && <SnackBar type="info" msg="Saving your workout..." />}
       </div>

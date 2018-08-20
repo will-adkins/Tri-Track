@@ -20,8 +20,19 @@ import WorkoutListItem from '../../components/workoutListItem'
 import withDrawer from '../../components/withDrawer'
 
 const styles = theme => ({
-  placeholder: { maxWidth: '90%', marginTop: '10%' },
-  workouts: { marginBottom: '10%' },
+  placeholder: { margin: 16, marginBottom: '10%', padding: 16 },
+  workouts: {
+    marginBottom: '10%',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center'
+  },
+  row: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    paddingTop: '10%'
+  },
   button: { padding: '5%' }
 })
 
@@ -36,20 +47,26 @@ class Home extends React.Component {
     const { firstName } = this.props.profile
 
     const RecentWorkouts = isEmpty(workouts) ? (
-      <center style={{ marginBottom: '20%' }}>
+      <center>
+        <div className={classes.row}>
+          <Typography variant="headline" color="secondary">
+            No Workouts Recorded
+          </Typography>
+        </div>
         <Card className={classes.placeholder}>
-          <Typography variant="headline">No Workouts Recorded.</Typography>
           <Typography variant="subheading">
-            Click the <Add style={{ marginBottom: '-1%' }} /> icon below to get
-            started!
+            Click the <Add color="secondary" style={{ marginBottom: '-1%' }} />{' '}
+            icon below to get started!
           </Typography>
         </Card>
       </center>
     ) : (
       <div className={classes.workouts}>
-        <Typography style={{ paddingTop: '10%' }} variant="headline">
-          Most Recent Workout
-        </Typography>
+        <div className={classes.row}>
+          <Typography variant="headline" color="secondary">
+            Most Recent Workout
+          </Typography>
+        </div>
         <WorkoutListItem
           workout={head(sortWorkouts(sortKey, workouts))}
           recentOnly

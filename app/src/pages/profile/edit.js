@@ -123,7 +123,7 @@ class ProfileEdit extends React.Component {
             >
               Next
             </Button>
-            <Link to="/" className="router-link">
+            <Link to="/home" className="router-link">
               <Button variant="flat" type="button" onClick={e => clearForm()}>
                 Cancel
               </Button>
