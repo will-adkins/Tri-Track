@@ -2,12 +2,12 @@ import React from 'react'
 import { equals } from 'ramda'
 import {
   withStyles,
-  ListItem,
   FormControl,
   InputLabel,
   InputAdornment,
   Input,
-  CardContent
+  Paper,
+  Typography
 } from '@material-ui/core'
 import {
   CalendarToday,
@@ -30,11 +30,24 @@ const styles = theme => ({
   },
   row: {
     display: 'flex',
-    justifyContent: 'space-between'
+    justifyContent: 'space-around'
   },
   data: {
     margin: 16
-  }
+  },
+  lowerRow: {
+    display: 'flex',
+    flexDirection: 'row',
+    minWidth: 152,
+    paddingLeft: '3%'
+  },
+  label: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'flex-start'
+  },
+  icon: { alignSelf: 'flex-end', marginRight: 8 },
+  info: { alignSelf: 'flex-end', marginRight: '-3%' }
 })
 
 const WorkoutData = props => {
@@ -97,10 +110,22 @@ const WorkoutData = props => {
       </div>
     )
   return (
-    <CardContent className={classes.workout}>
+    <div className={classes.workout}>
       {<DateStroke />}
       <div className={classes.row}>
-        <FormControl className={classes.data}>
+        <Paper className={classes.lowerRow}>
+          <div className={classes.label}>
+            <Typography variant="caption">Distance</Typography>
+            <div className={classes.icon}>
+              {equals(category, 'Swim') ? <Waves /> : <Terrain />}
+            </div>
+          </div>
+          <div className={classes.info}>
+            <Typography variant="subheading">{`${distanceMi} miles`}</Typography>
+          </div>
+        </Paper>
+
+        {/* <FormControl className={classes.data}>
           <InputLabel>Distance</InputLabel>
           <Input
             id="input-with-icon-adornment"
@@ -111,9 +136,24 @@ const WorkoutData = props => {
               </InputAdornment>
             }
           />
-        </FormControl>
+        </FormControl> */}
 
-        <FormControl className={classes.data}>
+        <Paper className={classes.lowerRow}>
+          <div className={classes.label}>
+            <Typography variant="caption">Duration</Typography>
+            <div className={classes.icon}>
+              <AccessTime />
+            </div>
+          </div>
+          <div className={classes.info}>
+            <Typography variant="subheading">{`${secToMin(
+              durationSec
+            )}`}</Typography>
+          </div>
+        </Paper>
+      </div>
+
+      {/* <FormControl className={classes.data}>
           <InputLabel>Duration</InputLabel>
           <Input
             id="input-with-icon-adornment"
@@ -125,7 +165,7 @@ const WorkoutData = props => {
             }
           />
         </FormControl>
-      </div>
+      </div> */}
       <div className={classes.row}>
         <FormControl className={classes.data}>
           <InputLabel>Pace</InputLabel>
@@ -180,7 +220,7 @@ const WorkoutData = props => {
           />
         </FormControl>
       </div>
-    </CardContent>
+    </div>
   )
 }
 

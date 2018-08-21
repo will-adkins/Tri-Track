@@ -4,9 +4,7 @@ import {
   IconButton,
   Card,
   Typography,
-  CardContent,
-  Tabs,
-  Tab
+  CardContent
 } from '@material-ui/core'
 import { connect } from 'react-redux'
 import {
@@ -17,7 +15,7 @@ import {
   MoodBad,
   SentimentSatisfied
 } from '@material-ui/icons'
-import { propEq, equals } from 'ramda'
+import { propEq } from 'ramda'
 
 import { FILTER_KEYS_UPDATED } from '../constants'
 
@@ -43,7 +41,7 @@ const styles = theme => ({
 })
 
 const CategoryButtons = props => {
-  const { classes, filterClick, filterNullClick, tryFilter } = props
+  const { classes, filterClick, filterNullClick } = props
   const { filter } = props.listOptions
   return (
     <div className={classes.root}>
@@ -232,8 +230,6 @@ const mapStateToProps = state => {
 }
 
 const mapActionsToProps = dispatch => ({
-  tryFilter: (field, value) =>
-    dispatch({ type: FILTER_KEYS_UPDATED, payload: { [field]: value } }),
   filterClick: (field, value) => e =>
     dispatch({ type: FILTER_KEYS_UPDATED, payload: { [field]: value } }),
   filterNullClick: field => e =>

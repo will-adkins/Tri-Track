@@ -71,7 +71,7 @@ class Workouts extends React.Component {
   }
 
   render() {
-    const { classes, workouts, showFilterBar, sortKey, filterKey } = this.props
+    const { workouts, showFilterBar, sortKey, filterKey } = this.props
     return (
       <div>
         <MenuAppBar highLevel listOptions />

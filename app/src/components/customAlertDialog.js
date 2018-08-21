@@ -14,10 +14,7 @@ import {
 import { Delete } from '@material-ui/icons'
 
 import { deleteWorkout } from '../action-creators/workouts'
-import {
-  CURRENT_WORKOUT_DELETING_CANCELED,
-  CURRENT_WORKOUT_DELETE_CONFIRMATION_ENDED
-} from '../constants'
+import { CURRENT_WORKOUT_DELETE_CONFIRMATION_ENDED } from '../constants'
 
 const styles = theme => ({
   rightIcon: {

@@ -1,7 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { CircularProgress, withStyles } from '@material-ui/core'
-import { isEmpty } from 'ramda'
 
 import MenuAppBar from '../../components/menuAppBar'
 import CenterLogo from '../../components/centerLogo'
@@ -14,7 +13,6 @@ import {
   setEditWorkout
 } from '../../action-creators/workouts'
 import {
-  EDIT_WORKOUT_LOADED,
   EDIT_WORKOUT_FORM_TOGGLE,
   EDIT_WORKOUT_ERROR_CLEAR,
   EDIT_WORKOUT_SAVE_FAILED,
@@ -47,8 +45,7 @@ class WorkoutEdit extends React.Component {
       errorClear,
       isSaving,
       isError,
-      errMsg,
-      isValid
+      errMsg
     } = this.props
 
     if (workout._id !== match.params.id) {

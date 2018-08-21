@@ -1,14 +1,5 @@
 import fetch from 'isomorphic-fetch'
-import {
-  filter,
-  propEq,
-  prop,
-  equals,
-  isEmpty,
-  merge,
-  gt,
-  mergeDeepRight
-} from 'ramda'
+import { filter, propEq, prop, equals, isEmpty, merge, gt } from 'ramda'
 import {
   SET_WORKOUTS,
   SET_CURRENT_WORKOUT,

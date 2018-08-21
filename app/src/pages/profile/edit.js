@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { Paper, TextField, Grid, Button, withStyles } from '@material-ui/core'
+import { Paper, TextField, Button, withStyles } from '@material-ui/core'
 import {
   AccountCircle,
   VpnKey,

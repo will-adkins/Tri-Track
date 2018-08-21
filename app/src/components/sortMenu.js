@@ -37,7 +37,7 @@ const styles = theme => ({
 
 class SortListComposition extends React.Component {
   render() {
-    const { classes, toggleSortDrawer, sortWorkouts, open } = this.props
+    const { toggleSortDrawer, sortWorkouts, open } = this.props
 
     return (
       <React.Fragment>

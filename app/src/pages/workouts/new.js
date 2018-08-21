@@ -33,7 +33,6 @@ class WorkoutNew extends React.Component {
 
   render() {
     const {
-      classes,
       history,
       workout,
       onChange,

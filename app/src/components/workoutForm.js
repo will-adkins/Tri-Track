@@ -1,9 +1,8 @@
 import React from 'react'
 
-import { equals, not, gt } from 'ramda'
+import { equals, not } from 'ramda'
 import { withRouter } from 'react-router'
 import {
-  Grid,
   TextField,
   CardActions,
   Button,
@@ -26,11 +25,9 @@ import {
 } from '@material-ui/icons'
 
 import secToMin from '../lib/secToMin'
-import dateParser from '../lib/dateDisplayParser'
 
-import WorkoutIcon from '../components/workoutIcon'
 import MotivationWellnessIcon from '../components/motivationWellnessIcon'
-import CustomSelect from '../components/customSelect'
+
 import { DateTimePicker } from 'material-ui-pickers'
 import DecimalTextField from '../components/decimalTextField'
 
@@ -96,7 +93,6 @@ const WorkoutForm = props => {
     hr,
     min,
     sec,
-    durationSec,
     paceSecPerMi,
     calories
   } = props.workout
