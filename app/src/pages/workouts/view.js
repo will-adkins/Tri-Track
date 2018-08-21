@@ -26,7 +26,12 @@ const styles = theme => ({
   card: {
     paddingTop: '15%'
   },
-  actions: { justifyContent: 'flex-end' }
+  actions: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    marginTop: 32
+  }
 })
 
 class ViewWorkout extends React.Component {

@@ -30,7 +30,8 @@ const styles = theme => ({
   },
   row: {
     display: 'flex',
-    justifyContent: 'space-around'
+    justifyContent: 'space-around',
+    marginTop: 24
   },
   data: {
     margin: 16
@@ -38,7 +39,7 @@ const styles = theme => ({
   lowerRow: {
     display: 'flex',
     flexDirection: 'row',
-    minWidth: 152,
+    minWidth: 160,
     paddingLeft: '3%'
   },
   label: {
@@ -67,34 +68,56 @@ const WorkoutData = props => {
   const DateStroke = () =>
     equals('Swim', category) ? (
       <div className={classes.row}>
-        <FormControl className={classes.data}>
-          <InputLabel>Date</InputLabel>
-          <Input
-            id="input-with-icon-adornment"
-            value={dateDisplayParser(dateTime)}
-            startAdornment={
-              <InputAdornment position="start">
-                <CalendarToday />
-              </InputAdornment>
-            }
-          />
-        </FormControl>
-
-        <FormControl className={classes.data}>
-          <InputLabel>Stroke</InputLabel>
-          <Input
-            id="input-with-icon-adornment"
-            value={stroke}
-            startAdornment={
-              <InputAdornment position="start">
-                <Waves />
-              </InputAdornment>
-            }
-          />
-        </FormControl>
+        <Paper className={classes.lowerRow}>
+          <div className={classes.label}>
+            <Typography variant="caption" style={{ marginLeft: -8 }}>
+              Date
+            </Typography>
+            <div className={classes.icon} style={{ marginLeft: 8 }}>
+              <CalendarToday />
+            </div>
+          </div>
+          <div className={classes.info}>
+            <Typography variant="subheading">
+              {dateDisplayParser(dateTime)}
+            </Typography>
+          </div>
+        </Paper>
+        <Paper className={classes.lowerRow}>
+          <div className={classes.label}>
+            <Typography variant="caption" style={{ marginLeft: -8 }}>
+              Stroke
+            </Typography>
+            <div className={classes.icon} style={{ marginLeft: 8 }}>
+              <Waves />
+            </div>
+          </div>
+          <div className={classes.info}>
+            <Typography variant="subheading">{`${stroke}`}</Typography>
+          </div>
+        </Paper>
       </div>
     ) : (
-      <div style={{ display: 'flex', justifyContent: 'center' }}>
+      <div className={classes.row}>
+        <Paper className={classes.lowerRow}>
+          <div className={classes.label}>
+            <Typography variant="caption" style={{ marginLeft: -8 }}>
+              Date
+            </Typography>
+            <div className={classes.icon} style={{ marginLeft: 8 }}>
+              <CalendarToday />
+            </div>
+          </div>
+          <div className={classes.info}>
+            <Typography variant="subheading">
+              {dateDisplayParser(dateTime)}
+            </Typography>
+          </div>
+        </Paper>
+      </div>
+    )
+  {
+    /* <div style={{ display: 'flex', justifyContent: 'center' }}>
         <FormControl className={classes.data}>
           <InputLabel>Date</InputLabel>
           <Input
@@ -107,8 +130,9 @@ const WorkoutData = props => {
             }
           />
         </FormControl>
-      </div>
-    )
+      </div> */
+  }
+
   return (
     <div className={classes.workout}>
       {<DateStroke />}
@@ -117,27 +141,13 @@ const WorkoutData = props => {
           <div className={classes.label}>
             <Typography variant="caption">Distance</Typography>
             <div className={classes.icon}>
-              {equals(category, 'Swim') ? <Waves /> : <Terrain />}
+              <Terrain />
             </div>
           </div>
           <div className={classes.info}>
             <Typography variant="subheading">{`${distanceMi} miles`}</Typography>
           </div>
         </Paper>
-
-        {/* <FormControl className={classes.data}>
-          <InputLabel>Distance</InputLabel>
-          <Input
-            id="input-with-icon-adornment"
-            value={`${distanceMi} miles`}
-            startAdornment={
-              <InputAdornment position="start">
-                <Terrain />
-              </InputAdornment>
-            }
-          />
-        </FormControl> */}
-
         <Paper className={classes.lowerRow}>
           <div className={classes.label}>
             <Typography variant="caption">Duration</Typography>
@@ -153,72 +163,58 @@ const WorkoutData = props => {
         </Paper>
       </div>
 
-      {/* <FormControl className={classes.data}>
-          <InputLabel>Duration</InputLabel>
-          <Input
-            id="input-with-icon-adornment"
-            value={secToMin(durationSec)}
-            startAdornment={
-              <InputAdornment position="start">
-                <AccessTime />
-              </InputAdornment>
-            }
-          />
-        </FormControl>
-      </div> */}
       <div className={classes.row}>
-        <FormControl className={classes.data}>
-          <InputLabel>Pace</InputLabel>
-          <Input
-            id="input-with-icon-adornment"
-            value={`${secToMin(paceSecPerMi)}  min / mile`}
-            startAdornment={
-              <InputAdornment position="start">
-                <Timer />
-              </InputAdornment>
-            }
-          />
-        </FormControl>
-
-        <FormControl className={classes.data}>
-          <InputLabel>Calories</InputLabel>
-          <Input
-            id="input-with-icon-adornment"
-            value={calories}
-            startAdornment={
-              <InputAdornment position="start">
-                <Whatshot />
-              </InputAdornment>
-            }
-          />
-        </FormControl>
+        <Paper className={classes.lowerRow}>
+          <div className={classes.label}>
+            <Typography variant="caption" style={{ marginLeft: -8 }}>
+              Pace
+            </Typography>
+            <div className={classes.icon} style={{ marginLeft: 7 }}>
+              <Timer />
+            </div>
+          </div>
+          <div className={classes.info}>
+            <Typography variant="subheading">{`${secToMin(
+              paceSecPerMi
+            )}  min / mile`}</Typography>
+          </div>
+        </Paper>
+        <Paper className={classes.lowerRow}>
+          <div className={classes.label}>
+            <Typography variant="caption">Calories</Typography>
+            <div className={classes.icon}>
+              <Whatshot />
+            </div>
+          </div>
+          <div className={classes.info}>
+            <Typography variant="subheading">{`${calories} Cal`}</Typography>
+          </div>
+        </Paper>
       </div>
-      <div className={classes.row}>
-        <FormControl className={classes.data}>
-          <InputLabel>Motivation</InputLabel>
-          <Input
-            id="input-with-icon-adornment"
-            value={`${motivation}`}
-            startAdornment={
-              <InputAdornment position="start">
-                <MotivationWellnessIcon type="motivation" value={motivation} />
-              </InputAdornment>
-            }
-          />
-        </FormControl>
 
-        <FormControl className={classes.data}>
-          <InputLabel>Wellness</InputLabel>
-          <Input
-            id="input-with-icon-adornment"
-            value={`${wellness}`}
-            startAdornment={
-              <InputAdornment position="start">
-                <MotivationWellnessIcon type="wellness" value={wellness} />
-              </InputAdornment>
-            }
-          />
-        </FormControl>
+      <div className={classes.row}>
+        <Paper className={classes.lowerRow} style={{ height: 44 }}>
+          <div className={classes.label}>
+            <Typography variant="caption">Motivation</Typography>
+            <div className={classes.icon} style={{ marginLeft: -8 }}>
+              <MotivationWellnessIcon type="motivation" value={motivation} />
+            </div>
+          </div>
+          <div className={classes.info}>
+            <Typography variant="subheading">{`${motivation}`}</Typography>
+          </div>
+        </Paper>
+        <Paper className={classes.lowerRow} style={{ height: 44 }}>
+          <div className={classes.label}>
+            <Typography variant="caption">Wellness</Typography>
+            <div className={classes.icon}>
+              <MotivationWellnessIcon type="wellness" value={wellness} />
+            </div>
+          </div>
+          <div className={classes.info}>
+            <Typography variant="subheading">{`${wellness}`}</Typography>
+          </div>
+        </Paper>
       </div>
     </div>
   )
