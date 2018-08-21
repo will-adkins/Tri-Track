@@ -63,7 +63,7 @@ class Welcome extends React.Component {
           </CardContent>
 
           <CardMedia
-            image="/static/tri-symbol-1.jpg"
+            image="/static/tri-symbol-alpha.png"
             title="Tri-Track icon"
             className={classes.media}
           />

@@ -18,7 +18,7 @@ const CenterLogo = props => {
       )}
       <img
         alt="Tri-Track icon"
-        src="/static/tri-symbol-1.jpg"
+        src="/static/tri-symbol-alpha.png"
         width="50%"
         className="underlay"
         style={title ? null : { paddingTop: '5%' }}

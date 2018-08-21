@@ -5,7 +5,9 @@
   "dependencies": {
     "@material-ui/core": "^1.4.3",
     "@material-ui/icons": "^2.0.1",
+    "date-fns": "^2.0.0-alpha.7",
     "isomorphic-fetch": "^2.2.1",
+    "material-ui-pickers": "^1.0.0-rc.13",
     "ramda": "^0.25.0",
     "react": "16.4.1",
     "react-calendar": "^2.16.1",
