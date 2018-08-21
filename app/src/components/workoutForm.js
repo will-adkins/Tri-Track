@@ -323,6 +323,7 @@ const WorkoutForm = props => {
                   style={{ width: 28 }}
                   inputProps={{ maxLength: 2 }}
                   helperText="Hr"
+                  autoComplete="off"
                 />
 
                 <TextField
@@ -333,6 +334,7 @@ const WorkoutForm = props => {
                   style={{ width: 28 }}
                   inputProps={{ maxLength: 2 }}
                   helperText="Min"
+                  autoComplete="off"
                 />
 
                 <TextField
@@ -343,6 +345,7 @@ const WorkoutForm = props => {
                   style={{ width: 28 }}
                   inputProps={{ maxLength: 2 }}
                   helperText="Sec"
+                  autoComplete="off"
                 />
               </div>
             </Paper>
@@ -359,6 +362,7 @@ const WorkoutForm = props => {
                 value={secToMin(paceSecPerMi)}
                 onChange={e => onChange('paceSecPerMi', Number(e.target.value))}
                 className={classes.textfield}
+                autoComplete="off"
                 disabled
               />
             </Paper>
@@ -375,6 +379,7 @@ const WorkoutForm = props => {
                 value={calories}
                 onChange={e => onChange('calories', Number(e.target.value))}
                 className={classes.textfield}
+                autoComplete="off"
                 disabled
               />
             </Paper>

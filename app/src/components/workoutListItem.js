@@ -28,7 +28,10 @@ const WorkoutListItem = data => {
   } = propOr(data, 'workout', data)
 
   return (
-    <Card style={recentOnly ? { margin: 16 } : { display: 'flex' }} key={_id}>
+    <Card
+      style={recentOnly ? { margin: 16 } : { display: 'flex', marginBottom: 5 }}
+      key={_id}
+    >
       <Link to={`/workouts/${_id}`} className="router-link">
         <ListItem button>
           <ListItemIcon>
@@ -37,10 +40,13 @@ const WorkoutListItem = data => {
             </Avatar>
           </ListItemIcon>
           <ListItemText>
-            <Typography variant="title">
+            <Typography
+              variant="subheading"
+              style={{ textDecoration: 'underline' }}
+            >
               {dateDisplayParser(dateTime)}
             </Typography>
-            <Typography variant="subheading">
+            <Typography variant="caption">
               {`Distance ${distanceMi}mi | Duration ${secToMin(
                 durationSec
               )} | Pace ${secToMin(paceSecPerMi)}`}

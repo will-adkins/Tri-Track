@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { TextField, Grid, Button, withStyles } from '@material-ui/core'
+import { TextField, Paper, Button, withStyles } from '@material-ui/core'
 import { AccountCircle, VpnKey } from '@material-ui/icons'
 
 import {
@@ -15,23 +15,28 @@ import MenuAppBar from '../../components/menuAppBar'
 import SnackBar from '../../components/customSnackBar'
 
 const styles = theme => ({
-  root: {
+  row: { display: 'flex', flexDirection: 'row', padding: '5%' },
+  lowerRow: {
     display: 'flex',
-    flexWrap: 'wrap'
+    flexDirection: 'row',
+    padding: '3%',
+    margin: '3%'
   },
-  margin: {
-    margin: theme.spacing.unit
-  },
-  withoutLabel: {
-    marginTop: theme.spacing.unit * 3
-  },
-  textField: {
-    width: '50%'
-  },
+  icon: { alignSelf: 'flex-end', marginRight: 8 },
   center: {
     display: 'flex',
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    flexDirection: 'column'
+  },
+  actions: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    marginTop: '5%',
+    marginBottom: '5%',
+    width: '75%'
   }
 })
 
@@ -53,11 +58,37 @@ const Login = props => {
       <MenuAppBar welcome back history={history} />
       <CenterLogo title="Tri-Track" />
       <center>
-        <form
-          onSubmit={checkLogin(history)}
-          style={{ marginLeft: '25%', paddingTop: '10%' }}
-        >
-          <div className={classes.margin}>
+        <form onSubmit={checkLogin(history)} className={classes.center}>
+          <Paper className={classes.lowerRow}>
+            <div className={classes.icon}>
+              <AccountCircle />
+            </div>
+            <TextField
+              id="username"
+              label="User Name"
+              value={email}
+              onChange={e => onChange('email', e.target.value)}
+              className={classes.textfield}
+              autoComplete="off"
+              required
+            />
+          </Paper>
+          <Paper className={classes.lowerRow}>
+            <div className={classes.icon}>
+              <VpnKey />
+            </div>
+            <TextField
+              id="password"
+              label="Password"
+              type="password"
+              value={password}
+              onChange={e => onChange('password', e.target.value)}
+              className={classes.textfield}
+              autoComplete="off"
+              required
+            />
+          </Paper>
+          {/* <div className={classes.margin}>
             <Grid container spacing={8} alignItems="flex-end">
               <Grid item>
                 <AccountCircle />
@@ -93,8 +124,8 @@ const Login = props => {
                 />
               </Grid>
             </Grid>
-          </div>
-          <div style={{ paddingTop: 12 }}>
+          </div> */}
+          <div className={classes.actions}>
             <Button variant="extendedFab" color="primary" type="submit">
               Sign In
             </Button>

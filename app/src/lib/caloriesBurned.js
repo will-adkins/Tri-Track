@@ -11,15 +11,7 @@ export default (category, distance, duration, stroke) => (
   const weightKg = getState().currentProfile.data.weightLbs * 0.454
   const distanceKm = distance * 1.61
   const durationMin = duration / 60
-  console.log(
-    'weight',
-    weightKg,
-    'distance',
-    distanceKm,
-    'durationMin',
-    durationMin
-  )
-  console.log('category', category, 'stroke', stroke)
+
   if (equals(category, 'Swim')) {
     const calories = equals(stroke, 'Freestyle')
       ? ((9.8 * weightKg * 3.5) / 200) * durationMin

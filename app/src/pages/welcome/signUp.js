@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { not, isEmpty } from 'ramda'
-import { TextField, Grid, Button, withStyles } from '@material-ui/core'
+import { Paper, TextField, Grid, Button, withStyles } from '@material-ui/core'
 import {
   AccountCircle,
   VpnKey,
@@ -24,23 +24,28 @@ import SnackBar from '../../components/customSnackBar'
 import CenterLogo from '../../components/centerLogo'
 
 const styles = theme => ({
-  root: {
+  row: { display: 'flex', flexDirection: 'row', padding: '5%' },
+  lowerRow: {
     display: 'flex',
-    flexWrap: 'wrap'
+    flexDirection: 'row',
+    padding: '3%',
+    margin: '3%'
   },
-  margin: {
-    margin: theme.spacing.unit
-  },
-  withoutLabel: {
-    marginTop: theme.spacing.unit * 3
-  },
-  textField: {
-    width: '50%'
-  },
+  icon: { alignSelf: 'flex-end', marginRight: 8 },
   center: {
     display: 'flex',
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    flexDirection: 'column'
+  },
+  actions: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    marginTop: '5%',
+    marginBottom: '5%',
+    width: '75%'
   }
 })
 
@@ -70,143 +75,142 @@ const SignUp = props => {
 
   const ProfileForm = (
     <center>
-      <form style={{ marginLeft: '25%', paddingTop: '10%' }}>
-        <div className={classes.margin}>
-          <Grid container spacing={8} alignItems="flex-end">
-            <Grid item>
+      <form>
+        <div className={classes.center}>
+          <Paper className={classes.lowerRow}>
+            <div className={classes.icon}>
               <AccountCircle />
-            </Grid>
-            <Grid item>
-              <TextField
-                id="username"
-                label="User Name"
-                value={email}
-                onChange={e => onChange('email', e.target.value)}
-                className={classes.textfield}
-                required
-              />
-            </Grid>
-          </Grid>
-        </div>
-        <div className={classes.margin}>
-          <Grid container spacing={8} alignItems="flex-end">
-            <Grid item>
+            </div>
+            <TextField
+              id="username"
+              label="User Name"
+              value={email}
+              onChange={e => onChange('email', e.target.value)}
+              className={classes.textfield}
+              autoComplete="off"
+              required
+            />
+          </Paper>
+          {/* <Grid container spacing={8} alignItems="flex-end">
+              <Grid item>
+                <AccountCircle />
+              </Grid>
+              <Grid item>
+                <TextField
+                  id="username"
+                  label="User Name"
+                  value={email}
+                  onChange={e => onChange('email', e.target.value)}
+                  className={classes.textfield}
+                  required
+                />
+              </Grid>
+            </Grid> */}
+          <Paper className={classes.lowerRow}>
+            <div className={classes.icon}>
               <VpnKey />
-            </Grid>
-            <Grid item>
-              <TextField
-                id="password"
-                label="Password"
-                type="password"
-                value={password}
-                onChange={e => onChange('password', e.target.value)}
-                className={classes.textfield}
-                required
-              />
-            </Grid>
-          </Grid>
-        </div>
-        <div style={{ paddingTop: 12 }}>
-          <Button
-            variant="extendedFab"
-            color="primary"
-            type="button"
-            onClick={e => toggleForm()}
-            disabled={isValid ? false : true}
-          >
-            Next
-          </Button>
-          <Link to="/" className="router-link">
-            <Button variant="flat" type="button" onClick={e => clearForm()}>
-              Cancel
+            </div>
+            <TextField
+              id="password"
+              label="Password"
+              type="password"
+              value={password}
+              onChange={e => onChange('password', e.target.value)}
+              className={classes.textfield}
+              autoComplete="off"
+              required
+            />
+          </Paper>
+
+          <div className={classes.actions}>
+            <Button
+              variant="extendedFab"
+              color="primary"
+              type="button"
+              onClick={e => toggleForm()}
+              disabled={isValid ? false : true}
+            >
+              Next
             </Button>
-          </Link>
+            <Link to="/" className="router-link">
+              <Button variant="flat" type="button" onClick={e => clearForm()}>
+                Cancel
+              </Button>
+            </Link>
+          </div>
         </div>
       </form>
     </center>
   )
-
   const DetailsForm = (
     <center>
-      <form
-        style={{ marginLeft: '25%', marginTop: '-5%' }}
-        onSubmit={onSubmit(history)}
-      >
-        <div className={classes.margin}>
-          <Grid container spacing={8} alignItems="flex-end">
-            <Grid item>
+      <form onSubmit={onSubmit(history)}>
+        <div className={classes.center}>
+          <Paper className={classes.lowerRow}>
+            <div className={classes.icon}>
               <Info />
-            </Grid>
-            <Grid item>
-              <TextField
-                id="firstName"
-                label="First Name"
-                value={firstName}
-                onChange={e => onChange('firstName', e.target.value)}
-                className={classes.textfield}
-                required
-              />
-            </Grid>
-          </Grid>
-        </div>
-        <div className={classes.margin}>
-          <Grid container spacing={8} alignItems="flex-end">
-            <Grid item>
+            </div>
+            <TextField
+              id="firstName"
+              label="First Name"
+              value={firstName}
+              onChange={e => onChange('firstName', e.target.value)}
+              className={classes.textfield}
+              required
+              autoComplete="off"
+            />
+          </Paper>
+          <Paper className={classes.lowerRow}>
+            <div className={classes.icon}>
               <Info />
-            </Grid>
-            <Grid item>
-              <TextField
-                id="lastName"
-                label="Last Name"
-                value={lastName}
-                onChange={e => onChange('lastName', e.target.value)}
-                className={classes.textfield}
-                required
-              />
-            </Grid>
-          </Grid>
-        </div>
-        <div className={classes.margin}>
-          <Grid container spacing={8} alignItems="flex-end">
-            <Grid item>
+            </div>
+            <TextField
+              id="lastName"
+              label="Last Name"
+              value={lastName}
+              onChange={e => onChange('lastName', e.target.value)}
+              className={classes.textfield}
+              required
+              autoComplete="off"
+            />
+          </Paper>
+          <Paper className={classes.lowerRow}>
+            <div className={classes.icon}>
               <AccessibilityNew />
-            </Grid>
-            <Grid item>
-              <TextField
-                id="heightIn"
-                label="Height (In)"
-                value={heightIn}
-                onChange={e => onChange('heightIn', Number(e.target.value))}
-                className={classes.textfield}
-                required
-              />
-            </Grid>
-          </Grid>
-        </div>
-        <div className={classes.margin}>
-          <Grid container spacing={8} alignItems="flex-end">
-            <Grid item>
+            </div>
+            <TextField
+              id="heightIn"
+              label="Height (In)"
+              value={heightIn}
+              onChange={e => onChange('heightIn', Number(e.target.value))}
+              className={classes.textfield}
+              required
+              autoComplete="off"
+            />
+          </Paper>
+          <Paper className={classes.lowerRow}>
+            <div className={classes.icon}>
               <FitnessCenter />
-            </Grid>
-            <Grid item>
-              <TextField
-                id="weightLbs"
-                label="Weight (Lbs)"
-                value={weightLbs}
-                onChange={e => onChange('weightLbs', Number(e.target.value))}
-                className={classes.textfield}
-                required
-              />
-            </Grid>
-          </Grid>
-        </div>
-        <div style={{ paddingTop: 12 }}>
-          <Button variant="extendedFab" color="primary" type="submit">
-            Sign Up
-          </Button>
-          <Button variant="flat" type="button" onClick={e => toggleForm()}>
-            Go Back
-          </Button>
+            </div>
+            <TextField
+              id="weightLbs"
+              label="Weight (Lbs)"
+              value={weightLbs}
+              onChange={e => onChange('weightLbs', Number(e.target.value))}
+              className={classes.textfield}
+              required
+              autoComplete="off"
+            />
+          </Paper>
+
+          <div className={classes.actions}>
+            <Button variant="extendedFab" color="primary" type="submit">
+              Submit
+            </Button>
+            <Button variant="flat" type="button" onClick={e => toggleForm()}>
+              Go Back
+            </Button>
+          </div>
         </div>
       </form>
     </center>

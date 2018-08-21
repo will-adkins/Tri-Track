@@ -28,6 +28,7 @@ class DecimalTextField extends React.Component {
           this.handleChange(e.target.value)
         }}
         className={classes.textfield}
+        autoComplete="off"
         required
       />
     )
