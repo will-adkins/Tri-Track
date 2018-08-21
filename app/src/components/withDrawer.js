@@ -28,7 +28,7 @@ const withDrawer = PageComponent => {
     const NavListItems = (
       <div>
         <center style={{ margin: '5%' }}>
-          <Typography variant="title" color="secondary">
+          <Typography variant="title" color="primary">
             Tri-Track
           </Typography>
           <div
@@ -38,7 +38,8 @@ const withDrawer = PageComponent => {
               marginTop: '5%'
             }}
           >
-            <Pool /> <DirectionsBike /> <DirectionsRun />
+            <Pool color="secondary" /> <DirectionsBike color="secondary" />{' '}
+            <DirectionsRun color="secondary" />
           </div>
         </center>
         <Divider />

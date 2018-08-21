@@ -8,7 +8,8 @@ import {
   CardActions,
   IconButton,
   Button,
-  Tooltip
+  Tooltip,
+  Paper
 } from '@material-ui/core'
 import { Edit, Delete } from '@material-ui/icons'
 

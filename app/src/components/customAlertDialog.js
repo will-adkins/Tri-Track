@@ -49,13 +49,11 @@ class AlertDialogSlide extends React.Component {
             </DialogContentText>
           </DialogContent>
           <DialogActions>
-            <Button onClick={onCancel} color="primary">
-              Cancel
-            </Button>
+            <Button onClick={onCancel}>Cancel</Button>
             <Button
               variant="contained"
               onClick={onDelete(history)}
-              color="secondary"
+              style={{ backgroundColor: '#F20038', color: 'white' }}
             >
               Delete
               <Delete className={classes.rightIcon} />

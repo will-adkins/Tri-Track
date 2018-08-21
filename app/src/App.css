@@ -28,12 +28,3 @@
   z-index: 0 !important;
   opacity: 0.99;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}

@@ -101,7 +101,7 @@ const WorkoutForm = props => {
   //   ? `${durationSec % 3600}`
   //   : `${Math.floor(durationSec / 60)}`
   // const sec = `${durationSec % 60}`
-  console.log('hr', hr, 'min', min, 'sec', sec)
+
   const SoftForm = (
     <center>
       <form>
@@ -110,10 +110,7 @@ const WorkoutForm = props => {
         {{ marginLeft: '25%' }} */}
         <div className={classes.center}>
           <div>
-            <Paper
-              className={classes.row}
-              style={{ minWidth: 198, marginLeft: -20 }}
-            >
+            <Paper className={classes.row} style={{ width: 216 }}>
               <div className={classes.icon}>
                 <CalendarToday />
               </div>
@@ -293,7 +290,7 @@ const WorkoutForm = props => {
           <div>
             <Paper
               className={classes.lowerRow}
-              style={{ width: 162, marginLeft: '-5%' }}
+              style={{ width: 178.22, marginLeft: 0 }}
             >
               <div
                 style={{
