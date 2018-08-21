@@ -214,7 +214,7 @@ const FilterBar = props => {
       <CardContent>
         <center>
           <Typography color="secondary" variant="title">
-            Filter Workouts By:
+            Filter Workouts By
           </Typography>
         </center>
       </CardContent>

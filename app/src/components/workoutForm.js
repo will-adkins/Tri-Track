@@ -38,8 +38,13 @@ const styles = theme => ({
   workout: {
     paddingTop: '10%'
   },
-  row: { display: 'flex', flexDirection: 'row' },
-  lowerRow: { display: 'flex', flexDirection: 'row', paddingTop: '5%' },
+  row: { display: 'flex', flexDirection: 'row', padding: '5%' },
+  lowerRow: {
+    display: 'flex',
+    flexDirection: 'row',
+    padding: '5%',
+    margin: '5%'
+  },
   icon: { alignSelf: 'flex-end', marginRight: 8 },
   root: {
     display: 'flex',
@@ -108,16 +113,23 @@ const WorkoutForm = props => {
         //style=
         {{ marginLeft: '25%' }} */}
         <div className={classes.center}>
-          <div className={classes.row}>
-            <div className={classes.icon}>
-              <CalendarToday />
-            </div>
-            <DateTimePicker
-              label="Date"
-              value={new Date(dateTime)}
-              onChange={date => onChange(date.toISOString())}
-              disableFuture
-            />
+          <div>
+            <Paper
+              className={classes.row}
+              style={{ minWidth: 198, marginLeft: -20 }}
+            >
+              <div className={classes.icon}>
+                <CalendarToday />
+              </div>
+              <div>
+                <DateTimePicker
+                  label="Date"
+                  value={new Date(dateTime)}
+                  onChange={date => onChange(date.toISOString())}
+                  disableFuture
+                />
+              </div>
+            </Paper>
           </div>
 
           <Paper className={classes.tabs}>
@@ -268,92 +280,104 @@ const WorkoutForm = props => {
     <center>
       <form onSubmit={onSubmit}>
         <div className={classes.center}>
-          <div className={classes.lowerRow}>
-            <div className={classes.icon}>
-              {equals(category, 'Swim') ? <Waves /> : <Terrain />}
-            </div>
-            <DecimalTextField
-              onChange={onChange}
-              label="Distance (miles)"
-              field="distanceMi"
-              value={distanceMi}
-            />
+          <div>
+            <Paper className={classes.lowerRow}>
+              <div className={classes.icon}>
+                {equals(category, 'Swim') ? <Waves /> : <Terrain />}
+              </div>
+
+              <DecimalTextField
+                onChange={onChange}
+                label="Distance (miles)"
+                field="distanceMi"
+                value={distanceMi}
+              />
+            </Paper>
           </div>
-          <div className={classes.lowerRow} style={{ width: 198 }}>
-            <div
-              style={{
-                alignSelf: 'center',
-                display: 'flex',
-                flexDirection: 'row'
-              }}
+          <div>
+            <Paper
+              className={classes.lowerRow}
+              style={{ width: 162, marginLeft: '-5%' }}
             >
-              <AccessTime />
-            </div>
-            <div
-              style={{
-                display: 'flex',
-                justifyContent: 'space-around',
-                width: '100%'
-              }}
-            >
-              <TextField
-                id="duration"
-                label="Duration"
-                value={hr}
-                onChange={e => onChange('hr', Number(e.target.value))}
-                style={{ width: 28 }}
-                inputProps={{ maxLength: 2 }}
-                helperText="Hr"
-              />
+              <div
+                style={{
+                  alignSelf: 'center',
+                  display: 'flex',
+                  flexDirection: 'row'
+                }}
+              >
+                <AccessTime />
+              </div>
+              <div
+                style={{
+                  display: 'flex',
+                  justifyContent: 'space-around',
+                  width: '90%'
+                }}
+              >
+                <TextField
+                  id="duration"
+                  label="Duration"
+                  value={hr}
+                  onChange={e => onChange('hr', Number(e.target.value))}
+                  style={{ width: 28 }}
+                  inputProps={{ maxLength: 2 }}
+                  helperText="Hr"
+                />
 
-              <TextField
-                id="duration"
-                label=" "
-                value={min}
-                onChange={e => onChange('min', Number(e.target.value))}
-                style={{ width: 28, marginRight: 8 }}
-                inputProps={{ maxLength: 2 }}
-                helperText="Min"
-              />
+                <TextField
+                  id="duration"
+                  label=" "
+                  value={min}
+                  onChange={e => onChange('min', Number(e.target.value))}
+                  style={{ width: 28 }}
+                  inputProps={{ maxLength: 2 }}
+                  helperText="Min"
+                />
 
-              <TextField
-                id="duration"
-                label=" "
-                value={sec}
-                onChange={e => onChange('sec', Number(e.target.value))}
-                style={{ width: 28 }}
-                inputProps={{ maxLength: 2 }}
-                helperText="Sec"
-              />
-            </div>
+                <TextField
+                  id="duration"
+                  label=" "
+                  value={sec}
+                  onChange={e => onChange('sec', Number(e.target.value))}
+                  style={{ width: 28 }}
+                  inputProps={{ maxLength: 2 }}
+                  helperText="Sec"
+                />
+              </div>
+            </Paper>
           </div>
 
-          <div className={classes.lowerRow}>
-            <div className={classes.icon}>
-              <Timer />
-            </div>
-            <TextField
-              id="pace"
-              label="Pace (min/mile)"
-              value={secToMin(paceSecPerMi)}
-              onChange={e => onChange('paceSecPerMi', Number(e.target.value))}
-              className={classes.textfield}
-              disabled
-            />
+          <div>
+            <Paper className={classes.lowerRow}>
+              <div className={classes.icon}>
+                <Timer />
+              </div>
+              <TextField
+                id="pace"
+                label="Pace (min/mile)"
+                value={secToMin(paceSecPerMi)}
+                onChange={e => onChange('paceSecPerMi', Number(e.target.value))}
+                className={classes.textfield}
+                disabled
+              />
+            </Paper>
           </div>
 
-          <div className={classes.lowerRow}>
-            <div className={classes.icon}>
-              <Whatshot />
-            </div>
-            <TextField
-              id="calories"
-              label="Calories Burned"
-              value={calories}
-              onChange={e => onChange('calories', Number(e.target.value))}
-              className={classes.textfield}
-              disabled
-            />
+          <div>
+            <Paper className={classes.lowerRow}>
+              <div className={classes.icon}>
+                <Whatshot />
+              </div>
+              <TextField
+                id="calories"
+                label="Calories Burned"
+                value={calories}
+                onChange={e => onChange('calories', Number(e.target.value))}
+                className={classes.textfield}
+                disabled
+              />
+            </Paper>
           </div>
         </div>
         <CardActions className={classes.actions} style={{ paddingTop: 16 }}>
