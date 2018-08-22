@@ -14,10 +14,10 @@ import { deepPurple, amber } from '@material-ui/core/colors'
 
 const theme = createMuiTheme({
   palette: {
-    type: 'light',
-    primary: { main: '#422751' },
-    secondary: { main: '#6A3E82' },
-    background: { default: '#E0E0E0', paper: '#EAEAEA' }
+    type: 'dark',
+    primary: { main: '#802BB1' },
+    secondary: { main: '#D1D7E0' },
+    background: { default: '#2D283E', paper: '#2D283E' }
     // swim: { main: '#3D52D5' },
     // run: { main: '#4BAA4C' },
     // bike: { main: '#F72727' }

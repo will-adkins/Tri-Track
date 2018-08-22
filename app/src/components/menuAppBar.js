@@ -99,7 +99,7 @@ const MenuAppBar = props => {
           >
             <div>
               <Button onClick={toggleDrawer}>
-                <Menu style={{ color: 'white' }} className="svg_icon" />
+                <Menu color="secondary" className="svg_icon" />
               </Button>
             </div>
             {listOptions && (
@@ -117,7 +117,7 @@ const MenuAppBar = props => {
                   className={classes.button}
                   onClick={toggleFilterBar}
                 >
-                  <FilterList style={{ color: 'white' }} />
+                  <FilterList color="primary" />
                 </Button>
                 <SortMenu />
               </div>

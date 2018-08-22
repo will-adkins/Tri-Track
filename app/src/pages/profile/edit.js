@@ -86,7 +86,7 @@ class ProfileEdit extends React.Component {
           <div className={classes.center}>
             <Paper className={classes.lowerRow}>
               <div className={classes.icon}>
-                <AccountCircle />
+                <AccountCircle color="secondary" />
               </div>
               <TextField
                 id="username"
@@ -115,7 +115,7 @@ class ProfileEdit extends React.Component {
             </Grid> */}
             <Paper className={classes.lowerRow}>
               <div className={classes.icon}>
-                <VpnKey />
+                <VpnKey color="secondary" />
               </div>
               <TextField
                 id="password"
@@ -156,7 +156,7 @@ class ProfileEdit extends React.Component {
           <div className={classes.center}>
             <Paper className={classes.lowerRow}>
               <div className={classes.icon}>
-                <Info />
+                <Info color="secondary" />
               </div>
               <TextField
                 id="firstName"
@@ -170,7 +170,7 @@ class ProfileEdit extends React.Component {
             </Paper>
             <Paper className={classes.lowerRow}>
               <div className={classes.icon}>
-                <Info />
+                <Info color="secondary" />
               </div>
               <TextField
                 id="lastName"
@@ -184,7 +184,7 @@ class ProfileEdit extends React.Component {
             </Paper>
             <Paper className={classes.lowerRow}>
               <div className={classes.icon}>
-                <AccessibilityNew />
+                <AccessibilityNew color="secondary" />
               </div>
               <TextField
                 id="heightIn"
@@ -198,7 +198,7 @@ class ProfileEdit extends React.Component {
             </Paper>
             <Paper className={classes.lowerRow}>
               <div className={classes.icon}>
-                <FitnessCenter />
+                <FitnessCenter color="secondary" />
               </div>
               <TextField
                 id="weightLbs"

@@ -112,7 +112,7 @@ const WorkoutForm = props => {
           <div>
             <Paper className={classes.row} style={{ width: 216 }}>
               <div className={classes.icon}>
-                <CalendarToday />
+                <CalendarToday color="secondary" />
               </div>
               <div>
                 <DateTimePicker
@@ -276,7 +276,11 @@ const WorkoutForm = props => {
           <div>
             <Paper className={classes.lowerRow}>
               <div className={classes.icon}>
-                {equals(category, 'Swim') ? <Waves /> : <Terrain />}
+                {equals(category, 'Swim') ? (
+                  <Waves color="secondary" />
+                ) : (
+                  <Terrain color="secondary" />
+                )}
               </div>
 
               <DecimalTextField
@@ -299,7 +303,7 @@ const WorkoutForm = props => {
                   flexDirection: 'row'
                 }}
               >
-                <AccessTime />
+                <AccessTime color="secondary" />
               </div>
               <div
                 style={{
@@ -347,7 +351,7 @@ const WorkoutForm = props => {
           <div>
             <Paper className={classes.lowerRow}>
               <div className={classes.icon}>
-                <Timer />
+                <Timer color="secondary" />
               </div>
               <TextField
                 id="pace"
@@ -364,7 +368,7 @@ const WorkoutForm = props => {
           <div>
             <Paper className={classes.lowerRow}>
               <div className={classes.icon}>
-                <Whatshot />
+                <Whatshot color="secondary" />
               </div>
               <TextField
                 id="calories"

@@ -61,7 +61,7 @@ const Login = props => {
         <form onSubmit={checkLogin(history)} className={classes.center}>
           <Paper className={classes.lowerRow}>
             <div className={classes.icon}>
-              <AccountCircle />
+              <AccountCircle color="secondary" />
             </div>
             <TextField
               id="username"
@@ -75,7 +75,7 @@ const Login = props => {
           </Paper>
           <Paper className={classes.lowerRow}>
             <div className={classes.icon}>
-              <VpnKey />
+              <VpnKey color="secondary" />
             </div>
             <TextField
               id="password"

@@ -35,7 +35,10 @@ const WorkoutListItem = data => {
       <Link to={`/workouts/${_id}`} className="router-link">
         <ListItem button>
           <ListItemIcon>
-            <Avatar aria-label={category}>
+            <Avatar
+              aria-label={category}
+              style={{ backgroundColor: '#802BB1' }}
+            >
               <WorkoutIcon color="primary" category={category} />
             </Avatar>
           </ListItemIcon>

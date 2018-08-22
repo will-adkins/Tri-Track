@@ -74,7 +74,7 @@ const WorkoutData = props => {
               Date
             </Typography>
             <div className={classes.icon} style={{ marginLeft: 8 }}>
-              <CalendarToday />
+              <CalendarToday color="secondary" />
             </div>
           </div>
           <div className={classes.info}>
@@ -89,7 +89,7 @@ const WorkoutData = props => {
               Stroke
             </Typography>
             <div className={classes.icon} style={{ marginLeft: 8 }}>
-              <Waves />
+              <Waves color="secondary" />
             </div>
           </div>
           <div className={classes.info}>
@@ -105,7 +105,7 @@ const WorkoutData = props => {
               Date
             </Typography>
             <div className={classes.icon} style={{ marginLeft: 8 }}>
-              <CalendarToday />
+              <CalendarToday color="secondary" />
             </div>
           </div>
           <div className={classes.info}>
@@ -141,7 +141,7 @@ const WorkoutData = props => {
           <div className={classes.label}>
             <Typography variant="caption">Distance</Typography>
             <div className={classes.icon}>
-              <Terrain />
+              <Terrain color="secondary" />
             </div>
           </div>
           <div className={classes.info}>
@@ -152,7 +152,7 @@ const WorkoutData = props => {
           <div className={classes.label}>
             <Typography variant="caption">Duration</Typography>
             <div className={classes.icon}>
-              <AccessTime />
+              <AccessTime color="secondary" />
             </div>
           </div>
           <div className={classes.info}>
@@ -170,7 +170,7 @@ const WorkoutData = props => {
               Pace
             </Typography>
             <div className={classes.icon} style={{ marginLeft: 7 }}>
-              <Timer />
+              <Timer color="secondary" />
             </div>
           </div>
           <div className={classes.info}>
@@ -183,7 +183,7 @@ const WorkoutData = props => {
           <div className={classes.label}>
             <Typography variant="caption">Calories</Typography>
             <div className={classes.icon}>
-              <Whatshot />
+              <Whatshot color="secondary" />
             </div>
           </div>
           <div className={classes.info}>

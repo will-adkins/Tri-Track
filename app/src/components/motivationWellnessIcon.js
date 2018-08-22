@@ -6,11 +6,11 @@ export default props => {
   const { type, value } = props
   if (equals(type, 'motivation')) {
     return equals(value, 1) ? (
-      <MoodBad />
+      <MoodBad color="secondary" />
     ) : equals(value, 2) ? (
-      <SentimentSatisfied />
+      <SentimentSatisfied color="secondary" />
     ) : (
-      <Mood />
+      <Mood color="secondary" />
     )
   }
   if (equals(type, 'wellness')) {

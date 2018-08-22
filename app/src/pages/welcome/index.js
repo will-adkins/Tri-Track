@@ -52,7 +52,7 @@ class Welcome extends React.Component {
           <CardContent>
             <div className={classes.title}>
               <Typography variant="headline" color="primary">
-                Welcome To
+                Welcome to
               </Typography>
             </div>
             <div className={classes.title}>
@@ -63,7 +63,7 @@ class Welcome extends React.Component {
           </CardContent>
 
           <CardMedia
-            image="/static/tri-symbol-alpha.png"
+            image="/static/tri-symbol-grey.png"
             title="Tri-Track icon"
             className={classes.media}
           />

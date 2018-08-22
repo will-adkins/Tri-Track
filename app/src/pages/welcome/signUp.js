@@ -79,7 +79,7 @@ const SignUp = props => {
         <div className={classes.center}>
           <Paper className={classes.lowerRow}>
             <div className={classes.icon}>
-              <AccountCircle />
+              <AccountCircle color="secondary" />
             </div>
             <TextField
               id="username"
@@ -108,7 +108,7 @@ const SignUp = props => {
             </Grid> */}
           <Paper className={classes.lowerRow}>
             <div className={classes.icon}>
-              <VpnKey />
+              <VpnKey color="secondary" />
             </div>
             <TextField
               id="password"
@@ -148,7 +148,7 @@ const SignUp = props => {
         <div className={classes.center}>
           <Paper className={classes.lowerRow}>
             <div className={classes.icon}>
-              <Info />
+              <Info color="secondary" />
             </div>
             <TextField
               id="firstName"
@@ -162,7 +162,7 @@ const SignUp = props => {
           </Paper>
           <Paper className={classes.lowerRow}>
             <div className={classes.icon}>
-              <Info />
+              <Info color="secondary" />
             </div>
             <TextField
               id="lastName"
@@ -176,7 +176,7 @@ const SignUp = props => {
           </Paper>
           <Paper className={classes.lowerRow}>
             <div className={classes.icon}>
-              <AccessibilityNew />
+              <AccessibilityNew color="secondary" />
             </div>
             <TextField
               id="heightIn"
@@ -190,7 +190,7 @@ const SignUp = props => {
           </Paper>
           <Paper className={classes.lowerRow}>
             <div className={classes.icon}>
-              <FitnessCenter />
+              <FitnessCenter color="secondary" />
             </div>
             <TextField
               id="weightLbs"

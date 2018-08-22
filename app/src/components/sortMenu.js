@@ -50,7 +50,7 @@ class SortListComposition extends React.Component {
             this.anchorEl = node
           }}
         >
-          <Sort style={{ color: 'white' }} />
+          <Sort color="primary" />
         </Button>
         <Popper
           open={open}
