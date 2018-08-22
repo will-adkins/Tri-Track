@@ -77,10 +77,10 @@ class SortListComposition extends React.Component {
                   <MenuList>
                     <center style={{ margin: '5%' }}>
                       <Typography variant="title" color="secondary">
-                        Sort Workouts By:
+                        Sort Workouts
                       </Typography>
                     </center>
-                    <Divider />
+                    <hr style={{ borderColor: '#802BB1' }} />
 
                     <MenuItem
                       button

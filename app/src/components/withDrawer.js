@@ -42,7 +42,7 @@ const withDrawer = PageComponent => {
             <DirectionsRun color="secondary" />
           </div>
         </center>
-        <Divider />
+        <hr style={{ borderColor: '#802BB1' }} />
         <Link to="/home" className="router-link">
           <ListItem button onClick={e => toggleDrawer()}>
             <ListItemIcon>

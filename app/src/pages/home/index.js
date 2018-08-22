@@ -55,7 +55,7 @@ class Home extends React.Component {
         </div>
         <Card className={classes.placeholder}>
           <Typography variant="subheading">
-            Click the <Add color="secondary" style={{ marginBottom: '-1%' }} />{' '}
+            Click the <Add color="primary" style={{ marginBottom: '-1%' }} />{' '}
             icon below to get started!
           </Typography>
         </Card>
@@ -95,7 +95,7 @@ class Home extends React.Component {
                 color="primary"
                 size="large"
               >
-                <Assignment style={{ color: 'white' }} className="svg_icon" />
+                <Assignment color="secondary" className="svg_icon" />
               </Button>
             </Tooltip>
           </Link>
@@ -107,7 +107,7 @@ class Home extends React.Component {
                 type="button"
                 color="primary"
               >
-                <Add style={{ color: 'white' }} className="svg_icon" />
+                <Add color="secondary" className="svg_icon" />
               </Button>
             </Tooltip>
           </Link>

@@ -48,6 +48,7 @@ const CategoryButtons = props => {
       <center>
         <Typography variant="caption">Categories</Typography>
       </center>
+
       <div className={classes.row}>
         <IconButton
           onClick={
@@ -209,11 +210,16 @@ const WellnessButtons = props => {
 const FilterBar = props => {
   return (
     <Card>
-      <CardContent>
+      <CardContent style={{ marginBottom: -8 }}>
         <center>
-          <Typography color="secondary" variant="title">
-            Filter Workouts By
+          <Typography
+            color="secondary"
+            variant="title"
+            style={{ marginBottom: 12 }}
+          >
+            Filter Workouts
           </Typography>
+          <hr style={{ borderColor: '#802BB1', width: '75%' }} />
         </center>
       </CardContent>
       <CategoryButtons {...props} />

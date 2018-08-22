@@ -42,8 +42,8 @@ const NoWorkouts = props => {
       </div>
       <Card className={classes.placeholder}>
         <Typography variant="subheading">
-          Click the <Add color="secondary" style={{ marginBottom: '-1%' }} />{' '}
-          icon below to get started!
+          Click the <Add color="primary" style={{ marginBottom: '-1%' }} /> icon
+          below to get started!
         </Typography>
       </Card>
       <div>
@@ -55,7 +55,7 @@ const NoWorkouts = props => {
               type="button"
               color="primary"
             >
-              <Add style={{ color: 'white' }} className="svg_icon" />
+              <Add color="secondary" className="svg_icon" />
             </Button>
           </Tooltip>
         </Link>
