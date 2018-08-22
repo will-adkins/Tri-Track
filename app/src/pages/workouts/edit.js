@@ -28,9 +28,16 @@ const styles = theme => ({
 
 class WorkoutEdit extends React.Component {
   componentDidMount() {
-    const { setWorkout, load, calendarReset } = this.props
+    const {
+      setWorkout,
+      load,
+      calendarReset,
+      isFirstForm,
+      toggleForm
+    } = this.props
     calendarReset()
     setWorkout(load)
+    if (!isFirstForm) toggleForm()
   }
 
   render() {

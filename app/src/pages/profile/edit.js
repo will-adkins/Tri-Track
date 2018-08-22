@@ -52,8 +52,9 @@ const styles = theme => ({
 
 class ProfileEdit extends React.Component {
   componentDidMount() {
-    const { load, loadProfile } = this.props
+    const { load, loadProfile, isDetailsForm, toggleForm } = this.props
     load(loadProfile)
+    if (isDetailsForm) toggleForm()
   }
 
   render() {

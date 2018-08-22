@@ -27,8 +27,9 @@ const styles = theme => ({
 
 class WorkoutNew extends React.Component {
   componentDidMount() {
-    const { errorClear } = this.props
+    const { errorClear, formClear } = this.props
     errorClear()
+    formClear()
   }
 
   render() {

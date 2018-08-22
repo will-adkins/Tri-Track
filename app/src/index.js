@@ -17,6 +17,7 @@ const theme = createMuiTheme({
     type: 'dark',
     primary: { main: '#802BB1' },
     secondary: { main: '#D1D7E0' },
+    error: { main: '#CD77FF' },
     background: { default: '#2D283E', paper: '#2D283E' }
     // swim: { main: '#3D52D5' },
     // run: { main: '#4BAA4C' },

@@ -18,6 +18,7 @@ import {
 import { propEq } from 'ramda'
 
 import { FILTER_KEYS_UPDATED } from '../constants'
+import MotivationWellnessIcon from './motivationWellnessIcon'
 
 const styles = theme => ({
   root: {
@@ -173,7 +174,7 @@ const WellnessButtons = props => {
               : classes.unselected
           }
         >
-          <img src="/static/sick.png" alt="Sick Icon" />
+          <MotivationWellnessIcon type="wellness" value={1} />
         </IconButton>
         <IconButton
           onClick={
@@ -187,7 +188,7 @@ const WellnessButtons = props => {
               : classes.unselected
           }
         >
-          <img src="/static/fever.png" alt="Fever Icon" />
+          <MotivationWellnessIcon type="wellness" value={2} />
         </IconButton>
         <IconButton
           onClick={
@@ -201,7 +202,7 @@ const WellnessButtons = props => {
               : classes.unselected
           }
         >
-          <img src="/static/well.png" alt="Well Icon" />
+          <MotivationWellnessIcon type="wellness" value={3} />
         </IconButton>
       </div>
     </div>

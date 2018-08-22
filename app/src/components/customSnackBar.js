@@ -20,13 +20,13 @@ const variantIcon = {
 
 const styles1 = theme => ({
   success: {
-    backgroundColor: green[600]
+    backgroundColor: theme.palette.error.light
   },
   error: {
-    backgroundColor: theme.palette.error.dark
+    backgroundColor: theme.palette.error.light
   },
   info: {
-    backgroundColor: theme.palette.primary.dark
+    backgroundColor: theme.palette.error.light
   },
   warning: {
     backgroundColor: amber[700]
@@ -40,7 +40,8 @@ const styles1 = theme => ({
   },
   message: {
     display: 'flex',
-    alignItems: 'center'
+    alignItems: 'center',
+    justifyContent: 'center'
   }
 })
 
@@ -53,10 +54,10 @@ function MySnackbarContent(props) {
       className={classNames(classes[variant], className)}
       aria-describedby="client-snackbar"
       message={
-        <span id="client-snackbar" className={classes.message}>
+        <center id="client-snackbar" className={classes.message}>
           <Icon className={classNames(classes.icon, classes.iconVariant)} />
           {message}
-        </span>
+        </center>
       }
       action={[
         <IconButton
