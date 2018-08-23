@@ -63,7 +63,7 @@ const CategoryButtons = props => {
               : classes.unselected
           }
         >
-          <Pool />
+          <Pool color="secondary" />
         </IconButton>
         <IconButton
           onClick={
@@ -77,7 +77,7 @@ const CategoryButtons = props => {
               : classes.unselected
           }
         >
-          <DirectionsBike />
+          <DirectionsBike color="secondary" />
         </IconButton>
         <IconButton
           onClick={
@@ -91,7 +91,7 @@ const CategoryButtons = props => {
               : classes.unselected
           }
         >
-          <DirectionsRun />
+          <DirectionsRun color="secondary" />
         </IconButton>
       </div>
     </div>
@@ -118,7 +118,7 @@ const MotivationButtons = props => {
               : classes.unselected
           }
         >
-          <MoodBad />
+          <MotivationWellnessIcon type="motivation" value={1} />
         </IconButton>
         <IconButton
           onClick={
@@ -132,7 +132,7 @@ const MotivationButtons = props => {
               : classes.unselected
           }
         >
-          <SentimentSatisfied />
+          <MotivationWellnessIcon type="motivation" value={2} />
         </IconButton>
         <IconButton
           onClick={
@@ -146,7 +146,7 @@ const MotivationButtons = props => {
               : classes.unselected
           }
         >
-          <Mood />
+          <MotivationWellnessIcon type="motivation" value={3} />
         </IconButton>
       </div>
     </div>

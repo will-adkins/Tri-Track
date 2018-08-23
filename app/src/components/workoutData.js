@@ -1,14 +1,6 @@
 import React from 'react'
 import { equals } from 'ramda'
-import {
-  withStyles,
-  FormControl,
-  InputLabel,
-  InputAdornment,
-  Input,
-  Paper,
-  Typography
-} from '@material-ui/core'
+import { withStyles, Paper, Typography } from '@material-ui/core'
 import {
   CalendarToday,
   Terrain,

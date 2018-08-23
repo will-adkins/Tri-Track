@@ -1,5 +1,5 @@
 import fetch from 'isomorphic-fetch'
-import { isNil, not, isEmpty, equals } from 'ramda'
+import { isNil, not, isEmpty, equals, merge } from 'ramda'
 import { setWorkouts } from './workouts'
 
 import {
@@ -16,7 +16,8 @@ import {
   EDIT_PROFILE_SAVE_STARTED,
   EDIT_PROFILE_SAVE_FAILED,
   EDIT_PROFILE_SAVE_SUCCEEDED,
-  EDIT_PROFILE_ERROR_CLEAR
+  EDIT_PROFILE_ERROR_CLEAR,
+  EDIT_PROFILE_LOADED
 } from '../constants'
 import findProfile from '../lib/findProfile'
 
@@ -87,10 +88,14 @@ export const updateProfile = history => async (dispatch, getState) => {
 
   const profile = getState().editProfile.data
 
+  const heightIn = profile.ft * 12 + profile.inches
+
+  const updatedProfile = merge(profile, { heightIn: heightIn })
+
   const putResult = await fetch(url, {
     headers: { 'Content-Type': 'application/json' },
     method: 'PUT',
-    body: JSON.stringify(profile)
+    body: JSON.stringify(updatedProfile)
   })
     .then(res => res.json())
     .catch(err =>
@@ -114,6 +119,15 @@ export const updateProfile = history => async (dispatch, getState) => {
         'Failed to update profile in database. Please refresh Tri-Track and try again.'
     })
   }
+}
+
+export const setEditProfile = profile => (dispatch, getState) => {
+  const ft = Math.floor(profile.heightIn / 12)
+  const inches = profile.heightIn % 12
+
+  const editProfile = merge(profile, { ft: ft, inches: inches })
+
+  dispatch({ type: EDIT_PROFILE_LOADED, payload: editProfile })
 }
 
 export const checkLogin = history => async (dispatch, getState) => {

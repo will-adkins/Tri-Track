@@ -19,7 +19,7 @@ import {
   EDIT_PROFILE_FORM_UPDATED,
   EDIT_PROFILE_LOADED
 } from '../../constants'
-import { updateProfile } from '../../action-creators/profiles'
+import { updateProfile, setEditProfile } from '../../action-creators/profiles'
 import MenuAppBar from '../../components/menuAppBar'
 import SnackBar from '../../components/customSnackBar'
 import CenterLogo from '../../components/centerLogo'
@@ -53,6 +53,7 @@ const styles = theme => ({
 class ProfileEdit extends React.Component {
   componentDidMount() {
     const { load, loadProfile, isDetailsForm, toggleForm } = this.props
+
     load(loadProfile)
     if (isDetailsForm) toggleForm()
   }
@@ -78,7 +79,9 @@ class ProfileEdit extends React.Component {
       firstName,
       lastName,
       heightIn,
-      weightLbs
+      weightLbs,
+      ft,
+      inches
     } = this.props.profile
 
     const ProfileForm = (
@@ -183,7 +186,49 @@ class ProfileEdit extends React.Component {
                 autoComplete="off"
               />
             </Paper>
-            <Paper className={classes.lowerRow}>
+
+            <Paper className={classes.lowerRow} style={{ width: 222.22 }}>
+              <div
+                style={{
+                  alignSelf: 'center',
+                  display: 'flex',
+                  flexDirection: 'row'
+                }}
+              >
+                <AccessibilityNew color="secondary" />
+              </div>
+              <div
+                style={{
+                  display: 'flex',
+                  justifyContent: 'space-evenly',
+                  width: '90%'
+                }}
+              >
+                <TextField
+                  id="ft"
+                  label="Height"
+                  value={ft}
+                  onChange={e => onChange('ft', Number(e.target.value))}
+                  style={{ width: 28 }}
+                  inputProps={{ maxLength: 2, min: 0 }}
+                  helperText="Ft"
+                  autoComplete="off"
+                />
+
+                <TextField
+                  id="in"
+                  label=" "
+                  value={inches}
+                  onChange={e => onChange('inches', Number(e.target.value))}
+                  style={{ width: 28 }}
+                  inputProps={{ maxLength: 2, min: 0, max: 11 }}
+                  helperText="In"
+                  autoComplete="off"
+                />
+              </div>
+            </Paper>
+
+            {/* <Paper className={classes.lowerRow}>
               <div className={classes.icon}>
                 <AccessibilityNew color="secondary" />
               </div>
@@ -196,7 +241,7 @@ class ProfileEdit extends React.Component {
                 required
                 autoComplete="off"
               />
-            </Paper>
+            </Paper> */}
             <Paper className={classes.lowerRow}>
               <div className={classes.icon}>
                 <FitnessCenter color="secondary" />
@@ -251,7 +296,7 @@ const mapStateToProps = state => ({
 })
 
 const mapActionsToProps = dispatch => ({
-  load: workout => dispatch({ type: EDIT_PROFILE_LOADED, payload: workout }),
+  load: profile => dispatch(setEditProfile(profile)),
   toggleForm: () => dispatch({ type: EDIT_PROFILE_FORM_TOGGLED }),
   clearError: () => dispatch({ type: EDIT_PROFILE_ERROR_CLEAR }),
   clearForm: () => dispatch({ type: EDIT_PROFILE_FORM_CLEAR }),

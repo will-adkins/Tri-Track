@@ -13,7 +13,9 @@ class DecimalTextField extends React.Component {
   }
 
   handleChange = value => {
-    this.setState({ stringValue: value })
+    if (!Number.isNaN(Number(value))) {
+      this.setState({ stringValue: value })
+    }
   }
 
   render() {
