@@ -20,10 +20,6 @@ class CustomSelect extends React.Component {
     open: false
   }
 
-  handleChange = event => {
-    this.setState({ [event.target.name]: event.target.value })
-  }
-
   handleClose = () => {
     this.setState({ open: false })
   }
