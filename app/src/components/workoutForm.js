@@ -118,7 +118,7 @@ const WorkoutForm = props => {
                 <DateTimePicker
                   label="Date"
                   value={new Date(dateTime)}
-                  onChange={date => onChange(date.toISOString())}
+                  onChange={date => onChange('dateTime', date.toISOString())}
                   disableFuture
                 />
               </div>
