@@ -74,13 +74,14 @@ class ViewWorkout extends React.Component {
             </CardContent>
             <WorkoutData workout={workout} />
             <CardActions className={classes.actions}>
-              <Link to={`/workouts/${_id}/edit`} className="router-link">
-                <Tooltip title="Edit Workout">
+              <Tooltip title="Edit Workout">
+                <Link to={`/workouts/${_id}/edit`} className="router-link">
                   <Button variant="fab" size="small" color="primary">
                     <Edit color="inherit" />
                   </Button>
-                </Tooltip>
-              </Link>
+                </Link>
+              </Tooltip>
+
               <Tooltip title="Delete Workout">
                 <IconButton color="primary" onClick={confirmDelete}>
                   <Delete />

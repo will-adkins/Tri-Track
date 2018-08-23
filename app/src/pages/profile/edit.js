@@ -16,8 +16,7 @@ import {
   EDIT_PROFILE_ERROR_CLEAR,
   EDIT_PROFILE_FORM_CLEAR,
   EDIT_PROFILE_SAVE_FAILED,
-  EDIT_PROFILE_FORM_UPDATED,
-  EDIT_PROFILE_LOADED
+  EDIT_PROFILE_FORM_UPDATED
 } from '../../constants'
 import { updateProfile, setEditProfile } from '../../action-creators/profiles'
 import MenuAppBar from '../../components/menuAppBar'
@@ -78,7 +77,6 @@ class ProfileEdit extends React.Component {
       password,
       firstName,
       lastName,
-      heightIn,
       weightLbs,
       ft,
       inches
@@ -228,20 +226,6 @@ class ProfileEdit extends React.Component {
               </div>
             </Paper>
 
-            {/* <Paper className={classes.lowerRow}>
-              <div className={classes.icon}>
-                <AccessibilityNew color="secondary" />
-              </div>
-              <TextField
-                id="heightIn"
-                label="Height (In)"
-                value={heightIn}
-                onChange={e => onChange('heightIn', Number(e.target.value))}
-                className={classes.textfield}
-                required
-                autoComplete="off"
-              />
-            </Paper> */}
             <Paper className={classes.lowerRow}>
               <div className={classes.icon}>
                 <FitnessCenter color="secondary" />

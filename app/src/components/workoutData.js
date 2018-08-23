@@ -108,22 +108,6 @@ const WorkoutData = props => {
         </Paper>
       </div>
     )
-  {
-    /* <div style={{ display: 'flex', justifyContent: 'center' }}>
-        <FormControl className={classes.data}>
-          <InputLabel>Date</InputLabel>
-          <Input
-            id="input-with-icon-adornment"
-            value={dateDisplayParser(dateTime)}
-            startAdornment={
-              <InputAdornment position="start">
-                <CalendarToday />
-              </InputAdornment>
-            }
-          />
-        </FormControl>
-      </div> */
-  }
 
   return (
     <div className={classes.workout}>

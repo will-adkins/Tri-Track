@@ -6,7 +6,6 @@ import {
   ListItemIcon,
   ListItemText,
   Drawer,
-  Divider,
   Typography
 } from '@material-ui/core'
 import {

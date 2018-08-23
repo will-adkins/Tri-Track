@@ -69,7 +69,8 @@ const SignUp = props => {
     password,
     firstName,
     lastName,
-    heightIn,
+    ft,
+    inches,
     weightLbs
   } = props.profile
 
@@ -91,21 +92,6 @@ const SignUp = props => {
               required
             />
           </Paper>
-          {/* <Grid container spacing={8} alignItems="flex-end">
-              <Grid item>
-                <AccountCircle />
-              </Grid>
-              <Grid item>
-                <TextField
-                  id="username"
-                  label="User Name"
-                  value={email}
-                  onChange={e => onChange('email', e.target.value)}
-                  className={classes.textfield}
-                  required
-                />
-              </Grid>
-            </Grid> */}
           <Paper className={classes.lowerRow}>
             <div className={classes.icon}>
               <VpnKey color="secondary" />
@@ -174,7 +160,47 @@ const SignUp = props => {
               autoComplete="off"
             />
           </Paper>
-          <Paper className={classes.lowerRow}>
+          <Paper className={classes.lowerRow} style={{ width: 222.22 }}>
+            <div
+              style={{
+                alignSelf: 'center',
+                display: 'flex',
+                flexDirection: 'row'
+              }}
+            >
+              <AccessibilityNew color="secondary" />
+            </div>
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'space-evenly',
+                width: '90%'
+              }}
+            >
+              <TextField
+                id="ft"
+                label="Height"
+                value={ft}
+                onChange={e => onChange('ft', Number(e.target.value))}
+                style={{ width: 28 }}
+                inputProps={{ maxLength: 2, min: 0 }}
+                helperText="Ft"
+                autoComplete="off"
+              />
+
+              <TextField
+                id="in"
+                label=" "
+                value={inches}
+                onChange={e => onChange('inches', Number(e.target.value))}
+                style={{ width: 28 }}
+                inputProps={{ maxLength: 2, min: 0, max: 11 }}
+                helperText="In"
+                autoComplete="off"
+              />
+            </div>
+          </Paper>
+          {/* <Paper className={classes.lowerRow}>
             <div className={classes.icon}>
               <AccessibilityNew color="secondary" />
             </div>
@@ -187,7 +213,7 @@ const SignUp = props => {
               required
               autoComplete="off"
             />
-          </Paper>
+          </Paper> */}
           <Paper className={classes.lowerRow}>
             <div className={classes.icon}>
               <FitnessCenter color="secondary" />

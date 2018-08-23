@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import { Error, Info, Close, Warning, CheckCircle } from '@material-ui/icons'
-import green from '@material-ui/core/colors/green'
 import amber from '@material-ui/core/colors/amber'
 import {
   IconButton,

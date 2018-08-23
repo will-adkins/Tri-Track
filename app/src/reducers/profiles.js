@@ -42,6 +42,8 @@ const initialNewProfile = {
     firstName: '',
     lastName: '',
     heightIn: '',
+    ft: '',
+    inches: '',
     weightLbs: ''
   },
   isDetailsForm: false,

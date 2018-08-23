@@ -34,7 +34,6 @@ export const listOptions = (state = initialListOptions, action) => {
         showFilterBar: false
       })
     case SORT_OPTION_TOGGLED:
-      console.log('sort key:', action.payload)
       return mergeDeepRight(state, { sort: action.payload })
     case LIST_OPTIONS_CLEARED:
       return initialListOptions

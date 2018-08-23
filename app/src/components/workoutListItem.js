@@ -5,8 +5,7 @@ import {
   Avatar,
   Typography,
   ListItemIcon,
-  ListItemText,
-  withStyles
+  ListItemText
 } from '@material-ui/core'
 import { Link } from 'react-router-dom'
 import { propOr } from 'ramda'
@@ -28,11 +27,12 @@ const WorkoutListItem = data => {
   } = propOr(data, 'workout', data)
 
   return (
-    <Card
-      style={recentOnly ? { margin: 16 } : { display: 'flex', marginBottom: 5 }}
-      key={_id}
-    >
-      <Link to={`/workouts/${_id}`} className="router-link">
+    <Link to={`/workouts/${_id}`} className="router-link" key={_id}>
+      <Card
+        style={
+          recentOnly ? { margin: 16 } : { display: 'flex', marginBottom: 5 }
+        }
+      >
         <ListItem button>
           <ListItemIcon>
             <Avatar
@@ -56,8 +56,8 @@ const WorkoutListItem = data => {
             </Typography>
           </ListItemText>
         </ListItem>
-      </Link>
-    </Card>
+      </Card>
+    </Link>
   )
 }
 

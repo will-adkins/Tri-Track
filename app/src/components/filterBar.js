@@ -7,14 +7,7 @@ import {
   CardContent
 } from '@material-ui/core'
 import { connect } from 'react-redux'
-import {
-  DirectionsRun,
-  Pool,
-  DirectionsBike,
-  Mood,
-  MoodBad,
-  SentimentSatisfied
-} from '@material-ui/icons'
+import { DirectionsRun, Pool, DirectionsBike } from '@material-ui/icons'
 import { propEq } from 'ramda'
 
 import { FILTER_KEYS_UPDATED } from '../constants'

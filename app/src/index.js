@@ -6,11 +6,10 @@ import './index.css'
 import MuiPickersUtilsProvider from 'material-ui-pickers/utils/MuiPickersUtilsProvider'
 import DateFnsUtils from 'material-ui-pickers/utils/date-fns-utils'
 import App from './App'
-import registerServiceWorker from './registerServiceWorker'
+//import registerServiceWorker from './registerServiceWorker'
 import store from './store'
 import { setProfiles } from './action-creators/profiles'
 import { CssBaseline } from '@material-ui/core'
-import { deepPurple, amber } from '@material-ui/core/colors'
 
 const theme = createMuiTheme({
   palette: {
