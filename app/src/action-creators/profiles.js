@@ -46,6 +46,8 @@ export const addProfile = history => async (dispatch, getState) => {
   dispatch({ type: NEW_PROFILE_SAVE_STARTED })
 
   const profile = getState().newProfile.data
+  const heightIn = profile.ft * 12 + profile.inches
+  const newProfile = merge(profile, { heightIn: heightIn })
 
   if (isEmpty(profile.email) || isEmpty(profile.password)) {
     dispatch({ type: NEW_PROFILE_ERROR_CLEAR })
@@ -59,7 +61,7 @@ export const addProfile = history => async (dispatch, getState) => {
   const postResult = await fetch(url, {
     headers: { 'Content-Type': 'application/json' },
     method: 'POST',
-    body: JSON.stringify(profile)
+    body: JSON.stringify(newProfile)
   })
     .then(res => res.json())
     .catch(err =>
