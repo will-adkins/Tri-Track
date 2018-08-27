@@ -49,158 +49,165 @@ const styles = theme => ({
   }
 })
 
-const SignUp = props => {
-  const {
-    classes,
-    history,
-    isDetailsForm,
-    toggleForm,
-    onChange,
-    onSubmit,
-    clearError,
-    clearForm,
-    isSaving,
-    isValid,
-    isError,
-    errMsg
-  } = props
-  const {
-    email,
-    password,
-    firstName,
-    lastName,
-    ft,
-    inches,
-    weightLbs
-  } = props.profile
+class SignUp extends React.Component {
+  componentDidMount() {
+    const { clearError, clearForm } = this.props
+    clearForm()
+    clearError()
+  }
 
-  const ProfileForm = (
-    <center>
-      <form>
-        <div className={classes.center}>
-          <Paper className={classes.lowerRow}>
-            <div className={classes.icon}>
-              <AccountCircle color="secondary" />
-            </div>
-            <TextField
-              id="username"
-              label="User Name"
-              value={email}
-              onChange={e => onChange('email', e.target.value)}
-              className={classes.textfield}
-              autoComplete="off"
-              required
-            />
-          </Paper>
-          <Paper className={classes.lowerRow}>
-            <div className={classes.icon}>
-              <VpnKey color="secondary" />
-            </div>
-            <TextField
-              id="password"
-              label="Password"
-              type="password"
-              value={password}
-              onChange={e => onChange('password', e.target.value)}
-              className={classes.textfield}
-              autoComplete="off"
-              required
-            />
-          </Paper>
+  render() {
+    const {
+      classes,
+      history,
+      isDetailsForm,
+      toggleForm,
+      onChange,
+      onSubmit,
+      clearError,
+      clearForm,
+      isSaving,
+      isValid,
+      isError,
+      errMsg
+    } = this.props
+    const {
+      email,
+      password,
+      firstName,
+      lastName,
+      ft,
+      inches,
+      weightLbs
+    } = this.props.profile
 
-          <div className={classes.actions}>
-            <Button
-              variant="extendedFab"
-              color="primary"
-              type="button"
-              onClick={e => toggleForm()}
-              disabled={isValid ? false : true}
-            >
-              Next
-            </Button>
-            <Link to="/" className="router-link">
-              <Button variant="flat" type="button" onClick={e => clearForm()}>
-                Cancel
+    const ProfileForm = (
+      <center>
+        <form>
+          <div className={classes.center}>
+            <Paper className={classes.lowerRow}>
+              <div className={classes.icon}>
+                <AccountCircle color="secondary" />
+              </div>
+              <TextField
+                id="username"
+                label="User Name"
+                value={email}
+                onChange={e => onChange('email', e.target.value)}
+                className={classes.textfield}
+                autoComplete="off"
+                required
+              />
+            </Paper>
+            <Paper className={classes.lowerRow}>
+              <div className={classes.icon}>
+                <VpnKey color="secondary" />
+              </div>
+              <TextField
+                id="password"
+                label="Password"
+                type="password"
+                value={password}
+                onChange={e => onChange('password', e.target.value)}
+                className={classes.textfield}
+                autoComplete="off"
+                required
+              />
+            </Paper>
+
+            <div className={classes.actions}>
+              <Button
+                variant="extendedFab"
+                color="primary"
+                type="button"
+                onClick={e => toggleForm()}
+                disabled={isValid ? false : true}
+              >
+                Next
               </Button>
-            </Link>
+              <Link to="/" className="router-link">
+                <Button variant="flat" type="button" onClick={e => clearForm()}>
+                  Cancel
+                </Button>
+              </Link>
+            </div>
           </div>
-        </div>
-      </form>
-    </center>
-  )
-  const DetailsForm = (
-    <center>
-      <form onSubmit={onSubmit(history)}>
-        <div className={classes.center}>
-          <Paper className={classes.lowerRow}>
-            <div className={classes.icon}>
-              <Info color="secondary" />
-            </div>
-            <TextField
-              id="firstName"
-              label="First Name"
-              value={firstName}
-              onChange={e => onChange('firstName', e.target.value)}
-              className={classes.textfield}
-              required
-              autoComplete="off"
-            />
-          </Paper>
-          <Paper className={classes.lowerRow}>
-            <div className={classes.icon}>
-              <Info color="secondary" />
-            </div>
-            <TextField
-              id="lastName"
-              label="Last Name"
-              value={lastName}
-              onChange={e => onChange('lastName', e.target.value)}
-              className={classes.textfield}
-              required
-              autoComplete="off"
-            />
-          </Paper>
-          <Paper className={classes.lowerRow} style={{ width: 222.22 }}>
-            <div
-              style={{
-                alignSelf: 'center',
-                display: 'flex',
-                flexDirection: 'row'
-              }}
-            >
-              <AccessibilityNew color="secondary" />
-            </div>
-            <div
-              style={{
-                display: 'flex',
-                justifyContent: 'space-evenly',
-                width: '90%'
-              }}
-            >
+        </form>
+      </center>
+    )
+    const DetailsForm = (
+      <center>
+        <form onSubmit={onSubmit(history)}>
+          <div className={classes.center}>
+            <Paper className={classes.lowerRow}>
+              <div className={classes.icon}>
+                <Info color="secondary" />
+              </div>
               <TextField
-                id="ft"
-                label="Height"
-                value={ft}
-                onChange={e => onChange('ft', Number(e.target.value))}
-                style={{ width: 28 }}
-                inputProps={{ maxLength: 2, min: 0 }}
-                helperText="Ft"
+                id="firstName"
+                label="First Name"
+                value={firstName}
+                onChange={e => onChange('firstName', e.target.value)}
+                className={classes.textfield}
+                required
                 autoComplete="off"
               />
+            </Paper>
+            <Paper className={classes.lowerRow}>
+              <div className={classes.icon}>
+                <Info color="secondary" />
+              </div>
+              <TextField
+                id="lastName"
+                label="Last Name"
+                value={lastName}
+                onChange={e => onChange('lastName', e.target.value)}
+                className={classes.textfield}
+                required
+                autoComplete="off"
+              />
+            </Paper>
+            <Paper className={classes.lowerRow} style={{ width: 222.22 }}>
+              <div
+                style={{
+                  alignSelf: 'center',
+                  display: 'flex',
+                  flexDirection: 'row'
+                }}
+              >
+                <AccessibilityNew color="secondary" />
+              </div>
+              <div
+                style={{
+                  display: 'flex',
+                  justifyContent: 'space-evenly',
+                  width: '90%'
+                }}
+              >
+                <TextField
+                  id="ft"
+                  label="Height"
+                  value={ft}
+                  onChange={e => onChange('ft', Number(e.target.value))}
+                  style={{ width: 28 }}
+                  inputProps={{ maxLength: 2, min: 0 }}
+                  helperText="Ft"
+                  autoComplete="off"
+                />
 
-              <TextField
-                id="in"
-                label=" "
-                value={inches}
-                onChange={e => onChange('inches', Number(e.target.value))}
-                style={{ width: 28 }}
-                inputProps={{ maxLength: 2, min: 0, max: 11 }}
-                helperText="In"
-                autoComplete="off"
-              />
-            </div>
-          </Paper>
-          {/* <Paper className={classes.lowerRow}>
+                <TextField
+                  id="in"
+                  label=" "
+                  value={inches}
+                  onChange={e => onChange('inches', Number(e.target.value))}
+                  style={{ width: 28 }}
+                  inputProps={{ maxLength: 2, min: 0, max: 11 }}
+                  helperText="In"
+                  autoComplete="off"
+                />
+              </div>
+            </Paper>
+            {/* <Paper className={classes.lowerRow}>
             <div className={classes.icon}>
               <AccessibilityNew color="secondary" />
             </div>
@@ -214,44 +221,45 @@ const SignUp = props => {
               autoComplete="off"
             />
           </Paper> */}
-          <Paper className={classes.lowerRow}>
-            <div className={classes.icon}>
-              <FitnessCenter color="secondary" />
-            </div>
-            <TextField
-              id="weightLbs"
-              label="Weight (Lbs)"
-              value={weightLbs}
-              onChange={e => onChange('weightLbs', Number(e.target.value))}
-              className={classes.textfield}
-              required
-              autoComplete="off"
-            />
-          </Paper>
+            <Paper className={classes.lowerRow}>
+              <div className={classes.icon}>
+                <FitnessCenter color="secondary" />
+              </div>
+              <TextField
+                id="weightLbs"
+                label="Weight (Lbs)"
+                value={weightLbs}
+                onChange={e => onChange('weightLbs', Number(e.target.value))}
+                className={classes.textfield}
+                required
+                autoComplete="off"
+              />
+            </Paper>
 
-          <div className={classes.actions}>
-            <Button variant="extendedFab" color="primary" type="submit">
-              Submit
-            </Button>
-            <Button variant="flat" type="button" onClick={e => toggleForm()}>
-              Go Back
-            </Button>
+            <div className={classes.actions}>
+              <Button variant="extendedFab" color="primary" type="submit">
+                Submit
+              </Button>
+              <Button variant="flat" type="button" onClick={e => toggleForm()}>
+                Go Back
+              </Button>
+            </div>
           </div>
+        </form>
+      </center>
+    )
+    return (
+      <React.Fragment>
+        <div>
+          <MenuAppBar welcome back history={history} />
+          <CenterLogo title="Tri-Track" />
+          {isError && <SnackBar type="error" msg={errMsg} close={clearError} />}
+          {isSaving && <SnackBar type="info" msg="Saving Profile..." />}
         </div>
-      </form>
-    </center>
-  )
-  return (
-    <React.Fragment>
-      <div>
-        <MenuAppBar welcome back history={history} />
-        <CenterLogo title="Tri-Track" />
-        {isError && <SnackBar type="error" msg={errMsg} close={clearError} />}
-        {isSaving && <SnackBar type="info" msg="Saving Profile..." />}
-      </div>
-      {!isDetailsForm ? ProfileForm : DetailsForm}
-    </React.Fragment>
-  )
+        {!isDetailsForm ? ProfileForm : DetailsForm}
+      </React.Fragment>
+    )
+  }
 }
 
 const mapStateToProps = state => ({

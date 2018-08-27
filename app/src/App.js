@@ -11,20 +11,32 @@ import WorkoutEdit from './pages/workouts/edit'
 import WorkoutNew from './pages/workouts/new'
 import ProfileEdit from './pages/profile/edit'
 
-const App = () => (
-  <BrowserRouter>
-    <Switch>
-      <Route exact path="/" component={Welcome} />
-      <Route exact path="/login" component={Login} />
-      <Route exact path="/sign-up" component={SignUp} />
-      <Route exact path="/home" component={Home} />
-      <Route exact path="/workouts" component={Workouts} />
-      <Route exact path="/workouts/new" component={WorkoutNew} />
-      <Route exact path="/workouts/:id" component={WorkoutView} />
-      <Route exact path="/workouts/:id/edit" component={WorkoutEdit} />
-      <Route exact path="/profile/:id/edit" component={ProfileEdit} />
-    </Switch>
-  </BrowserRouter>
-)
+class App extends React.Component {
+  componentWillMount() {
+    window.location.pathname !== '/login'
+      ? console.log('reun auth endpoint')
+      : ''
+  }
+  render() {
+    return (
+      <div>
+        {}
+        <BrowserRouter>
+          <Switch>
+            <Route exact path="/" component={Welcome} />
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/sign-up" component={SignUp} />
+            <Route exact path="/home" component={Home} />
+            <Route exact path="/workouts" component={Workouts} />
+            <Route exact path="/workouts/new" component={WorkoutNew} />
+            <Route exact path="/workouts/:id" component={WorkoutView} />
+            <Route exact path="/workouts/:id/edit" component={WorkoutEdit} />
+            <Route exact path="/profile/:id/edit" component={ProfileEdit} />
+          </Switch>
+        </BrowserRouter>
+      </div>
+    )
+  }
+}
 
 export default App
