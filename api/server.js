@@ -3,6 +3,7 @@ const PORT = process.env.PORT
 
 const profileRoutes = require('./routes/profiles')
 const workoutRoutes = require('./routes/workouts')
+const raceRoutes = require('./routes/races')
 
 const app = require('express')()
 const cors = require('cors')
@@ -16,6 +17,7 @@ app.get('/', (req, res, next) => {
 })
 profileRoutes(app)
 workoutRoutes(app)
+raceRoutes(app)
 
 app.use((err, req, res, next) => {
   res.status(err.status || 500).send(err.message)
