@@ -73,7 +73,7 @@ const deleteWorkout = id => db.get(id).then(doc => db.remove(doc))
 // Race Routes
 ///////////////////////
 
-listRaces = () =>
+const listRaces = () =>
   db
     .allDocs({
       include_docs: true,
@@ -83,6 +83,8 @@ listRaces = () =>
     .then(metaDoc =>
       map(row => propOr({}, 'doc', row), propOr([], 'rows', metaDoc))
     )
+
+const getRace = id => db.get(id)
 
 module.exports = {
   listProfiles,
@@ -95,5 +97,6 @@ module.exports = {
   addWorkout,
   updateWorkout,
   deleteWorkout,
-  listRaces
+  listRaces,
+  getRace
 }

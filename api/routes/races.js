@@ -6,12 +6,19 @@ const checkReqFields = require('../lib/checkReqFields')
 const missingFieldsMsg = require('../lib/missingFieldsMsg')
 const cleanObj = require('../lib/cleanObj')
 
-const { listRaces } = require('../dal')
+const { listRaces, getRace } = require('../dal')
 const reqFields = []
 
 module.exports = app => {
   app.get('/races', (req, res, next) => {
     listRaces()
+      .then(getResult => res.status(200).send(getResult))
+      .catch(err => next(new NodeHTTPError(err.status, err.message, err)))
+  })
+  app.get('/races/:id', (req, res, next) => {
+    const raceId = pathOr('', ['params', 'id'], req)
+
+    getRace(raceId)
       .then(getResult => res.status(200).send(getResult))
       .catch(err => next(new NodeHTTPError(err.status, err.message, err)))
   })
