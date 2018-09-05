@@ -86,6 +86,8 @@ const listRaces = () =>
 
 const getRace = id => db.get(id)
 
+const deleteRace = id => db.get(id).then(doc => db.delete(doc))
+
 module.exports = {
   listProfiles,
   getProfile,
@@ -98,5 +100,6 @@ module.exports = {
   updateWorkout,
   deleteWorkout,
   listRaces,
-  getRace
+  getRace,
+  deleteRace
 }
